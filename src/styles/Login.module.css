@@ -16,10 +16,19 @@
     height: 33.33vw;
     border: 2px solid #9f9f9f;
     border-radius: 20px;
+    padding-bottom: 6em;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+}
+
+#text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 8vh;
 }
 
 .heading {
@@ -29,7 +38,8 @@
 
 .description {
     font-family: 'Abel', sans-serif;
-    font-size: 1.5em
+    font-size: 1.5em;
+    color: #797979;
 }
 
 .form {
@@ -37,20 +47,26 @@
     flex-direction: column;
 }
 
-.formInput {
-    width: 100%;
+.formTextField {
+    margin: 1vh;
+    width: 27em;
 }
 
 #forgotpassword {
+    font-family: sans-serif;
+    font-size: 0.9em;
     color: #118AB2;
-    text-decoration: none;
+    text-decoration: underline;
+    padding-left: 0.9em;
 }
 
 #forgotpassword:hover {
-    color: #0B555D;
+    color: #0D5E66;
 }
 
-#submitbutton {
-    background-color: '#BFBFBF';
-    color: 'black';
+.submitbutton {
+    margin-top: 3vh;
+    background-color: #BFBFBF;
+    color: black;
+    width:auto;
 }
