@@ -29,9 +29,6 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        <div name="banner" className={styles.banner}>
-          BANNER
-        </div>
         <div name="underbanner" className={styles.under_banner}>
           <div name="leftside" className={styles.left_side}>
             <div name="left buttons" className={styles.left_buttons}>
