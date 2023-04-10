@@ -1,0 +1,144 @@
+@font-face {
+  font-family: 'Abel';
+  src: url('https://fonts.gstatic.com/s/abel/v18/MwQ5bhbm2POE2V9BPQ.woff2');
+}
+
+  
+  .main {
+    align-items: center;
+    font-family: 'Abel';
+  }
+  
+  .importcontainer {
+    border-radius: 15px;
+    background-color: gray;
+    padding: 10px 50px 10px 50px;
+    margin: 15px 15px 15px 15px;
+    float: left;
+    height: 60px;
+    font-family: 'Abel';
+  }
+
+  .recentmapcontainer {
+    width: 350px;
+    border-radius: 15px;
+    background-color: gray;
+    padding: 10px 10px 10px 10px;
+    margin: 15px 15px 15px 15px;
+    clear: left;
+    text-align: center;
+    font-family: 'Abel';
+  }
+
+  .profilecontainer {
+    float: right;
+    border-radius: 15px;
+    background-color: silver;
+    padding: 25px 25px 25px 25px;
+    margin: 10px 10px 10px 50px;
+    width: 1100px;
+    font-family: 'Abel';
+    }
+
+  .mapcontainer {
+    display: inline-block;
+    width: 1100px;
+    border-radius: 15px;
+    background-color: gray;
+    padding: 20px 20px 20px 20px;
+    margin: 10px 10px 10px 10px;
+    text-align: center;
+    font-family: 'Abel';
+    }
+
+  .flexcontainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    font-family: 'Abel';
+  }
+
+  .mapsflexcontainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 5px 5px 5px 5px;
+    background-color: silver;
+    border-radius: 10px;
+    overflow-y: scroll;
+    font-family: 'Abel';
+  }
+
+  .recentmap {
+    height: 80px;
+    width: 120px;
+    float: left;
+    margin-right: 20px;
+    border-radius: 10px;
+    font-family: 'Abel';
+    
+  }
+
+  .map {
+    height: 120px;
+    height: 180px;
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-top: 20px;
+    border-radius: 10px;
+    font-family: 'Abel';
+  }
+  
+  .profile {
+    height: 80px;
+    width: 80px;
+    float: left;
+    margin-right: 15px;
+    border-radius: 10px;
+    font-family: 'Abel';
+  }
+
+  .recentmaptitle {
+    text-decoration: underline;
+    color: white;
+    padding-bottom: 10px;
+    font-family: 'Abel';
+  }
+  
+  .recentmapdiv {
+    /* border-radius: 15px; */
+    background-color: silver;
+    border-radius: 10px;
+    padding: 10px 10px 10px 10px;
+    margin: 10px 10px 10px 10px;
+    font-size: 25px;
+    text-align: left;
+    font-family: 'Abel';
+  }
+
+  .importbutton {
+    background-color: silver;
+    color: black;
+    border-color: black;
+    border-radius: 15px;
+    font-family: 'Abel';
+  }
+
+  .forumTitle{
+     /* border-radius: 15px; */
+     background-color: silver;
+     border-radius: 10px;
+     padding: 10px 10px 10px 10px;
+     margin: 10px 10px 10px 10px;
+     font-size: 20px;
+     text-align: left;
+     font-family: 'Abel';
+  }
+
+.forumTitleName{
+  font-size: 30px;
+  font-weight: bold;
+  font-family: 'Abel';
+}
