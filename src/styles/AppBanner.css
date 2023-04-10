@@ -3,10 +3,15 @@
     src: url('https://fonts.gstatic.com/s/abel/v18/MwQ5bhbm2POE2V9BPQ.woff2');
 }
 
+@font-face {
+    font-family: 'Inter';
+    src: url('https://fonts.googleapis.com/css2?family=Inter');
+}
 
-
-.homescreen-heading {
-    
+#homescreen-heading {
+    display: inline-flex;
+    text-align: center;
+    align-items: center;
 }
 
 #outlined-basic {
