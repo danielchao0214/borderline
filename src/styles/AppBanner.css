@@ -89,16 +89,13 @@ a[target="list"] {
     font-weight: 400;
     font-size: 20px;
     line-height: 20px;
-    padding: 10px;
-    
-
     color: #000000;
 }
 
 
-
 .css-3bmhjh-MuiPaper-root-MuiPopover-paper{
     background-color: #AEAEAE;
+    border-radius: 20px;
 }
 
 li{
@@ -108,4 +105,15 @@ li{
     list-style-type: none;
     border-radius: 25px;
     text-align: center;
+    padding: 10px;
+
+}
+
+#tagSearch{
+    padding: 5px;
+    border-radius: 25px;
+}
+
+#AccountIcon .css-i4bv87-MuiSvgIcon-root{
+    font-size: 2rem;
 }
