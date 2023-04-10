@@ -5,17 +5,12 @@ import { Button, TextField, Tabs, Tab, List, } from '@mui/material'
 import { Link } from 'react-router-dom'
 import { Inter } from 'next/font/google';
 import SortIcon from '@mui/icons-material/Sort';
-import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import ArrowDownwardSharpIcon from '@mui/icons-material/ArrowDownwardSharp';
 import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@mui/icons-material/Search';
-import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
-import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import AppBar from '@mui/material/AppBar';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import IconButton from '@mui/material/IconButton';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 
