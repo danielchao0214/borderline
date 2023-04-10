@@ -1,97 +1,208 @@
-import { useContext, useState } from 'react';
+import * as React from 'react';
+import Popover from '@mui/material/Popover';
 import Box from '@mui/material/Box';
 import { Button, TextField, Tabs, Tab, List, } from '@mui/material'
+import { Link } from 'react-router-dom'
+import { Inter } from 'next/font/google';
 import SortIcon from '@mui/icons-material/Sort';
-import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import ArrowDownwardSharpIcon from '@mui/icons-material/ArrowDownwardSharp';
-import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
-import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
+import InputAdornment from '@mui/material/InputAdornment';
+import SearchIcon from '@mui/icons-material/Search';
 import AppBar from '@mui/material/AppBar';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import IconButton from '@mui/material/IconButton';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 
 
-function AppBanner() {
-    return (
-        <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static">
-                <Toolbar>
-                    <Typography
-                        variant="h4"
-                        noWrap
-                        component="div"
-                        sx={{ display: { xs: 'none', sm: 'block', minHeight: 82 } }}
-                    >
-                    </Typography>
+export default function AppBanner() {
 
-                    <div id="homescreen">
-                        <div id="homescreen-heading">
+    const [anchorEl1, setAnchorEl1] = React.useState(null);
+    const [anchorEl2, setAnchorEl2] = React.useState(null);
+    const [anchorEl3, setAnchorEl3] = React.useState(null);
 
-                            <Box sx={{ display: { xs: 'none', md: 'flex', marginRight: 'none' } }}>
-                                <a href="/" target='Home'>borderline</a>
+    const handleClick1 = (event) => {
+        setAnchorEl1(event.currentTarget);
+    };
 
-                                <p>name</p>
+    const handleClick2 = (event) => {
+        setAnchorEl2(event.currentTarget);
+    };
 
-                                <TextField
-                                    id="outlined-basic"
-                                    //label="Search" 
-                                    variant="outlined"
-                                    defaultValue='Type Something To Search'
-                                    sx={{ width: 600, backgroundColor: 'white' }}
-                                //onKeyPress={handleSearch}
-                                />
-                                <Button
-                                    size="large"
-                                    edge="end"
-                                    aria-label="sort by tag"
-                                    aria-controls='primary-search-tag-filter'
-                                    aria-haspopup="true"
-                                    //onClick={handleMenuOpen}
-                                    color="inherit"
-                                    endIcon={<ArrowDownwardSharpIcon />}
-                                    sx={{ fontSize: 20, fontWeight: 'bold' }}
-                                >
-                                </Button>
-                                <Button
-                                    size="large"
-                                    edge="end"
-                                    aria-label="sort by catagory"
-                                    aria-controls='primary-search-catagory'
-                                    aria-haspopup="true"
-                                    //onClick={handleMenuOpen}
-                                    color="inherit"
-                                    endIcon={<SortIcon />}
-                                    sx={{ fontSize: 20, mr: 10, fontWeight: 'bold' }}
-                                >
-                                </Button>
+    const handleClick3 = (event) => {
+        setAnchorEl3(event.currentTarget);
+    }
 
-                                <a href="/" target='Nav'>Maps</a>
+    const handleClose1 = () => {
+        setAnchorEl1(null);
+    };
 
-                                <a href="/" target='Nav'>Forums</a>
+    const handleClose2 = () => {
+        setAnchorEl2(null);
+    };
 
+    const handleClose3 = () => {
+        setAnchorEl3(null);
+    }
 
-                                <Box sx={{ display: { xs: 'none', md: 'flex', marginLeft: 'auto' } }}>
-                                    <IconButton
-                                        size="large"
-                                        edge="end"
-                                        aria-label="account of current user"
-                                        aria-haspopup="true"
-                                        color="inherit"
-                                    >
-                                        <AccountCircle />
-                                    </IconButton>
-                                </Box>
-                            </Box>
-                        </div>
-                    </div>
-                </Toolbar>
-            </AppBar>
-        </Box>
+    const tagTextField = (
+        <TextField
+            id="tagSearch"
+            //label="Search" 
+            //variant="outlined"
+            defaultValue='Type Something To Search'
+
+           sx={{ width: 200, backgroundColor: 'white',borderRadius: 5}}
+        //onKeyPress={handleSearch}
+        />
     )
-}
 
-export default AppBanner
+
+    return (
+        <div class='homescreen-heading'>
+            <Box sx={{ flexGrow: 1 }}>
+                <AppBar position="static">
+                    <Toolbar>
+                        <Typography
+                            variant="h4"
+                            noWrap
+                            component="div"
+                            sx={{ display: { xs: 'none', sm: 'block', minHeight: 82 } }}
+                        >
+                        </Typography>
+
+                        <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+                            <a href="/" target='Home'>borderline</a>
+
+                            <p>Dashboard</p>
+
+                            <TextField
+                                id="outlined-basic"
+                                //label="Search" 
+                                variant="outlined"
+                                defaultValue='Type Something To Search'
+
+                                InputProps={{
+                                    startAdornment: (
+                                        <InputAdornment position="start">
+                                            <SearchIcon />
+                                        </InputAdornment>
+                                    ),
+                                }}
+
+
+                                sx={{ width: 600, backgroundColor: 'white' }}
+                            //onKeyPress={handleSearch}
+                            />
+                            <Button
+                                size="large"
+                                edge="end"
+                                aria-label="sort by tag"
+                                aria-controls='primary-search-tag-filter'
+                                aria-haspopup="true"
+                                onClick={handleClick3}
+                                color="inherit"
+                                endIcon={<ArrowDownwardSharpIcon />}
+                                sx={{ fontSize: 20, fontWeight: 'bold' }}
+                            >
+                            </Button>
+                            <Button
+                                size="large"
+                                edge="end"
+                                aria-label="sort by catagory"
+                                aria-controls='primary-search-catagory'
+                                aria-haspopup="true"
+                                onClick={handleClick1}
+                                color="inherit"
+                                endIcon={<SortIcon />}
+                                sx={{ fontSize: 20, mr: 10, fontWeight: 'bold' }}
+                            >
+
+                            </Button>
+
+                            <a href="/" target='Nav'>Maps</a>
+
+                            <a href="/" target='Nav'>Forum</a>
+
+
+                            <Box sx={{ display: { xs: 'none', md: 'flex'}, p: 0 }}>
+                                <IconButton
+                                    id = "AccountIcon"
+                                    size="large"
+                                    edge="end"
+                                    aria-label="account of current user"
+                                    aria-haspopup="true"
+                                    onClick={handleClick2}
+                                    color="inherit"
+                                >
+                                    <AccountCircle />
+                                </IconButton>
+
+                                <Popover
+                                    open={Boolean(anchorEl1)}
+                                    anchorEl={anchorEl1}
+                                    onClose={handleClose1}
+                                    anchorOrigin={{
+                                        vertical: 'bottom',
+                                        horizontal: 'left',
+                                    }}
+
+                                >
+                                    <Typography sx={{ width: 200 }}>
+                                        <ul>
+                                            <li target="Catagories">Sort Catagory 1</li>
+                                            <li target="Catagories">Sort Catagory 2</li>
+                                            <li target="Catagories">Sort Catagory 3</li>
+                                            <li target="Catagories">Sort Catagory 4</li>
+                                        </ul>
+                                    </Typography>
+                                </Popover>
+
+                                <Popover
+
+                                    open={Boolean(anchorEl2)}
+                                    anchorEl={anchorEl2}
+                                    onClose={handleClose2}
+                                    anchorOrigin={{
+                                        vertical: 'bottom',
+                                        horizontal: 'left',
+                                    }}
+
+                                >
+                                    <Typography sx={{ width: 150 }}>
+                                        <ul>
+                                            <li><a href="/login" target='list'>Login</a></li>
+                                            <li><a href="/createaccount" target='list'>Create Account</a></li>
+                                        </ul>
+                                    </Typography>
+                                </Popover>
+
+                                <Popover
+
+                                    open={Boolean(anchorEl3)}
+                                    anchorEl={anchorEl3}
+                                    onClose={handleClose3}
+                                    anchorOrigin={{
+                                        vertical: 'bottom',
+                                        horizontal: 'left',
+                                    }}
+
+                                >
+                                    <Typography sx={{ width: 200 }}>
+                                        <ul>
+                                            <li>{tagTextField}</li>
+                                            <li>Preset Tag 1</li>
+                                            <li>Preset Tag 2</li>
+                                            <li>Preset Tag 3</li>
+                                        </ul>
+                                    </Typography>
+                                </Popover>
+
+                            </Box>
+                        </Box>
+
+                    </Toolbar>
+                </AppBar>
+            </Box>
+        </div>)
+}
