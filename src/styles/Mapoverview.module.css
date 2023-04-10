@@ -1,18 +1,16 @@
+@font-face {
+  font-family: 'Abel';
+  src: url('https://fonts.gstatic.com/s/abel/v18/MwQ5bhbm2POE2V9BPQ.woff2');
+}
+
+
 .main {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   min-height: 100vh;
   height: 30rem;
-}
-
-.banner {
-  width: 100%;
-  height: 10%;
-  display: inherit;
-  justify-content: inherit;
-  align-items: inherit;
-  background-color: gray;
+  font-family: "Abel";
 }
 
 .under_banner {
@@ -151,7 +149,7 @@
   width: 98%;
   min-height: 80%;
   z-index: 2;
-  font-family: var(--font-mono);
+  font-family:"Abel";
   background-color: rgb(225, 225, 225);
   resize: none;
 }
@@ -167,7 +165,7 @@
   width: 30%;
   min-height: 15%;
   z-index: 2;
-  font-family: var(--font-mono);
+  font-family: "Abel";
   background-color: rgb(134, 134, 134);
   resize: none;
 }
@@ -193,7 +191,7 @@
   min-height: 20%;
   height: 29%;
   z-index: 2;
-  font-family: var(--font-mono);
+  font-family: "Abel";
   background-color: rgb(134, 134, 134);
 }
 
@@ -237,7 +235,7 @@
   min-height: 20%;
   height: 15%;
   z-index: 2;
-  font-family: var(--font-mono);
+  font-family: "Abel";
   background-color: rgb(134, 134, 134);
 }
 
@@ -254,7 +252,7 @@
   height: 90%;
   max-height: 90%;
   z-index: 2;
-  font-family: var(--font-mono);
+  font-family: "Abel";
 }
 
 .img_graphic {
@@ -281,7 +279,7 @@ border-radius: 10px;
   min-height: 20%;
   height: 90%;
   z-index: 2;
-  font-family: var(--font-mono);
+  font-family: "Abel";
   background-color: transparent;
 }
 
@@ -299,7 +297,7 @@ border-radius: 10px;
   margin-right: 1%;
   padding-top: 1%;
   z-index: 2;
-  font-family: var(--font-mono);
+  font-family: "Abel";
   background-color: rgb(104, 104, 104);
 }
 
@@ -325,7 +323,7 @@ border-radius: 10px;
   max-width: 80%;
   width: 100%;
   height: 10%;
-  font-family: var(--font-mono);
+  font-family: "Abel";
   background-color: transparent;
 }
 
@@ -343,7 +341,7 @@ border-radius: 10px;
   width: 100%;
   height: 52%;
   z-index: 2;
-  font-family: var(--font-mono);
+  font-family: "Abel";
   background-color: rgb(134, 134, 134);
 }
 
@@ -356,7 +354,7 @@ border-radius: 10px;
   min-height: 15%;
   height: 15%;
   z-index: 2;
-  font-family: var(--font-mono);
+  font-family: "Abel";
   color: black;
   background-color: rgb(178, 178, 178);
 }
@@ -376,7 +374,7 @@ border-radius: 10px;
   width: 80%;
   height: 30%;
   z-index: 2;
-  font-family: var(--font-mono);
+  font-family: "Abel";
   background-color: rgb(134, 134, 134);
 }
 
@@ -389,7 +387,7 @@ border-radius: 10px;
   min-height: 35%;
   height: 35%;
   z-index: 2;
-  font-family: var(--font-mono);
+  font-family: "Abel";
   color: black;
   background-color: rgb(178, 178, 178);
 }
@@ -418,7 +416,7 @@ border-radius: 10px;
   width: 100%;
   height: 11%;
   z-index: 2;
-  font-family: var(--font-mono);
+  font-family: "Abel";
   color:black;
   font-weight: bold;
   background-color: rgb(191, 191, 191);
@@ -435,7 +433,7 @@ border-radius: 10px;
     width: 100%;
     height: 52%;
     z-index: 2;
-    font-family: var(--font-mono);
+    font-family: "Abel";
 }
 
 .img {
@@ -459,13 +457,13 @@ border-radius: 10px;
   width: 100%;
   height: 29%;
   z-index: 2;
-  font-family: var(--font-mono);
+  font-family: "Abel";
   background-color: rgb(191, 191, 191);
 }
 
 .code {
   font-weight: 700;
-  font-family: var(--font-mono);
+  font-family: "Abel";
 }
 
 .grid {
