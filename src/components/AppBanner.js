@@ -172,6 +172,7 @@ export default function AppBanner() {
                                         <ul>
                                             <li><a href="/login" target='list'>Login</a></li>
                                             <li><a href="/createaccount" target='list'>Create Account</a></li>
+                                            <li><a href="/userprofile" target='list'>View Account</a></li>
                                         </ul>
                                     </Typography>
                                 </Popover>
