@@ -46,7 +46,7 @@ export default function Login() {
               margin="normal"
               variant="outlined"
             />
-            <a href="/forgot-password" id={styles.forgotpassword}>Forgot password?</a>
+            <a href="/resetpasswordemail" id={styles.forgotpassword}>Forgot password?</a>
             <div style={{ display: "flex", justifyContent: "center" }}>
               <Button className={styles.submitbutton} type="submit" variant="contained">
                 Log in
