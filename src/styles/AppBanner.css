@@ -1,0 +1,61 @@
+@font-face {
+    font-family: 'Abel';
+    src: url('https://fonts.gstatic.com/s/abel/v18/MwQ5bhbm2POE2V9BPQ.woff2');
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('/fonts/inter.woff2') format('woff2'),
+        url('/fonts/inter.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+#homescreen-heading{
+  display: inline-flex;
+  text-align: center;
+  align-items: center;
+}
+
+
+
+#outlined-basic{
+    background-color: rgb(255, 255, 255);
+    text-align: center;
+}
+
+.css-1pmjqg1-MuiFormControl-root-MuiTextField-root{
+    padding-top: 15px;
+    background-color: #999999;
+}
+
+.css-hip9hq-MuiPaper-root-MuiAppBar-root{
+    background-color: #999999;
+    color: #000000;
+}
+
+
+a[target="Nav"]{
+    display: flex;
+    padding-left: 50px;
+    padding-right: 50px;
+    align-items: center;
+
+    font-family: 'Abel';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 39px;
+}
+
+a[target="Home"]{
+
+    font-family: 'Abel';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 64px;
+    line-height: 82px;
+    padding-right: 10%;
+
+    color: #000000;
+}
