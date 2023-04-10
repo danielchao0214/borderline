@@ -1,0 +1,115 @@
+@font-face {
+  font-family: 'Abel';
+  src: url('https://fonts.gstatic.com/s/abel/v18/MwQ5bhbm2POE2V9BPQ.woff2');
+}
+
+.modalContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.modal {
+  position: relative;
+  background-color: #AEAEAE;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  padding: 16px;
+  width: 40vw;
+  height: 25vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.bigModal {
+  position: relative;
+  background-color: #AEAEAE;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  padding: 16px;
+  width: 40vw;
+  height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.closeButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border: none;
+  background-color: transparent;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+#modalTitle {
+  font-family: Abel;
+  text-align: center;
+  text-decoration: underline;
+}
+
+#modalSubtitle {
+  font-family: Abel;
+  text-align: center;
+  margin-top: 0.5em;
+}
+
+.modalChoices {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.exportButton {
+  background-color: #D9D9D9;
+  color: black;
+  border: 1px solid black;
+  margin: 2em;
+  margin-bottom: 0.5em;
+  height: 10vh;
+  width: 15vw;
+}
+
+.exportButton:hover {
+  background-color: #d6d6d6
+}
+
+.publishButton {
+  background-color: #D9D9D9;
+  color: black;
+  border: 1px solid black;
+  margin: 2em;
+  margin-bottom: 0.5em;
+  height: 6vh;
+  width: 15vw;
+}
+
+.publishButton:hover {
+  background-color: #d6d6d6
+}
+
+.label {
+  margin-left: 2em;
+  margin-right: 2em;
+  width: 15vw;
+  text-align: center;
+}
+
+.tagSection {
+  display:flex;
+  flex-direction: column;
+  height:auto;
+}
+
+.tags{
+  display:flex;
+  flex-direction: column;
+  max-height: 30vh;
+  overflow-y: auto;
+}
