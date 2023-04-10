@@ -23,9 +23,9 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 const inter = Inter({ subsets: ['latin'] })
 
-export default function Home() {
+export default function MapEdit() {
   const Map = React.useMemo(() => dynamic(
-    () => import('@/components/map.js'), // replace '@components/map' with your component's location
+    () => import('@/components/Map.js'), // replace '@components/map' with your component's location
     {
       loading: () => <p>A map is loading</p>,
       ssr: false // This line is important. It's what prevents server-side render

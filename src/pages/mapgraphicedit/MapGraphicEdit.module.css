@@ -5,7 +5,7 @@
 
 .main {
     width: 100vw;
-    height: 100vh;
+    height: 91vh;
     background-color: white;
     display: flex;
     justify-content: space-between;
@@ -72,7 +72,7 @@
 
 .propertiesbar {
     font-family: 'Abel', sans-serif;
-    height: 80vh;
+    height: 50vh;
     width: 18vw;
     background-color: #D9D9D9;
     border: 2px solid #9f9f9f;
@@ -83,8 +83,10 @@
     align-items: center;
     overflow-y: auto;
 }
+/* 
+.property {
 
-.property {}
+} */
 
 .propertybutton {
     background: gray;
@@ -112,4 +114,18 @@
 
 .propertiesbar::-webkit-scrollbar-thumb:hover {
     background-color: #555;
+}
+
+.colorPickerSection {
+    font-family: 'Abel', sans-serif;
+    height: 25vh;
+    width: 18vw;
+    background-color: #D9D9D9;
+    border: 2px solid #9f9f9f;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1em;
 }
