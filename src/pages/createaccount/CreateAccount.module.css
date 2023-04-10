@@ -12,11 +12,10 @@
 
 .squircle {
     background: transparent;
-    width: 33.33vw;
-    height: 33.33vw;
+    width: 36vw;
+    height: 36vw;
     border: 2px solid #9f9f9f;
     border-radius: 20px;
-    padding-bottom: 6em;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -28,7 +27,6 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    margin: 8vh;
 }
 
 .heading {
@@ -48,8 +46,8 @@
 }
 
 .formTextField {
-    margin: 1vh;
-    width: 27em;
+    margin: 0.5vh;
+    width: 30em;
 }
 
 #forgotpassword {

@@ -23,7 +23,7 @@ export default function Login() {
         <div className={styles.squircle}>
           <div id={styles.text}>
             <div className={styles.heading}>
-              <p>createaccount</p>
+              <p>Create Account</p>
             </div>
             <div className={styles.description}>
               <p>Enter your information below</p>
@@ -31,7 +31,31 @@ export default function Login() {
           </div>
           <form onSubmit={handleSubmit} className={styles.form}>
             <TextField
+              label="First Name"
+              className={styles.formTextField}
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+              margin="normal"
+              variant="outlined"
+            />
+            <TextField
+              label="Last Name"
+              className={styles.formTextField}
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+              margin="normal"
+              variant="outlined"
+            />
+            <TextField
               label="Email"
+              className={styles.formTextField}
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+              margin="normal"
+              variant="outlined"
+            />
+            <TextField
+              label="Username"
               className={styles.formTextField}
               value={email}
               onChange={(event) => setEmail(event.target.value)}
@@ -46,10 +70,17 @@ export default function Login() {
               margin="normal"
               variant="outlined"
             />
-            <a href="/forgot-password" id={styles.forgotpassword}>Forgot password?</a>
+            <TextField
+              label="Confirm Password"
+              className={styles.formTextField}
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
+              margin="normal"
+              variant="outlined"
+            />
             <div style={{ display: "flex", justifyContent: "center" }}>
               <Button className={styles.submitbutton} type="submit" variant="contained">
-                Log in
+                Create Account
               </Button>
             </div>
           </form>
