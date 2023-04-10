@@ -2,7 +2,6 @@ import * as React from 'react';
 import Popover from '@mui/material/Popover';
 import Box from '@mui/material/Box';
 import { Button, TextField, Tabs, Tab, List, } from '@mui/material'
-import { Link } from 'react-router-dom'
 import { Inter } from 'next/font/google';
 import SortIcon from '@mui/icons-material/Sort';
 import ArrowDownwardSharpIcon from '@mui/icons-material/ArrowDownwardSharp';
@@ -52,7 +51,7 @@ export default function AppBanner() {
             //variant="outlined"
             defaultValue='Type Something To Search'
 
-           sx={{ width: 200, backgroundColor: 'white',borderRadius: 5}}
+            sx={{ width: 200, backgroundColor: 'white', borderRadius: 5 }}
         //onKeyPress={handleSearch}
         />
     )
@@ -120,14 +119,14 @@ export default function AppBanner() {
 
                             </Button>
 
-                            <a href="/" target='Nav'>Maps</a>
+                            <a href="/dashboardmaps" target='Nav'>Maps</a>
 
-                            <a href="/" target='Nav'>Forum</a>
+                            <a href="/dashboardforums" target='Nav'>Forum</a>
 
 
-                            <Box sx={{ display: { xs: 'none', md: 'flex'}, p: 0 }}>
+                            <Box sx={{ display: { xs: 'none', md: 'flex' }, p: 0 }}>
                                 <IconButton
-                                    id = "AccountIcon"
+                                    id="AccountIcon"
                                     size="large"
                                     edge="end"
                                     aria-label="account of current user"
