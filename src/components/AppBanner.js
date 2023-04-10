@@ -38,6 +38,7 @@ export default function AppBanner() {
       const id = open ? 'simple-popover' : undefined;
     
     return (
+    <div class = 'homescreen-heading'>
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static">
                 <Toolbar>
@@ -92,11 +93,14 @@ export default function AppBanner() {
                                     aria-label="sort by catagory"
                                     aria-controls='primary-search-catagory'
                                     aria-haspopup="true"
-                                    //onClick={handleMenuOpen}
+                                    onClick={handleClick}
                                     color="inherit"
                                     endIcon={<SortIcon />}
                                     sx={{ fontSize: 20, mr: 10, fontWeight: 'bold' }}
                                 >
+                                
+                                
+                                
                                 </Button>
 
                                 <a href="/" target='Nav'>Maps</a>
@@ -141,5 +145,5 @@ export default function AppBanner() {
                 </Toolbar>
             </AppBar>
         </Box>
-    )
+    </div>)
 }

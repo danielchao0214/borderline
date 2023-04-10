@@ -5,8 +5,8 @@
 
 
 
-#homescreen-heading {
-    display: -webkit-box
+.homescreen-heading {
+    
 }
 
 #outlined-basic {
@@ -47,7 +47,7 @@
     background-color: white;
 }
 
-p{
+.homescreen-heading p{
     font-family: 'Abel';
     font-style: normal;
     display:flex;
