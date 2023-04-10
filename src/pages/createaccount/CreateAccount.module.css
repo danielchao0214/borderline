@@ -1,0 +1,63 @@
+@font-face {
+    font-family: 'Abel';
+    src: url('https://fonts.gstatic.com/s/abel/v18/MwQ5bhbm2POE2V9BPQ.woff2');
+}
+
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.squircle {
+    background: transparent;
+    width: auto;
+    padding-left: 3vw;
+    padding-right: 3vw;
+    height: auto;
+    padding-top: 3vh;
+    padding-bottom: 3vh;
+    border: 2px solid #9f9f9f;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 3vh;
+}
+
+.heading {
+    font-family: 'Abel', sans-serif;
+    font-size: 3em;
+}
+
+.description {
+    font-family: 'Abel', sans-serif;
+    font-size: 1.5em;
+    color: #797979;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+}
+
+.formTextField {
+    margin: 0.5vh;
+    width: 30em;
+}
+
+.submitbutton {
+    margin-top: 3vh;
+    background-color: #BFBFBF;
+    color: black;
+    width:auto;
+}

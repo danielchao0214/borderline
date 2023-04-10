@@ -1,11 +1,37 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import styles from '@/styles/Home.module.css'
+import Head from 'next/head';
+import { Inter } from 'next/font/google';
+import dynamic from 'next/dynamic';
+import React from 'react';
+import styles from '@/pages/mapedit/MapEdit.module.css'
+import IconButton from '@mui/material/IconButton';
+import Button from '@mui/material/Button';
+import CompressIcon from '@mui/icons-material/compress';
+import NearMeIcon from '@mui/icons-material/NearMe';
+import ClearIcon from '@mui/icons-material/Clear';
+import MergeIcon from '@mui/icons-material/Merge';
+import AddIcon from '@mui/icons-material/Add';
+import CallSplitIcon from '@mui/icons-material/CallSplit';
+import BuildIcon from '@mui/icons-material/Build';
+import AddLocationIcon from '@mui/icons-material/AddLocation';
+import DeleteIcon from '@mui/icons-material/Delete';
+import UndoIcon from '@mui/icons-material/Undo';
+import RedoIcon from '@mui/icons-material/Redo';
+import SaveIcon from '@mui/icons-material/Save';
+import FileDownloadIcon from '@mui/icons-material/FileDownload';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
+  const Map = React.useMemo(() => dynamic(
+    () => import('@/components/map.js'), // replace '@components/map' with your component's location
+    {
+      loading: () => <p>A map is loading</p>,
+      ssr: false // This line is important. It's what prevents server-side render
+    }
+  ), [/* list variables which should trigger a re-render here */])
+
   return (
     <>
       <Head>
@@ -15,98 +41,116 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        <div className={styles.description}>
-          <p>
-            Get started by editing&nbsp;
-            <code className={styles.code}>src/pages/index.js</code>
-          </p>
-          <div>
-            <a
-              href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              By{' '}
-              <Image
-                src="/vercel.svg"
-                alt="Vercel Logo"
-                className={styles.vercelLogo}
-                width={100}
-                height={24}
-                priority
-              />
-            </a>
+        <div className={styles.left}>
+          <div className={styles.toolbar}>
+            <IconButton aria-label='compress' className={styles.toolbarbutton}>
+              <CompressIcon />
+            </IconButton>
+            <IconButton aria-label='select region' className={styles.toolbarbutton}>
+              <NearMeIcon />
+            </IconButton>
+            <IconButton aria-label='delete region' className={styles.toolbarbutton}>
+              <ClearIcon />
+            </IconButton>
+            <IconButton aria-label='merge regions ' className={styles.toolbarbutton}>
+              <MergeIcon />
+            </IconButton>
+            <IconButton aria-label='add region' className={styles.toolbarbutton}>
+              <AddIcon />
+            </IconButton>
+            <IconButton aria-label='split region' className={styles.toolbarbutton}>
+              <CallSplitIcon />
+            </IconButton>
+            <IconButton aria-label='select vertex' className={styles.toolbarbutton}>
+              <BuildIcon />
+            </IconButton>
+            <IconButton aria-label='add vertex' className={styles.toolbarbutton}>
+              <AddLocationIcon />
+            </IconButton>
+            <IconButton aria-label='remove vertex' className={styles.toolbarbutton}>
+              <DeleteIcon />
+            </IconButton>
+            <IconButton aria-label='undo' className={styles.toolbarbutton}>
+              <UndoIcon />
+            </IconButton>
+            <IconButton aria-label='redo' className={styles.toolbarbutton}>
+              <RedoIcon />
+            </IconButton>
+          </div>
+          <div className={styles.actionbuttons}>
+            <Button variant="contained" startIcon={<SaveIcon />} style={{ backgroundColor: "green" }} className={styles.actionbutton}>
+              Save
+            </Button>
+            <Button variant="contained" startIcon={<FileDownloadIcon />} style={{ backgroundColor: "red" }} className={styles.actionbutton}>
+              Export
+            </Button>
+            <Button variant="contained" startIcon={<CheckCircleIcon />} style={{ backgroundColor: "blue" }} className={styles.actionbutton}>
+              Publish
+            </Button>
           </div>
         </div>
-
         <div className={styles.center}>
-          <Image
-            className={styles.logo}
-            src="/next.svg"
-            alt="Next.js Logo"
-            width={180}
-            height={37}
-            priority
-          />
+          <Map />
         </div>
-
-        <div className={styles.grid}>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Docs <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Find in-depth information about Next.js features and&nbsp;API.
-            </p>
-          </a>
-
-          <a
-            href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Learn <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Learn about Next.js in an interactive course with&nbsp;quizzes!
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Templates <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Discover and deploy boilerplate example Next.js&nbsp;projects.
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Deploy <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Instantly deploy your Next.js site to a shareable URL
-              with&nbsp;Vercel.
-            </p>
-          </a>
+        <div className={styles.right}>
+          <div className={styles.propertiesbar}>
+            <h1 style={{ textDecoration: "underline", margin: "0.1em" }}>Properties</h1>
+            <div className={styles.property}>asdf: asdf</div>
+            <div className={styles.property}>asdf: asdf</div>
+            <div className={styles.property}>asdf: asdf</div>
+            <div className={styles.property}>asdf: asdf</div>
+            <div className={styles.property}>asdf: asdf</div>
+            <div className={styles.property}>asdf: asdf</div>
+            <div className={styles.property}>asdf: asdf</div>
+            <div className={styles.property}>asdf: asdf</div>
+            <div className={styles.property}>asdf: asdf</div>
+            <div className={styles.property}>asdf: asdf</div>
+            <div className={styles.property}>asdf: asdf</div>
+            <div className={styles.property}>asdf: asdf</div>
+            <div className={styles.property}>asdf: asdf</div>
+            <div className={styles.property}>asdf: asdf</div>
+            <div className={styles.property}>asdf: asdf</div>
+            <div className={styles.property}>asdf: asdf</div>
+            <div className={styles.property}>asdf: asdf</div>
+            <div className={styles.property}>asdf: asdf</div>
+            <div className={styles.property}>asdf: asdf</div>
+            <div className={styles.property}>asdf: asdf</div>
+            <div className={styles.property}>asdf: asdf</div>
+            <div className={styles.property}>asdf: asdf</div>
+            <div className={styles.property}>asdf: asdf</div>
+            <div className={styles.property}>asdf: asdf</div>
+            <div className={styles.property}>asdf: asdf</div>
+            <div className={styles.property}>asdf: asdf</div>
+            <div className={styles.property}>asdf: asdf</div>
+            <div className={styles.property}>asdf: asdf</div>
+            <div className={styles.property}>asdf: asdf</div>
+            <div className={styles.property}>asdf: asdf</div>
+            <div className={styles.property}>asdf: asdf</div>
+            <div className={styles.property}>asdf: asdf</div>
+            <div className={styles.property}>asdf: asdf</div>
+            <div className={styles.property}>asdf: asdf</div>
+            <div className={styles.property}>asdf: asdf</div>
+            <div className={styles.property}>asdf: asdf</div>
+            <div className={styles.property}>asdf: asdf</div>
+            <div className={styles.property}>asdf: asdf</div>
+            <div className={styles.property}>asdf: asdf</div>
+            <div className={styles.property}>asdf: asdf</div>
+            <div className={styles.property}>asdf: asdf</div>
+            <div className={styles.property}>asdf: asdf</div>
+            <div className={styles.property}>asdf: asdf</div>
+            <div className={styles.property}>asdf: asdf</div>
+            <div className={styles.property}>asdf: asdf</div>
+            <div className={styles.property}>asdf: asdf</div>
+            <div className={styles.property}>asdf: asdf</div>
+            <div className={styles.property}>asdf: asdf</div>
+            <div className={styles.property}>asdf: asdf</div>
+            <div className={styles.property}>asdf: asdf</div>
+            <div className={styles.property}>asdf: asdf</div>
+            <div>
+              <Button variant="contained" className={styles.propertybutton}>Add</Button>
+              <Button variant="contained" className={styles.propertybutton}>Edit</Button>
+            </div>
+          </div>
         </div>
       </main>
     </>

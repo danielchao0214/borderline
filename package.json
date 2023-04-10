@@ -13,15 +13,12 @@
     "@emotion/styled": "^11.10.6",
     "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.11.16",
-    "@mui/styled-engine-sc": "^5.11.11",
     "eslint": "8.38.0",
     "eslint-config-next": "13.3.0",
-    "install": "^0.13.0",
+    "leaflet": "^1.9.3",
     "next": "13.3.0",
-    "npm": "^9.6.4",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "react-router-dom": "^6.10.0",
-    "styled-components": "^5.3.9"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-leaflet": "^4.2.1"
   }
 }

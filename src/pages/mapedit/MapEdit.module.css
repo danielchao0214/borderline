@@ -1,0 +1,115 @@
+@font-face {
+    font-family: 'Abel';
+    src: url('https://fonts.gstatic.com/s/abel/v18/MwQ5bhbm2POE2V9BPQ.woff2');
+}
+
+.main {
+    width: 100vw;
+    height: 100vh;
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 1vw;
+    margin-right: 1vw;
+}
+
+.toolbar {
+    background: #D9D9D9;
+    width: auto;
+    height: auto;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+    border: 2px solid gray;
+    border-radius: 9px;
+    margin-top: 3vh;
+    margin-bottom: 3vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.toolbarbutton {
+    color: black;
+}
+
+.actionbuttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.actionbutton {
+    width: 6vw;
+    margin: 0.5vh;
+}
+
+.center {
+    height: 80vh;
+    width: 70vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 1vw;
+    margin-right: 1vw;
+}
+
+.propertiesbar {
+    font-family: 'Abel', sans-serif;
+    height: 80vh;
+    width: 18vw;
+    background-color: #D9D9D9;
+    border: 2px solid #9f9f9f;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: center;
+    overflow-y: auto;
+}
+
+.property {}
+
+.propertybutton {
+    background: gray;
+    color: black;
+    border: 2px solid;
+    border-radius: 20px;
+    margin: 1em
+}
+
+.propertiesbar::-webkit-scrollbar {
+    width: 12px;
+}
+
+.propertiesbar::-webkit-scrollbar-track {
+    margin: 1px;
+    background: #f1f1f1;
+    border-radius: 6px;
+}
+
+.propertiesbar::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 6px;
+    border: 3px solid #f1f1f1;
+}
+
+.propertiesbar::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+}
