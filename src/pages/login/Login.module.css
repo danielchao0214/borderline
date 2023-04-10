@@ -1,0 +1,72 @@
+@font-face {
+    font-family: 'Abel';
+    src: url('https://fonts.gstatic.com/s/abel/v18/MwQ5bhbm2POE2V9BPQ.woff2');
+}
+
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.squircle {
+    background: transparent;
+    width: 33.33vw;
+    height: 33.33vw;
+    border: 2px solid #9f9f9f;
+    border-radius: 20px;
+    padding-bottom: 6em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 8vh;
+}
+
+.heading {
+    font-family: 'Abel', sans-serif;
+    font-size: 3em;
+}
+
+.description {
+    font-family: 'Abel', sans-serif;
+    font-size: 1.5em;
+    color: #797979;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+}
+
+.formTextField {
+    margin: 1vh;
+    width: 27em;
+}
+
+#forgotpassword {
+    font-family: sans-serif;
+    font-size: 0.9em;
+    color: #118AB2;
+    text-decoration: underline;
+    padding-left: 0.9em;
+}
+
+#forgotpassword:hover {
+    color: #0D5E66;
+}
+
+.submitbutton {
+    margin-top: 3vh;
+    background-color: #BFBFBF;
+    color: black;
+    width:auto;
+}

@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { useRouter } from 'next/router'
 import { Inter } from 'next/font/google'
 import { TextField, Button } from '@mui/material';
-import styles from '@/styles/Login.module.css'
+import styles from '@/pages/login/Login.module.css'
 
 const inter = Inter({ subsets: ['latin'] })
 
-export default function Home() {
+export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
