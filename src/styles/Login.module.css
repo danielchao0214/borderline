@@ -41,9 +41,15 @@
     width: 100%;
 }
 
-#forgot-password {
-    color:aliceblue;
+#forgotpassword {
+    color: #118AB2;
+    text-decoration: none;
 }
+
+#forgotpassword:hover {
+    color: #0B555D;
+}
+
 
 .submitButton {
     background-color: '#BFBFBF';

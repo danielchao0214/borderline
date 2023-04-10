@@ -42,7 +42,7 @@ export default function Home() {
               variant="outlined"
               className={styles.formTextField}
             />
-            <a href="/forgot-password" id="forgot-password" className={styles.container}>Forgot password?</a>
+            <a href="/forgot-password" id={styles.forgotpassword}>Forgot password?</a>
             <Button type="submit" variant="contained" style={{ backgroundColor: '#BFBFBF', color: 'black' }}>
               Log in
             </Button>
