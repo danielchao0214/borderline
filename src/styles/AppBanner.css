@@ -11,44 +11,42 @@
     font-style: normal;
 }
 
-#homescreen-heading{
-  display: inline-flex;
-  text-align: center;
-  align-items: center;
+#homescreen-heading {
+    display: inline-flex;
+    text-align: center;
+    align-items: center;
 }
 
-
-
-#outlined-basic{
+#outlined-basic {
     background-color: rgb(255, 255, 255);
     text-align: center;
 }
 
-.css-1pmjqg1-MuiFormControl-root-MuiTextField-root{
+.css-1pmjqg1-MuiFormControl-root-MuiTextField-root {
     padding-top: 15px;
     background-color: #999999;
 }
 
-.css-hip9hq-MuiPaper-root-MuiAppBar-root{
+.css-hip9hq-MuiPaper-root-MuiAppBar-root {
     background-color: #999999;
     color: #000000;
 }
 
 
-a[target="Nav"]{
+a[target="Nav"] {
     display: flex;
     padding-left: 50px;
     padding-right: 50px;
     align-items: center;
 
-    font-family: 'Abel';
+    font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
     font-size: 32px;
     line-height: 39px;
 }
 
-a[target="Home"]{
+a[target="Home"] {
 
     font-family: 'Abel';
     font-style: normal;

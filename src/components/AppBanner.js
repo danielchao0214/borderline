@@ -1,7 +1,6 @@
 import { useContext, useState } from 'react';
-import { Link } from 'react-router-dom'
 import Box from '@mui/material/Box';
-import {Button, TextField, Tabs, Tab, List,} from '@mui/material'
+import { Button, TextField, Tabs, Tab, List, } from '@mui/material'
 import SortIcon from '@mui/icons-material/Sort';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import ArrowDownwardSharpIcon from '@mui/icons-material/ArrowDownwardSharp';
@@ -16,83 +15,83 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 
 
-function AppBanner(){
-   return(
-    <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="static">
-            <Toolbar>
-                <Typography
-                    variant = "h4"
-                    noWrap
-                    component = "div"
-                    sx={{ display: {xs: 'none', sm:'block', minHeight:82} }}
-                >    
-                </Typography>
+function AppBanner() {
+    return (
+        <Box sx={{ flexGrow: 1 }}>
+            <AppBar position="static">
+                <Toolbar>
+                    <Typography
+                        variant="h4"
+                        noWrap
+                        component="div"
+                        sx={{ display: { xs: 'none', sm: 'block', minHeight: 82 } }}
+                    >
+                    </Typography>
 
-                <div id="homescreen">
-                    <div id="homescreen-heading">
-                        
-                    <Box sx={{ display: { xs: 'none', md: 'flex', marginRight: 'none' } }}>
-                        <a href="/" target='Home'>borderline</a>  
+                    <div id="homescreen">
+                        <div id="homescreen-heading">
 
-                        <p>name</p>                  
-                    
-                        <TextField 
-                            id="outlined-basic" 
-                            //label="Search" 
-                            variant="outlined"
-                            defaultValue='Type Something To Search' 
-                            sx={{ width: 600, backgroundColor: 'white'}}
-                            //onKeyPress={handleSearch}
-                        />
-                        <Button
-                            size="large"
-                            edge="end"
-                            aria-label="sort by tag"
-                            aria-controls='primary-search-tag-filter'
-                            aria-haspopup="true"
-                            //onClick={handleMenuOpen}
-                            color="inherit"
-                            endIcon={<ArrowDownwardSharpIcon/>}
-                            sx={{ fontSize: 20, fontWeight: 'bold'}}
-                        > 
-                        </Button> 
-                        <Button
-                            size="large"
-                            edge="end"
-                            aria-label="sort by catagory"
-                            aria-controls='primary-search-catagory'
-                            aria-haspopup="true"
-                            //onClick={handleMenuOpen}
-                            color="inherit"
-                            endIcon={<SortIcon/>}
-                            sx={{ fontSize: 20, mr:10, fontWeight: 'bold'}}
-                        > 
-                        </Button>
-                        
-                            <a href="/" target='Nav'>Maps</a>
+                            <Box sx={{ display: { xs: 'none', md: 'flex', marginRight: 'none' } }}>
+                                <a href="/" target='Home'>borderline</a>
 
-                            <a href="/"target='Nav'>Forums</a>
+                                <p>name</p>
+
+                                <TextField
+                                    id="outlined-basic"
+                                    //label="Search" 
+                                    variant="outlined"
+                                    defaultValue='Type Something To Search'
+                                    sx={{ width: 600, backgroundColor: 'white' }}
+                                //onKeyPress={handleSearch}
+                                />
+                                <Button
+                                    size="large"
+                                    edge="end"
+                                    aria-label="sort by tag"
+                                    aria-controls='primary-search-tag-filter'
+                                    aria-haspopup="true"
+                                    //onClick={handleMenuOpen}
+                                    color="inherit"
+                                    endIcon={<ArrowDownwardSharpIcon />}
+                                    sx={{ fontSize: 20, fontWeight: 'bold' }}
+                                >
+                                </Button>
+                                <Button
+                                    size="large"
+                                    edge="end"
+                                    aria-label="sort by catagory"
+                                    aria-controls='primary-search-catagory'
+                                    aria-haspopup="true"
+                                    //onClick={handleMenuOpen}
+                                    color="inherit"
+                                    endIcon={<SortIcon />}
+                                    sx={{ fontSize: 20, mr: 10, fontWeight: 'bold' }}
+                                >
+                                </Button>
+
+                                <a href="/" target='Nav'>Maps</a>
+
+                                <a href="/" target='Nav'>Forums</a>
 
 
-                    <Box sx={{ display: { xs: 'none', md: 'flex', marginLeft: 'auto' } }}>                    
-                        <IconButton
-                            size="large"
-                            edge="end"
-                            aria-label="account of current user"
-                            aria-haspopup="true"
-                            color="inherit"      
-                        >
-                        <AccountCircle />
-                        </IconButton>
-                    </Box>
-                </Box>
-                </div>
-            </div>
-            </Toolbar>
-        </AppBar>
-    </Box>    
-   ) 
+                                <Box sx={{ display: { xs: 'none', md: 'flex', marginLeft: 'auto' } }}>
+                                    <IconButton
+                                        size="large"
+                                        edge="end"
+                                        aria-label="account of current user"
+                                        aria-haspopup="true"
+                                        color="inherit"
+                                    >
+                                        <AccountCircle />
+                                    </IconButton>
+                                </Box>
+                            </Box>
+                        </div>
+                    </div>
+                </Toolbar>
+            </AppBar>
+        </Box>
+    )
 }
 
 export default AppBanner
