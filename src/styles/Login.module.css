@@ -50,8 +50,7 @@
     color: #0B555D;
 }
 
-
-.submitButton {
+#submitbutton {
     background-color: '#BFBFBF';
     color: 'black';
 }

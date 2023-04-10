@@ -43,7 +43,7 @@ export default function Home() {
               className={styles.formTextField}
             />
             <a href="/forgot-password" id={styles.forgotpassword}>Forgot password?</a>
-            <Button type="submit" variant="contained" style={{ backgroundColor: '#BFBFBF', color: 'black' }}>
+            <Button type="submit" variant="contained" id={styles.submitbutton}>
               Log in
             </Button>
           </form>
