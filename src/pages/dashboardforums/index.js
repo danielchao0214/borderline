@@ -1,7 +1,7 @@
 import styles from '@/pages/dashboardforums/DashboardForums.module.css'
 import Button from '@mui/material/Button';
 
-export default function App() {
+export default function DashboardForums() {
   return (
     <>
       <main>

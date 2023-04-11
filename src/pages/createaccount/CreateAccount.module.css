@@ -56,8 +56,8 @@
 }
 
 .submitbutton {
-    margin-top: 3vh;
-    background-color: #BFBFBF;
-    color: black;
-    width:auto;
+    margin-top: 3vh !important;
+    background-color: #BFBFBF !important;
+    color: black !important;
+    width:auto !important;
 }

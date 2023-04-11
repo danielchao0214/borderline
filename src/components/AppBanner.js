@@ -12,6 +12,8 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import IconButton from '@mui/material/IconButton';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
+import Link from 'next/link';
+import styles from '@/styles/AppBanner.module.css'
 
 
 export default function AppBanner() {
@@ -46,7 +48,7 @@ export default function AppBanner() {
 
     const tagTextField = (
         <TextField
-            id="tagSearch"
+            id={styles.tagSearch}
             //label="Search" 
             //variant="outlined"
             defaultValue='Type Something To Search'
@@ -58,29 +60,30 @@ export default function AppBanner() {
 
 
     return (
-        <div class='homescreen-heading'>
+        <div className={styles.homescreenheading}>
             <Box sx={{ flexGrow: 1 }}>
-                <AppBar position="static">
-                    <Toolbar>
+                <AppBar position="static" style={{backgroundColor: "#AEAEAE", color:"000000"}}>
+                    <Toolbar style={{display:"block"}}>
                         <Typography
                             variant="h4"
                             noWrap
                             component="div"
                             sx={{ display: { xs: 'none', sm: 'block', minHeight: 82 } }}
+                            style={{display:"none"}}
                         >
                         </Typography>
 
                         <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-                            <a href="/" target='Home'>borderline</a>
+                            <Link href="/" target='Home' className={styles.home}>borderline</Link>
 
-                            <p>Dashboard</p>
+                            <p className={styles.p}>Dashboard</p>
 
                             <TextField
-                                id="outlined-basic"
+                                id={styles.outlinedbasic}
                                 //label="Search" 
                                 variant="outlined"
                                 defaultValue='Type Something To Search'
-
+                                style={{ padding: "10px", paddingTop: "15px", backgroundColor: "#AEAEAE"}}
                                 InputProps={{
                                     startAdornment: (
                                         <InputAdornment position="start">
@@ -103,6 +106,7 @@ export default function AppBanner() {
                                 color="inherit"
                                 endIcon={<ArrowDownwardSharpIcon />}
                                 sx={{ fontSize: 20, fontWeight: 'bold' }}
+                                style={{marginRight:0}}
                             >
                             </Button>
                             <Button
@@ -115,18 +119,19 @@ export default function AppBanner() {
                                 color="inherit"
                                 endIcon={<SortIcon />}
                                 sx={{ fontSize: 20, mr: 10, fontWeight: 'bold' }}
+                                style={{marginRight:0}}
                             >
 
                             </Button>
 
-                            <a href="/dashboardmaps" target='Nav'>Maps</a>
+                            <Link href="/dashboardmaps" target='Nav' className={styles.nav}>Maps</Link>
 
-                            <a href="/dashboardforums" target='Nav'>Forum</a>
+                            <Link href="/dashboardforums" target='Nav' className={styles.nav}>Forum</Link>
 
 
                             <Box sx={{ display: { xs: 'none', md: 'flex' }, p: 0 }}>
                                 <IconButton
-                                    id="AccountIcon"
+                                    id={styles.AccountIcon}
                                     size="large"
                                     edge="end"
                                     aria-label="account of current user"
@@ -149,10 +154,10 @@ export default function AppBanner() {
                                 >
                                     <Typography sx={{ width: 200 }}>
                                         <ul>
-                                            <li target="Catagories">Sort Catagory 1</li>
-                                            <li target="Catagories">Sort Catagory 2</li>
-                                            <li target="Catagories">Sort Catagory 3</li>
-                                            <li target="Catagories">Sort Catagory 4</li>
+                                            <li target="Catagories" className="li">Sort Catagory 1</li>
+                                            <li target="Catagories" className="li">Sort Catagory 2</li>
+                                            <li target="Catagories" className="li">Sort Catagory 3</li>
+                                            <li target="Catagories" className="li">Sort Catagory 4</li>
                                         </ul>
                                     </Typography>
                                 </Popover>
@@ -170,8 +175,8 @@ export default function AppBanner() {
                                 >
                                     <Typography sx={{ width: 150 }}>
                                         <ul>
-                                            <li><a href="/login" target='list'>Login</a></li>
-                                            <li><a href="/createaccount" target='list'>Create Account</a></li>
+                                            <li className="li"><Link href="/login" target='list' className={styles.list}>Login</Link></li>
+                                            <li className="li"><Link href="/createaccount" target='list' className={styles.list}>Create Account</Link></li>
                                         </ul>
                                     </Typography>
                                 </Popover>
@@ -189,10 +194,10 @@ export default function AppBanner() {
                                 >
                                     <Typography sx={{ width: 200 }}>
                                         <ul>
-                                            <li>{tagTextField}</li>
-                                            <li>Preset Tag 1</li>
-                                            <li>Preset Tag 2</li>
-                                            <li>Preset Tag 3</li>
+                                            <li className="li">{tagTextField}</li>
+                                            <li className="li">Preset Tag 1</li>
+                                            <li className="li">Preset Tag 2</li>
+                                            <li className="li">Preset Tag 3</li>
                                         </ul>
                                     </Typography>
                                 </Popover>

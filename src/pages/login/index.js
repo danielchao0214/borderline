@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import { Inter } from 'next/font/google'
 import { TextField, Button } from '@mui/material';
 import styles from '@/pages/login/Login.module.css'
+import Link from "next/link";
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -46,7 +47,7 @@ export default function Login() {
               margin="normal"
               variant="outlined"
             />
-            <a href="/resetpasswordemail" id={styles.forgotpassword}>Forgot password?</a>
+            <Link href="/resetpasswordemail" id={styles.forgotpassword}>Forgot password?</Link>
             <div style={{ display: "flex", justifyContent: "center" }}>
               <Button className={styles.submitbutton} type="submit" variant="contained">
                 Log in

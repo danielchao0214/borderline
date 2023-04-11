@@ -8,7 +8,7 @@ import TagMapModal from '@/components/TagMapModal';
 import styles from '@/pages/mapedit/MapEdit.module.css'
 import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
-import CompressIcon from '@mui/icons-material/compress';
+import CompressIcon from '@mui/icons-material/Compress';
 import NearMeIcon from '@mui/icons-material/NearMe';
 import ClearIcon from '@mui/icons-material/Clear';
 import MergeIcon from '@mui/icons-material/Merge';
