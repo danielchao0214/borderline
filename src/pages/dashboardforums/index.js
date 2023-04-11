@@ -4,115 +4,78 @@ import Button from '@mui/material/Button';
 export default function DashboardForums() {
   return (
     <>
-      <main>
-        <div className={styles.flexcontainer}>
-          <div className={styles.importcontainer}>
-            {
-              <Button className={styles.importbutton} variant="outlined">Import File</Button>
-            }
-          </div>
+      {/* <main> */}
+      {/* <div className={styles.flexcontainer}> */}
+        <div className={styles.createcontainer}>
+          {
+            <Button className={styles.createbutton} variant="outlined">Create Post</Button>
+          }
+        </div>
 
-          <div className={styles.profilecontainer}>
-            <div>
-              <img className={styles.profile} src="profile.jpeg" alt="Profile" />
+        <div className={styles.forumcontainer}>
+          <div className={styles.forumflexcontainer}>
+            <div className={styles.forumdiv}>
+              <h1>Title</h1>
+              <p>Posted by: User</p>
+              <br />
+              <p>Lorem ipsum dolor sit amet, docendi urbanitas te eum, dolore explicari mei eu. Mandamus democritum necessitatibus an nec. In sit alia libris docendi, cu omittam sapientem definitiones his. Neglegentur voluptatibus interpretaris ei has, eos at exerci audiam.
+
+                Mel an viderer eleifend intellegebat. Ne duo nihil dolorum habemus, iuvaret eleifend prodesset sea ad. Eu quodsi graecis efficiendi per, sea at veri accusam. Quo ferri nobis sadipscing ut, vel suas sint ut.</p>
             </div>
-            <h1>User</h1><br />
-            Owned Maps: 5
-          </div>
+            <div className={styles.forumdiv}>
+            <h1>Title</h1>
+              <p>Posted by: User</p>
+              <br />
+              <p>Lorem ipsum dolor sit amet, docendi urbanitas te eum, dolore explicari mei eu. Mandamus democritum necessitatibus an nec. In sit alia libris docendi, cu omittam sapientem definitiones his. Neglegentur voluptatibus interpretaris ei has, eos at exerci audiam.
 
-          <div className={styles.recentmapcontainer}>
-            <h2 className={styles.recentmaptitle} >Recently Viewed</h2>
-            <div className={styles.flexcontainer}>
-              <div className={styles.recentmapdiv}>
-                <img className={styles.recentmap} src="map.png" alt="Map" />
-                Title
-                Author
-                
-              </div>
-              <div className={styles.recentmapdiv}>
-                <img className={styles.recentmap} src="map.png" alt="Map" />
-                Title
-                Author
-              </div>
-              <div className={styles.recentmapdiv}>
-                <img className={styles.recentmap} src="map.png" alt="Map" />
-                Title
-                Author
-              </div>
-              <div className={styles.recentmapdiv}>
-                <img className={styles.recentmap} src="map.png" alt="Map" />
-                Title
-                Author
-              </div>
-              <div className={styles.recentmapdiv}>
-                <img className={styles.recentmap} src="map.png" alt="Map" />
-                Title
-                Author
-              </div>
+                Mel an viderer eleifend intellegebat. Ne duo nihil dolorum habemus, iuvaret eleifend prodesset sea ad. Eu quodsi graecis efficiendi per, sea at veri accusam. Quo ferri nobis sadipscing ut, vel suas sint ut.</p>
             </div>
-          </div>
+            <div className={styles.forumdiv}>
+            <h1>Title</h1>
+              <p>Posted by: User</p>
+              <br />
+              <p>Lorem ipsum dolor sit amet, docendi urbanitas te eum, dolore explicari mei eu. Mandamus democritum necessitatibus an nec. In sit alia libris docendi, cu omittam sapientem definitiones his. Neglegentur voluptatibus interpretaris ei has, eos at exerci audiam.
 
-          <div className={styles.mapcontainer}>
-            <div className={styles.mapsflexcontainer}>
-              <div>
-                <img className={styles.map} src="map.png" alt="Map" />
-                <h3>Title</h3>
-                Author
-                <p>5 Likes ⋅ 5 Dislikes ⋅ 04/10/2023</p>
-              </div>
-              <div>
-                <img className={styles.map} src="map.png" alt="Map" />
-                <h3>Title</h3>
-                Author
-                <p>5 Likes ⋅ 5 Dislikes ⋅ 04/10/2023</p>
-              </div>
-              <div>
-                <img className={styles.map} src="map.png" alt="Map" />
-                <h3>Title</h3>
-                Author
-                <p>5 Likes ⋅ 5 Dislikes ⋅ 04/10/2023</p>
-              </div>
-              <div>
-                <img className={styles.map} src="map.png" alt="Map" />
-                <h3>Title</h3>
-                Author
-                <p>5 Likes ⋅ 5 Dislikes ⋅ 04/10/2023</p>
-              </div>
-              <div>
-                <img className={styles.map} src="map.png" alt="Map" />
-                <h3>Title</h3>
-                Author
-                <p>5 Likes ⋅ 5 Dislikes ⋅ 04/10/2023</p>
-              </div>
-              <div>
-                <img className={styles.map} src="map.png" alt="Map" />
-                <h3>Title</h3>
-                Author
-                <p>5 Likes ⋅ 5 Dislikes ⋅ 04/10/2023</p>
-              </div><div>
-                <img className={styles.map} src="map.png" alt="Map" />
-                <h3>Title</h3>
-                Author
-                <p>5 Likes ⋅ 5 Dislikes ⋅ 04/10/2023</p>
-              </div>
-              <div>
-                <img className={styles.map} src="map.png" alt="Map" />
-                <h3>Title</h3>
-                Author
-                <p>5 Likes ⋅ 5 Dislikes ⋅ 04/10/2023</p>
-              </div>
-              <div>
-                <img className={styles.map} src="map.png" alt="Map" />
-                <h3>Title</h3>
-                Author
-                <p>5 Likes ⋅ 5 Dislikes ⋅ 04/10/2023</p>
-              </div>
+                Mel an viderer eleifend intellegebat. Ne duo nihil dolorum habemus, iuvaret eleifend prodesset sea ad. Eu quodsi graecis efficiendi per, sea at veri accusam. Quo ferri nobis sadipscing ut, vel suas sint ut.</p>
+            </div>
+            <div className={styles.forumdiv}>
+            <h1>Title</h1>
+              <p>Posted by: User</p>
+              <br />
+              <p>Lorem ipsum dolor sit amet, docendi urbanitas te eum, dolore explicari mei eu. Mandamus democritum necessitatibus an nec. In sit alia libris docendi, cu omittam sapientem definitiones his. Neglegentur voluptatibus interpretaris ei has, eos at exerci audiam.
+
+                Mel an viderer eleifend intellegebat. Ne duo nihil dolorum habemus, iuvaret eleifend prodesset sea ad. Eu quodsi graecis efficiendi per, sea at veri accusam. Quo ferri nobis sadipscing ut, vel suas sint ut.</p>
             </div>
           </div>
         </div>
-      </main>
-      {/* <RecentMapList /> */}
-      {/* <MapList /> */}
+
+        <div className={styles.recentforumcontainer}>
+          <h1 className={styles.recentforumtitle} >Recently Viewed</h1>
+          <div className={styles.flexcontainer}>
+            <div className={styles.recentforumdiv}>
+              <h2>Title</h2>
+              Posted by: User
+            </div>
+            <div className={styles.recentforumdiv}>
+              <h2>Title</h2>
+              Posted by: User
+            </div>
+            <div className={styles.recentforumdiv}>
+              <h2>Title</h2>
+              Posted by: User
+            </div>
+            <div className={styles.recentforumdiv}>
+              <h2>Title</h2>
+              Posted by: User
+            </div>
+            <div className={styles.recentforumdiv}>
+              <h2>Title</h2>
+              Posted by: User
+            </div>
+          </div>
+        </div>
+      {/* </div> */}
+      {/* </main> */}
     </>
   )
 }
