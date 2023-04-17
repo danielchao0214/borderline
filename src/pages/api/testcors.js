@@ -26,13 +26,21 @@ export default async function handler(req, res) {
 
     // Rest of the API logic
     const client = await clientPromise;
-    const db = client.db("playlists");
+    const db = client.db("Users");
     switch (req.method) {
         case "POST":
-            // do whatever
+            console.log(req.body);
+            db.collection("Users").insertOne(req.body, function(err, res){
+                if (err) throw err;
+                console.log(err);
+                client.close();
+            });
+
+            res.json({status: 200});
+
             break;
         case "GET":
-            const allPosts = await db.collection("playlists").find({}).toArray();
+            const allPosts = await db.collection("Users").find({}).toArray();
             res.json({ status: 200, data: allPosts });
             break;
     }
