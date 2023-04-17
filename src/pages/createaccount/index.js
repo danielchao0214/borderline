@@ -15,11 +15,10 @@ export default function Login() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const router = useRouter();
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(`Submitted: ${email} ${password}`);
     let url = "/api/auth"
-    fetch("http://localhost:3000/"+url, {
+    const res = await fetch("http://localhost:3000/"+url, {
       method: "Post",
       body: JSON.stringify({
         firstName,
@@ -32,7 +31,22 @@ export default function Login() {
       headers: {
         "content-type": "application/json"
       },
-    }).catch((e) =>console.log(e));
+    }).catch((e) =>console.log(e)); // Error for fetch request only
+
+    // wait for the responce from request and get the body
+    const data = await res.json(); 
+
+    // If status code returns error print the code in the body
+    if(res.status == 400){ 
+      console.log(data.errorMessage);
+    }
+
+    //If route is good then log the results and rout the use to login Screen
+    if(res.status == 200){
+      console.log(data.message);
+      router.push("/login");
+    }
+    
   };
   return (
     <>
