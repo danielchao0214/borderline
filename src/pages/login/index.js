@@ -12,11 +12,34 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const router = useRouter();
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(`Submitted: ${email} ${password}`);
-    router.push('/'); // this should be changed to whatever
-    // handle submit logic here
+    let url = "/api/authLogin"
+    const res = await fetch("http://localhost:3000/" + url, {
+      method: "Post",
+      body: JSON.stringify({
+        email,
+        password
+      }),
+      headers: {
+        "content-type": "application/json"
+      },
+    }).catch((e) => console.log(e));
+    
+    // wait for the responce from request and get the body
+    const data = await res.json(); 
+
+    // If status code returns error print the code in the body
+    if(res.status == 401){ 
+      console.log(data.errorMessage);
+    }
+
+    //If route is good then log the results and rout the use to login Screen
+    if(res.status == 200){
+      console.log(data.message);
+      router.push("/login");
+    }
+    
   };
   return (
     <>
@@ -42,6 +65,7 @@ export default function Login() {
             <TextField
               label="Password"
               className={styles.formTextField}
+              type="password"
               value={password}
               onChange={(event) => setPassword(event.target.value)}
               margin="normal"
