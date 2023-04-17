@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from 'next/router'
 import { Inter } from 'next/font/google'
 import { TextField, Button } from '@mui/material';
@@ -7,13 +7,16 @@ import styles from '@/pages/resetpassword/ResetPassword.module.css'
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [newPasswordRepeat, setNewPasswordRepeat] = useState("");
   const router = useRouter();
+  useEffect(() => {
+    console.log("hi");
+    console.log(router.query);
+  }, [router.query]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(`Submitted: ${email} ${password}`);
     router.push('/'); // this should be changed to whatever
     // handle submit logic here
   };
@@ -33,16 +36,16 @@ export default function Login() {
             <TextField
               label="Password"
               className={styles.formTextField}
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
+              value={newPassword}
+              onChange={(event) => setNewPassword(event.target.value)}
               margin="normal"
               variant="outlined"
             />
             <TextField
               label="Confirm Password"
               className={styles.formTextField}
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
+              value={newPasswordRepeat}
+              onChange={(event) => setNewPasswordRepeat(event.target.value)}
               margin="normal"
               variant="outlined"
             />
