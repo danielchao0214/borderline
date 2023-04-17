@@ -1,6 +1,5 @@
 import { IconButton, Button, Modal } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import FileUploader from './FileUploader';
 import styles from '@/styles/Modal.module.css'
 import Typography from '@mui/material/Typography';
 
