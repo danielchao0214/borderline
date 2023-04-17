@@ -8,15 +8,15 @@ const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
   const showGraphics = () => {
-    document.getElementById("comments").style.display="none";
+    document.getElementById("comments").style.display = "none";
     document.getElementById("comments_button").style.backgroundColor = "rgb(104,104,104)";
-    document.getElementById("graphics").style.display="flex";
+    document.getElementById("graphics").style.display = "flex";
     document.getElementById("graphics_button").style.backgroundColor = "rgb(191,191,191)"
   }
   const showComments = () => {
-    document.getElementById("comments").style.display="flex";
+    document.getElementById("comments").style.display = "flex";
     document.getElementById("comments_button").style.backgroundColor = "rgb(191,191,191)";
-    document.getElementById("graphics").style.display="none";
+    document.getElementById("graphics").style.display = "none";
     document.getElementById("graphics_button").style.backgroundColor = "rgb(104,104,104)";
   }
   return (
@@ -35,15 +35,21 @@ export default function Home() {
               <div name="spacer" className={styles.button_spacer}>
               </div>
               <div name="option buttons" className={styles.option_buttons}>
+                <Link href="mapedit">
                 <button className={styles.option_button}>
                   Edit Map
                 </button>
+                </Link>
+                <Link href="mapedit">
                 <button className={styles.option_button}>
                   Fork Map
                 </button>
-                <button className={styles.option_button}>
-                  Edit Graphic
-                </button>
+                </Link>
+                <Link href="mapgraphicedit">
+                  <button className={styles.option_button}>
+                    Edit Graphic
+                  </button>
+                </Link>
                 <button className={styles.option_button}>
                   Publish Map
                 </button>
@@ -67,7 +73,7 @@ export default function Home() {
                     edit
                   </span>
                 </div>
-                <span style={{fontSize:"1.2rem"}}>
+                <span style={{ fontSize: "1.2rem" }}>
                   PizzaLover
                 </span>
               </div>
@@ -76,16 +82,16 @@ export default function Home() {
               </div>
               <div name="description" className={styles.description}>
                 <div>
-                  <span style={{fontSize:"1.5rem"}}>
+                  <span style={{ fontSize: "1.5rem" }}>
                     Publish Date · 4/10/2023
                   </span>
                 </div>
-                <br/>
+                <br />
                 <div>
                   <span>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure 
-                  dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+                    dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
                   </span>
                 </div>
               </div>
@@ -105,75 +111,75 @@ export default function Home() {
                 <div name="comment container" className={styles.comments_container}>
                   <div name="comment" className={styles.comment_card}>
                     <div>
-                      <span style={{fontWeight:"bold"}}>
+                      <span style={{ fontWeight: "bold" }}>
                         PizzaHater
                       </span>
                     </div>
                     <div>
                       <span>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                      Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure 
-                      dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+                        dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
                       </span>
                     </div>
                   </div>
                   <div name="comment" className={styles.comment_card}>
                     <div>
-                      <span style={{fontWeight:"bold"}}>
+                      <span style={{ fontWeight: "bold" }}>
                         PizzaHater
                       </span>
                     </div>
                     <div>
                       <span>
-                      Lorem ipsum dolor sit amet, consectetur
+                        Lorem ipsum dolor sit amet, consectetur
                       </span>
                     </div>
                   </div>
                   <div name="comment" className={styles.comment_card}>
                     <div>
-                      <span style={{fontWeight:"bold"}}>
+                      <span style={{ fontWeight: "bold" }}>
                         PizzaHater
                       </span>
                     </div>
                     <div>
                       <span>
-                      Lorem ipsum dolor sit amet, consectetur
+                        Lorem ipsum dolor sit amet, consectetur
                       </span>
                     </div>
                   </div>
                   <div name="comment" className={styles.comment_card}>
                     <div>
-                      <span style={{fontWeight:"bold"}}>
+                      <span style={{ fontWeight: "bold" }}>
                         PizzaHater
                       </span>
                     </div>
                     <div>
                       <span>
-                      Lorem ipsum dolor sit amet, consectetur
+                        Lorem ipsum dolor sit amet, consectetur
                       </span>
                     </div>
                   </div>
                   <div name="comment" className={styles.comment_card}>
                     <div>
-                      <span style={{fontWeight:"bold"}}>
+                      <span style={{ fontWeight: "bold" }}>
                         PizzaHater
                       </span>
                     </div>
                     <div>
                       <span>
-                      Lorem ipsum dolor sit amet, consectetur
+                        Lorem ipsum dolor sit amet, consectetur
                       </span>
                     </div>
                   </div>
                   <div name="comment" className={styles.comment_card}>
                     <div>
-                      <span style={{fontWeight:"bold"}}>
+                      <span style={{ fontWeight: "bold" }}>
                         PizzaHater
                       </span>
                     </div>
                     <div>
                       <span>
-                      Lorem ipsum dolor sit amet, consectetur
+                        Lorem ipsum dolor sit amet, consectetur
                       </span>
                     </div>
                   </div>
@@ -187,14 +193,14 @@ export default function Home() {
                 </div>
               </div>
 
-              <div id="graphics" name="comment inside container" className={styles.comment_inside_container} style={{display:"none"}}>
+              <div id="graphics" name="comment inside container" className={styles.comment_inside_container} style={{ display: "none" }}>
                 <div name="graphic container" className={styles.graphics_container}>
                   <div name="Graphic" className={styles.graphic}>
                     <div name="image graphic" className={styles.image_graphic}>
                       <img src="map_overview_US.jpg" className={styles.img_graphic}></img>
                     </div>
                     <div name="graphic description" className={styles.graphic_description}>
-                      <p style={{fontWeight:"bolder", fontSize:"15px"}}>
+                      <p style={{ fontWeight: "bolder", fontSize: "15px" }}>
                         Graphic 1 Title
                       </p>
                       <p>
@@ -213,7 +219,7 @@ export default function Home() {
                       <img src="map_overview_US.jpg" className={styles.img_graphic}></img>
                     </div>
                     <div name="graphic description" className={styles.graphic_description}>
-                      <p style={{fontWeight:"bolder", fontSize:"15px"}}>
+                      <p style={{ fontWeight: "bolder", fontSize: "15px" }}>
                         Graphic 2 Title
                       </p>
                       <p>
@@ -232,7 +238,7 @@ export default function Home() {
                       <img src="map_overview_US.jpg" className={styles.img_graphic}></img>
                     </div>
                     <div name="graphic description" className={styles.graphic_description}>
-                      <p style={{fontWeight:"bolder", fontSize:"15px"}}>
+                      <p style={{ fontWeight: "bolder", fontSize: "15px" }}>
                         Graphic 3 Title
                       </p>
                       <p>
@@ -251,7 +257,7 @@ export default function Home() {
                       <img src="map_overview_US.jpg" className={styles.img_graphic}></img>
                     </div>
                     <div name="graphic description" className={styles.graphic_description}>
-                      <p style={{fontWeight:"bolder", fontSize:"15px"}}>
+                      <p style={{ fontWeight: "bolder", fontSize: "15px" }}>
                         Graphic 4 Title
                       </p>
                       <p>
@@ -270,7 +276,7 @@ export default function Home() {
                       <img src="map_overview_US.jpg" className={styles.img_graphic}></img>
                     </div>
                     <div name="graphic description" className={styles.graphic_description}>
-                      <p style={{fontWeight:"bolder", fontSize:"15px"}}>
+                      <p style={{ fontWeight: "bolder", fontSize: "15px" }}>
                         Graphic 5 Title
                       </p>
                       <p>
@@ -289,7 +295,7 @@ export default function Home() {
                       <img src="map_overview_US.jpg" className={styles.img_graphic}></img>
                     </div>
                     <div name="graphic description" className={styles.graphic_description}>
-                      <p style={{fontWeight:"bolder", fontSize:"15px"}}>
+                      <p style={{ fontWeight: "bolder", fontSize: "15px" }}>
                         Graphic 6 Title
                       </p>
                       <p>
