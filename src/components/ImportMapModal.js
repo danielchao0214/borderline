@@ -23,14 +23,14 @@ function ImportMapModal(props) {
 
         request.onsuccess = (event) => {
         // store the result of opening the database.
-        db = request.result;
-        const file = document.getElementById("importGeo").files[0];
-        const transaction = db.transaction('map', 'readwrite');
-        const fileStore = transaction.objectStore('map');
-        const addRequest = fileStore.put(new Blob([file], { type: file.type }), 1);
-        addRequest.onsuccess = event => {
-            console.log('File added to object store success');
-            window.location.replace("/mapedit");
+            db = request.result;
+            const file = document.getElementById("importGeo").files[0];
+            const transaction = db.transaction('map', 'readwrite');
+            const fileStore = transaction.objectStore('map');
+            const addRequest = fileStore.put(new Blob([file], { type: file.type }), 1);
+            addRequest.onsuccess = event => {
+                console.log('File added to object store success');
+                window.location.replace("/mapedit");
         };
         props.handleClose();
     }

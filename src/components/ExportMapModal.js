@@ -2,6 +2,40 @@ import { IconButton, Button, Modal } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import styles from '@/styles/Modal.module.css'
 
+function handleShpDbf(props) {
+}
+function handleGeoJSON(props) {
+    console.log("getting file");
+    let db;
+    var request = indexedDB.open("map", 1);
+
+    request.onsuccess = (event) => {
+        // store the result of opening the database.
+        db = request.result;
+        const transaction = db.transaction('map', 'readwrite');
+        const fileStore = transaction.objectStore('map');
+
+        var getRequest = fileStore.get(1);
+
+        getRequest.onsuccess = async function(event) {
+            var file = event.target.result;
+            if (file) {
+                var json = JSON.parse(await file.text());
+                var a = window.document.createElement('a');
+                a.href = window.URL.createObjectURL(new File([file], "export.json", {type: file.type}));
+                a.download = "export";
+
+                // Append anchor to body.
+                document.body.appendChild(a);
+                a.click();
+
+                // Remove anchor from body
+                document.body.removeChild(a);
+            }
+        } 
+    }
+}
+
 function ExportMapModal(props) {
     return (
         <Modal
@@ -16,11 +50,11 @@ function ExportMapModal(props) {
                 <h2 id={styles.modalTitle}>Export File</h2>
                 <div className={styles.modalChoices}>
                     <div>
-                        <Button variant="contained" className={styles.exportButton}>SHP/DBF</Button>
+                        <Button onClick={handleShpDbf} variant="contained" className={styles.exportButton}>SHP/DBF</Button>
                         <p className={styles.label}>.zip file containing .shp and .dbf files</p>
                     </div>
                     <div>
-                        <Button variant="contained" className={styles.exportButton}>GeoJSON</Button>
+                        <Button onClick={handleGeoJSON} variant="contained" className={styles.exportButton}>GeoJSON</Button>
                         <p className={styles.label}>.geojson file</p>
                     </div>
                 </div>

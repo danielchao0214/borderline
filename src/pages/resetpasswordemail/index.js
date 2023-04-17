@@ -3,19 +3,20 @@ import { useRouter } from 'next/router'
 import { Inter } from 'next/font/google'
 import { TextField, Button } from '@mui/material';
 import styles from '@/pages/resetpasswordemail/ResetPasswordEmail.module.css'
+import { sendResetEmail } from "../../../lib/api";
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Login() {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const router = useRouter();
+  const [submitEnabled, setSubmitEnabled] = useState(false);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(`Submitted: ${email} ${password}`);
-    router.push('/'); // this should be changed to whatever
-    // handle submit logic here
+    console.log(`Submitted: ${email}`);
+    setSubmitEnabled(true);
+    await sendResetEmail(email);
   };
   return (
     <>
@@ -33,14 +34,14 @@ export default function Login() {
             <TextField
               label="Email Address"
               className={styles.formTextField}
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
               margin="normal"
               variant="outlined"
             />
             <div style={{ display: "flex", justifyContent: "center" }}>
-              <Button className={styles.submitbutton} type="submit" variant="contained">
-                  Send Reset Link
+              <Button className={styles.submitbutton} type="submit" variant="contained" disabled={submitEnabled}>
+                Send Reset Link
               </Button>
             </div>
           </form>
