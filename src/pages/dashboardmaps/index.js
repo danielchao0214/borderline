@@ -1,14 +1,42 @@
+import { useState } from 'react';
 import styles from '@/pages/dashboardmaps/DashboardMaps.module.css'
 import Button from '@mui/material/Button';
+import ImportMapModal from '@/components/ImportMapModal';
 
-export default function App() {
+import Box from '@mui/system/Box';
+import AccountCircle from '@mui/icons-material/AccountCircle';
+import Typography from '@mui/material/Typography';
+
+
+export default function DashboardMaps() {
+  const [openImportMapModal, setOpenImportMapModal] = useState(false);
+
+  const handleCloseImportMapModal = () => {
+    setOpenImportMapModal(false);
+  };
+
   return (
     <>
+    {/* <Box className={styles.importbox}>
+      <Button className={styles.importbutton} variant="outlined">Import File</Button>
+    </Box>
+    <AccountCircle></AccountCircle> */}
+      <ImportMapModal
+        open={openImportMapModal}
+        handleClose={handleCloseImportMapModal}
+      />
       <main>
+
         <div className={styles.flexcontainer}>
-          <div className={styles.importcontainer}>
+          <div className={styles.importbox}>
             {
-              <Button className={styles.importbutton} variant="outlined">Import File</Button>
+              <Button
+                variant="outlined"
+                className={styles.importbutton}
+                onClick={() => setOpenImportMapModal(true)}
+              >
+                Import File
+              </Button>
             }
           </div>
 
@@ -27,7 +55,7 @@ export default function App() {
                 <img className={styles.recentmap} src="map.png" alt="Map" />
                 Title
                 Author
-                
+
               </div>
               <div className={styles.recentmapdiv}>
                 <img className={styles.recentmap} src="map.png" alt="Map" />
