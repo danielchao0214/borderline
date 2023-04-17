@@ -14,8 +14,17 @@ export default function Login() {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(`Submitted: ${email} ${password}`);
-    router.push('/'); // this should be changed to whatever
-    // handle submit logic here
+    let url = "/api/testcors"
+    fetch("http://localhost:3000/"+url, {
+      method: "Post",
+      body: JSON.stringify({
+        email,
+        password,
+      }),
+      headers: {
+        "content-type": "application/json"
+      },
+    }).catch((e) =>console.log(e));
   };
   return (
     <>
