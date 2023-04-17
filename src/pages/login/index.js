@@ -36,8 +36,12 @@ export default function Login() {
 
     //If route is good then log the results and rout the use to login Screen
     if(res.status == 200){
+      const{firstName, lastName, username} = data.user;
       console.log(data.message);
-      router.push("/login");
+      console.log(firstName);
+      console.log(lastName);
+      console.log(username);
+      router.push("/dashboardmaps");
     }
     
   };

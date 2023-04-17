@@ -48,9 +48,16 @@ export default async function handler(req, res) {
             // LOGIN THE USER
                 //temporary
             //login success prompt
-            res.json({status: 200, message: "SUCCESS: User has been signed into their account"});
 
-   
+            //console.log(existingUser);
+
+            return res
+                .status(200)
+                .json({
+                    message: "SUCCESS: User has been signed into their account",
+                    user: existingUser
+                })
+               
             break;
 
     }
