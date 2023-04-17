@@ -18,7 +18,7 @@ export default function Login() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     let url = "/api/auth"
-    const res = await fetch("http://localhost:3000/"+url, {
+    const res = await fetch(url, {
       method: "Post",
       body: JSON.stringify({
         firstName,
