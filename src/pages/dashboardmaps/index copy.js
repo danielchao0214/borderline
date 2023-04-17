@@ -1,45 +1,109 @@
-import { useState } from 'react';
 import styles from '@/pages/dashboardmaps/DashboardMaps.module.css'
 import Button from '@mui/material/Button';
-import ImportMapModal from '@/components/ImportMapModal';
+import AppBanner from '@/components/AppBanner';
 
-import Box from '@mui/system/Box';
-import AccountCircle from '@mui/icons-material/AccountCircle';
-import Typography from '@mui/material/Typography';
+export default function App() {
 
 
-export default function DashboardMaps() {
-  const [openImportMapModal, setOpenImportMapModal] = useState(false);
+  const handleUpload = async(event) => {
+    event.preventDefault();
 
-  const handleCloseImportMapModal = () => {
-    setOpenImportMapModal(false);
+    let db;
+    var request = indexedDB.open("map", 1);
+
+    request.onupgradeneeded = (event) => {
+      // store the result of opening the database.
+      db = request.result;
+      const fileStore = db.createObjectStore("map");
+    };
+
+    request.onsuccess = (event) => {
+      // store the result of opening the database.
+      db = request.result;
+      const file = document.getElementById("import").files[0];
+      const transaction = db.transaction('map', 'readwrite');
+      const fileStore = transaction.objectStore('map');
+      const addRequest = fileStore.put(new Blob([file], { type: file.type }), 1);
+      addRequest.onsuccess = event => {
+        console.log('File added to object store success');
+        window.location.replace("/mapedit");
+      };
+    };
+
+
+    //console.log(`Submitted: ${email} ${password}`);
+    // let url = "/api/importmap"
+    // let file = document.getElementById("import").files[0];
+    // let title = file.name.substring(0, file.name.lastIndexOf("."));
+    // let author = "None";
+    // let tags = "None";
+    // let file_size = file.size;
+    // let likes = 0;
+    // let dislikes = 0;
+    // let published = false;
+    // let publish_date = Date();
+    // let description = "None";
+    // let map = await file.arrayBuffer();
+    // let comments = "None";
+    // let graphics = "None";
+    // let thumbnail = null;
+    // console.log({
+    //   title,
+    //   author,
+    //   tags,
+    //   file_size,
+    //   likes,
+    //   dislikes,
+    //   published,
+    //   publish_date,
+    //   description,
+    //   map,
+    //   comments,
+    //   graphics,
+    //   thumbnail
+    // })
+    // const mapData = new FormData();
+    // mapData.append("title", title);
+    // mapData.append("author", author);
+    // mapData.append("file_size", file_size);
+    // fetch("http://localhost:3000/"+url, {
+    //   method: "Post",
+    //   body: {
+    //     title,
+    //     author,
+    //     tags,
+    //     file_size,
+    //     likes,
+    //     dislikes,
+    //     published,
+    //     publish_date,
+    //     description,
+    //     comments,
+    //     graphics,
+    //     thumbnail 
+    //   },
+    //   headers: {
+    //     "content-type": "application/json"
+    //   },
+    // }).catch((e) =>console.log(e));
+
   };
+
+  const handleImportClick = (event) => {
+    document.getElementById("import").click();
+  }
 
   return (
     <>
-    {/* <Box className={styles.importbox}>
-      <Button className={styles.importbutton} variant="outlined">Import File</Button>
-    </Box>
-    <AccountCircle></AccountCircle> */}
-      <ImportMapModal
-        open={openImportMapModal}
-        handleClose={handleCloseImportMapModal}
-      />
+     <AppBanner />
       <main>
-
         <div className={styles.flexcontainer}>
-          <div className={styles.importbox}>
+          <div className={styles.importcontainer}>
             {
-              <Button
-                variant="outlined"
-                className={styles.importbutton}
-                onClick={() => setOpenImportMapModal(true)}
-              >
-                Import File
-              </Button>
+              <Button onClick={handleImportClick} className={styles.importbutton} variant="outlined">Import File</Button>
             }
           </div>
-
+          <input id="import" onChange={handleUpload} type="file" style={{display:"none"}} />
           <div className={styles.profilecontainer}>
             <div>
               <img className={styles.profile} src="profile.jpeg" alt="Profile" />
@@ -55,7 +119,7 @@ export default function DashboardMaps() {
                 <img className={styles.recentmap} src="map.png" alt="Map" />
                 Title
                 Author
-
+                
               </div>
               <div className={styles.recentmapdiv}>
                 <img className={styles.recentmap} src="map.png" alt="Map" />

@@ -80,6 +80,24 @@
   background-color: #d6d6d6
 }
 
+.importButton {
+  background-color: #D9D9D9;
+  color: black;
+  border: 1px solid black;
+  margin: 2em;
+  margin-bottom: 0.5em;
+  height: 6vh;
+  width: 15vw;
+}
+
+.importButton:hover {
+  background-color: #d6d6d6
+}
+
+.importTypography {
+  text-align: center;
+}
+
 .publishButton {
   background-color: #D9D9D9;
   color: black;

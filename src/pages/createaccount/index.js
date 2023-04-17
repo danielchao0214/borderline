@@ -9,22 +9,44 @@ const inter = Inter({ subsets: ['latin'] })
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [username, setUsername] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const router = useRouter();
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(`Submitted: ${email} ${password}`);
-    let url = "/api/testcors"
-    fetch("http://localhost:3000/"+url, {
+    let url = "/api/auth"
+    const res = await fetch("http://localhost:3000/"+url, {
       method: "Post",
       body: JSON.stringify({
+        firstName,
+        lastName,
+        username,
         email,
         password,
+        confirmPassword
       }),
       headers: {
         "content-type": "application/json"
       },
-    }).catch((e) =>console.log(e));
+    }).catch((e) =>console.log(e)); // Error for fetch request only
+
+    // wait for the responce from request and get the body
+    const data = await res.json(); 
+
+    // If status code returns error print the code in the body
+    if(res.status == 400){ 
+      console.log(data.errorMessage);
+    }
+
+    //If route is good then log the results and rout the use to login Screen
+    if(res.status == 200){
+      console.log(data.message);
+      router.push("/login");
+    }
+    
   };
   return (
     <>
@@ -42,16 +64,16 @@ export default function Login() {
             <TextField
               label="First Name"
               className={styles.formTextField}
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
+              value={firstName}
+              onChange={(event) => setFirstName(event.target.value)}
               margin="normal"
               variant="outlined"
             />
             <TextField
               label="Last Name"
               className={styles.formTextField}
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
+              value={lastName}
+              onChange={(event) => setLastName(event.target.value)}
               margin="normal"
               variant="outlined"
             />
@@ -66,13 +88,14 @@ export default function Login() {
             <TextField
               label="Username"
               className={styles.formTextField}
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
+              value={username}
+              onChange={(event) => setUsername(event.target.value)}
               margin="normal"
               variant="outlined"
             />
             <TextField
               label="Password"
+              type="password"
               className={styles.formTextField}
               value={password}
               onChange={(event) => setPassword(event.target.value)}
@@ -81,9 +104,10 @@ export default function Login() {
             />
             <TextField
               label="Confirm Password"
+              type="password"
               className={styles.formTextField}
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
+              value={confirmPassword}
+              onChange={(event) => setConfirmPassword(event.target.value)}
               margin="normal"
               variant="outlined"
             />
