@@ -30,7 +30,9 @@ const Map = () => {
     };
   }
 
-  React.useEffect(getFile);
+  React.useEffect(() => {
+    getFile();
+  }, []);
 
   return (
     <MapContainer center={[51.505, -0.09]} zoom={2} scrollWheelZoom={true} style={{height: "100%", width: "100%"}}>
