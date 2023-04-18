@@ -1,6 +1,6 @@
 describe('Create Account Tests Edge Cases', () => {
   beforeEach(function(){
-    cy.visit('http://localhost:3000/createaccount')
+    cy.visit('https://borderline-github.vercel.app/createaccount')
   })
 
 
