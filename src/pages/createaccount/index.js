@@ -62,7 +62,6 @@ export default function Login() {
           </div>
           <form onSubmit={handleSubmit} className={styles.form}>
             <TextField
-              id = "firstName"
               label="First Name"
               className={styles.formTextField}
               value={firstName}
@@ -71,7 +70,6 @@ export default function Login() {
               variant="outlined"
             />
             <TextField
-              id = "lastName"
               label="Last Name"
               className={styles.formTextField}
               value={lastName}
@@ -80,7 +78,6 @@ export default function Login() {
               variant="outlined"
             />
             <TextField
-              id = "email"
               label="Email"
               className={styles.formTextField}
               value={email}
@@ -89,7 +86,6 @@ export default function Login() {
               variant="outlined"
             />
             <TextField
-              id = "username"
               label="Username"
               className={styles.formTextField}
               value={username}
@@ -98,7 +94,6 @@ export default function Login() {
               variant="outlined"
             />
             <TextField
-              id = "password"
               label="Password"
               type="password"
               className={styles.formTextField}
@@ -108,7 +103,6 @@ export default function Login() {
               variant="outlined"
             />
             <TextField
-              id = "confirmPassword"
               label="Confirm Password"
               type="password"
               className={styles.formTextField}
