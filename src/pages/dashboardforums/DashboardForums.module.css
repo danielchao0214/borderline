@@ -1,79 +1,63 @@
-.main {
-    align-items: center;
-  }
-  
-  .createcontainer {
-    border-radius: 15px;
-    background-color: gray;
-    padding: 10px 50px 10px 50px;
-    margin: 15px 15px 15px 15px;
-    float: left;
-    height: 60px;
-  }
 
-  .recentforumcontainer {
-    width: 250px;
-    border-radius: 15px;
-    background-color: gray;
-    padding: 10px 10px 10px 10px;
-    margin: 15px 15px 15px 15px;
-    clear: left;
-    text-align: center;
-  }
+.createcontainer {
+  width: 15%; 
+}
 
-  .forumcontainer {
-    display: inline-block;
-    width: 1100px;
-    border-radius: 15px;
-    background-color: gray;
-    padding: 20px 20px 20px 20px;
-    margin: 10px 10px 10px 10px;
-    text-align: center;
-    }
+.createButtonContainter{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 100px;
+  border-radius: 15px;
+  padding: 10px 50px 10px 50px;
+  margin: 15px 15px 15px 15px;
+  background-color: gray;
+  height:auto
 
-  .flexcontainer {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: flex-start;
-  }
+}
 
-  .forumflexcontainer {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 5px 5px 5px 5px;
-    border-radius: 10px;
-    overflow-y: scroll;
-  }
+.recentforumcontainer {
+  border-radius: 15px;
+  background-color: gray;
+  padding: 10px 10px 10px 10px;
+  margin: 15px 15px 15px 15px;
+  text-align: center;
+}
 
-  .recentforumtitle {
-    text-decoration: underline;
-    color: white;
-  }
-  
-  .recentforumdiv {
-    background-color: silver;
-    border-radius: 10px;
-    padding: 10px 10px 10px 10px;
-    margin: 10px 10px 10px 10px;
-    width: 100%;
-    text-align: left;
-  }
+.mainContainer{
+  display: flex;
+}
 
-  .createbutton {
-    background-color: silver;
-    color: black;
-    border-color: black;
-    border-radius: 15px;
-  }
 
-  .forumdiv {
-    width: 100%;
-    background-color: silver;
-    padding: 1% 1% 1% 1%;
-    margin: 1% 1% 1% 1%;
-    text-align: left;
-    border-radius: 15px;
-  }
+.forumcontainer {
+  display: inline-block;
+  width: 100%;
+  border-radius: 15px;
+  background-color: gray;
+  padding: 20px 20px 20px 20px;
+  margin: 10px 10px 10px 10px;
+  text-align: center;
+}
+
+.forumflexcontainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 5px 5px 5px 5px;
+  border-radius: 10px;
+  overflow-y: scroll;
+}
+
+.recentforumtitle {
+  text-decoration: underline;
+  color: white;
+}
+
+.createbutton {
+  background-color: silver;
+  color: black;
+  border-color: black;
+  border-radius: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
