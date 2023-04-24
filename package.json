@@ -20,6 +20,8 @@
     "cypress": "^12.10.0",
     "eslint": "8.38.0",
     "eslint-config-next": "13.3.0",
+    "fs": "^0.0.1-security",
+    "geojson2shp": "^0.5.0",
     "leaflet": "^1.9.3",
     "mongodb": "^5.2.0",
     "mongoose": "^7.0.3",
@@ -29,9 +31,8 @@
     "react-color": "^2.19.3",
     "react-dom": "^18.2.0",
     "react-leaflet": "^4.2.1",
-    "react-router-dom": "^6.10.0"
-  },
-  "devDependencies": {
+    "react-router-dom": "^6.10.0",
+    "shp-write": "^0.3.2",
     "shpjs": "^4.0.4"
   }
 }
