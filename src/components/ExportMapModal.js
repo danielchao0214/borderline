@@ -23,7 +23,7 @@ function handleGeoJSON(props) {
                 var json = JSON.parse(await file.text());
                 var a = window.document.createElement('a');
                 a.href = window.URL.createObjectURL(new File([file], "export.json", {type: file.type}));
-                a.download = "export";
+                a.download = "export.json";
 
                 // Append anchor to body.
                 document.body.appendChild(a);

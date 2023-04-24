@@ -2,101 +2,55 @@ import { IconButton, Button, Modal, Input } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import styles from '@/styles/Modal.module.css'
 import Typography from '@mui/material/Typography';
-import { shp, dbf } from 'shapefile';
+import shp from 'shpjs'
+
 
 
 function ImportMapModal(props) {
     function handleShpDbfClick() {
         document.getElementById("importShp").click();
     }
-    function handleShpDbf() {
+    async function handleShpDbf() {
 
-        let files = document.getElementById("importShp").files
-        let shp = undefined;
-        let dbf = undefined;
-        for (let i = 0; i < files.length; i++) {
-            if (files[i].name.endsWith(".shp")) {
-                shp = files[i];
-            }else if (files[i].name.endsWith(".dbf")) {
-                dbf = files[i];
-            }
-        }
+        let shpfile = document.getElementById("importShp").files[0];
 
-        if (shp && dbf) {
-            // Load the shapefile data
-            shp(shp).then(source => {
-            // Read the .dbf file data
-            dbf(dbf).then(attributeData => {
-                // Combine the shapefile features and .dbf attribute data
-                const geojson = {
-                type: 'FeatureCollection',
-                features: source.features.map((feature, index) => {
-                    return {
-                    type: 'Feature',
-                    geometry: feature.geometry,
-                    properties: { ...feature.properties, ...attributeData[index] }
-                    };
-                })
-                };
-                // geojson object now contains the converted GeoJSON data with .dbf data
-                console.log(geojson);
-            }).catch(error => {
-                // Handle .dbf loading error if any
-                console.error('Error while loading .dbf file:', error);
-            });
-            }).catch(error => {
-            // Handle .shp loading error if any
-            console.error('Error while converting shapefile to GeoJSON:', error);
-            });
-        }
-    
+        console.log(shpfile);
 
-        // let db;
-        // var request = indexedDB.open("map", 1);
-        // var request_name;
 
-        // request.onupgradeneeded = (event) => {
-        //     // store the result of opening the database.
-        //     db = request.result;
-        //     db.createObjectStore("map");
-        // };
+        const reader = new FileReader();
 
-        // request.onsuccess = (event) => {
-        // // store the result of opening the database.
-        //     db = request.result;
-        //     const file = document.getElementById("importGeo").files[0];
-        //     const transaction = db.transaction('map', 'readwrite');
-        //     const fileStore = transaction.objectStore('map');
-        //     const addRequest = fileStore.put(new Blob([file], { type: file.type }), 1);
-        //     addRequest.onsuccess = event => {
-        //         console.log('File added to object store success');
-        //         request_name = indexedDB.open("map", 1);
-        //         request_name.onupgradeneeded = (event) => {
-        //         // store the result of opening the database.
-        //             db = request.result;
-        //             const fileStore = db.createObjectStore("map");
-        //         };
+        // Define a callback function to handle the onload event when the file is loaded
+        reader.onload = async(event) => {
+        // Access the ArrayBuffer from the result property of the event
+            const arrayBuffer = event.target.result;
+
+            let json = await shp(arrayBuffer);
+
+            console.log(json);
         
-        //         request_name.onsuccess = (event) => {
-        //         // store the result of opening the database.
-        //             db = request.result;
-        //             const transaction = db.transaction('map', 'readwrite');
-        //             const fileStore = transaction.objectStore('map');
-        //             const addRequest = fileStore.put(file.name, 2);
-        //             addRequest.onsuccess = event => {
-        //                 console.log('File name added to object store success');
-        //                 window.location.href = "/mapedit";
-        //             }
-        //         };
-        //     }
-        // };
+            const jsonString = JSON.stringify(json);
+
+            // Create a Blob from the JSON string
+            const blob = new Blob([jsonString], { type: 'application/json' });
+
+            // Create a File from the Blob
+            const file = new File([blob], shpfile.name.substring(0, shpfile.name.indexOf(".")) + ".json");
+
+            handleGeoJSON(file);
+        };
+
+        // Use the FileReader instance to read the file as an ArrayBuffer
+        reader.readAsArrayBuffer(shpfile);
 
         props.handleClose();
     }
     function handleGeoJSONClick() {
         document.getElementById("importGeo").click();
     }
-    function handleGeoJSON() {
+    function handleGeoJSONChange() {
+        handleGeoJSON(document.getElementById("importGeo").files[0])
+    }
+    function handleGeoJSON(file) {
         let db;
         var request = indexedDB.open("map", 1);
         var request_name;
@@ -110,7 +64,6 @@ function ImportMapModal(props) {
         request.onsuccess = (event) => {
         // store the result of opening the database.
             db = request.result;
-            const file = document.getElementById("importGeo").files[0];
             const transaction = db.transaction('map', 'readwrite');
             const fileStore = transaction.objectStore('map');
             const addRequest = fileStore.put(new Blob([file], { type: file.type }), 1);
@@ -166,7 +119,7 @@ function ImportMapModal(props) {
                         </div>
                         <div>
                             <Button variant="contained" className={styles.importButton} onClick={handleGeoJSONClick}>GeoJSON</Button>
-                            <Input id="importGeo" type="file" onChange={handleGeoJSON} style={{display:"none"}}></Input>
+                            <Input id="importGeo" type="file" onChange={handleGeoJSONChange} style={{display:"none"}}></Input>
                             <Typography className={styles.importTypography}>
                                 .geojson file
                             </Typography>
