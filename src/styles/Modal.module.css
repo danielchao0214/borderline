@@ -3,6 +3,24 @@
   src: url('https://fonts.gstatic.com/s/abel/v18/MwQ5bhbm2POE2V9BPQ.woff2');
 }
 
+.errorModal {
+  position: relative;
+  background-color: #AEAEAE;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  padding: 2%;
+  width: 40vw;
+  height: 25vh;
+  justify-content: center;
+}
+
+.errorModalContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
 .modalContainer {
   display: flex;
   align-items: center;
@@ -46,6 +64,19 @@
   background-color: transparent;
   font-size: 24px;
   cursor: pointer;
+}
+
+.modalText {
+  color: red;
+  font-family: Abel;
+  margin-top: 5%;
+  text-align: center;
+}
+
+.modalTitle {
+  font-family: Abel;
+  text-align: center;
+  text-decoration: underline;
 }
 
 #modalTitle {
@@ -96,6 +127,22 @@
 
 .importTypography {
   text-align: center;
+}
+
+.postButton {
+  background-color: #D9D9D9;
+  border-radius: 15px;
+  color: black;
+  border: 1px solid black;
+  height: 6vh;
+  margin: 2em;
+  margin-bottom: 0.5em;
+  text-align: right;
+  width: 15vw;
+}
+
+.postButton:hover {
+  background-color: #d6d6d6
 }
 
 .publishButton {
