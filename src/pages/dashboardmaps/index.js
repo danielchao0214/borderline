@@ -17,7 +17,7 @@ export default function DashboardMaps() {
 
   return (
     <>
-    {/* <Box className={styles.importbox}>
+      {/* <Box className={styles.importbox}>
       <Button className={styles.importbutton} variant="outlined">Import File</Button>
     </Box>
     <AccountCircle></AccountCircle> */}
@@ -25,7 +25,203 @@ export default function DashboardMaps() {
         open={openImportMapModal}
         handleClose={handleCloseImportMapModal}
       />
-      <main>
+      <Box className={styles.importcontainer}>
+        <Button
+          variant="outlined"
+          className={styles.importbutton}
+          onClick={() => setOpenImportMapModal(true)}
+        >
+          Import File
+        </Button>
+      </Box>
+      <Box sx={{ display: 'flex' }} className={styles.profilecontainer}>
+        <AccountCircle className={styles.profilepic} />
+        <Box sx={{ display: 'flex', flexDirection: 'column' }} className={styles.profiletext}>
+          <Typography variant="h4" className={styles.profileuser}>
+            User
+          </Typography>
+          <Typography variant="h6" className={styles.profileownedmaps}>
+            Owned Maps: 5
+          </Typography>
+        </Box>
+      </Box>
+      <Box className={styles.recentmapcontainer}>
+        <Typography variant="h5" className={styles.recentmapheading}>
+          Recently Viewed
+        </Typography>
+        <Box sx={{ display: 'flex' }} className={styles.recentmapsubcontainer}>
+          <img className={styles.recentmap} src="map.png" alt="Map" />
+          <Box sx={{ display: 'flex', flexDirection: 'column' }} className={styles.recentmaptext}>
+            <Typography className={styles.recentmaptitle}>
+              Title
+            </Typography>
+            <Typography className={styles.recentmapauthor}>
+              Author
+            </Typography>
+          </Box>
+        </Box>
+        <Box sx={{ display: 'flex' }} className={styles.recentmapsubcontainer}>
+          <img className={styles.recentmap} src="map.png" alt="Map" />
+          <Box sx={{ display: 'flex', flexDirection: 'column' }} className={styles.recentmaptext}>
+            <Typography className={styles.recentmaptitle}>
+              Title
+            </Typography>
+            <Typography className={styles.recentmapauthor}>
+              Author
+            </Typography>
+          </Box>
+        </Box>
+        <Box sx={{ display: 'flex' }} className={styles.recentmapsubcontainer}>
+          <img className={styles.recentmap} src="map.png" alt="Map" />
+          <Box sx={{ display: 'flex', flexDirection: 'column' }} className={styles.recentmaptext}>
+            <Typography className={styles.recentmaptitle}>
+              Title
+            </Typography>
+            <Typography className={styles.recentmapauthor}>
+              Author
+            </Typography>
+          </Box>
+        </Box>
+        <Box sx={{ display: 'flex' }} className={styles.recentmapsubcontainer}>
+          <img className={styles.recentmap} src="map.png" alt="Map" />
+          <Box sx={{ display: 'flex', flexDirection: 'column' }} className={styles.recentmaptext}>
+            <Typography className={styles.recentmaptitle}>
+              Title
+            </Typography>
+            <Typography className={styles.recentmapauthor}>
+              Author
+            </Typography>
+          </Box>
+        </Box>
+        <Box sx={{ display: 'flex' }} className={styles.recentmapsubcontainer}>
+          <img className={styles.recentmap} src="map.png" alt="Map" />
+          <Box sx={{ display: 'flex', flexDirection: 'column' }} className={styles.recentmaptext}>
+            <Typography className={styles.recentmaptitle}>
+              Title
+            </Typography>
+            <Typography className={styles.recentmapauthor}>
+              Author
+            </Typography>
+          </Box>
+        </Box>
+      </Box>
+      <Box className={styles.mapcontainer}>
+        <Box sx={{ display: 'flex', flexWrap: 'wrap' }}
+          className={styles.mapflexcontainer}>
+          <Box className={styles.mapbox}>
+            <img className={styles.map} src="map.png" alt="Map" />
+            <Typography className={styles.maptitle}>
+              Title
+            </Typography>
+            <Typography className={styles.maptext}>
+              Author
+            </Typography>
+            <Typography className={styles.maptext}>
+              5 Likes ⋅ 5 Dislikes ⋅ 04/10/2023
+            </Typography>
+          </Box>
+          <Box className={styles.mapbox}>
+            <img className={styles.map} src="map.png" alt="Map" />
+            <Typography className={styles.maptitle}>
+              Title
+            </Typography>
+            <Typography className={styles.maptext}>
+              Author
+            </Typography>
+            <Typography className={styles.maptext}>
+              5 Likes ⋅ 5 Dislikes ⋅ 04/10/2023
+            </Typography>
+          </Box>
+          <Box className={styles.mapbox}>
+            <img className={styles.map} src="map.png" alt="Map" />
+            <Typography className={styles.maptitle}>
+              Title
+            </Typography>
+            <Typography className={styles.maptext}>
+              Author
+            </Typography>
+            <Typography className={styles.maptext}>
+              5 Likes ⋅ 5 Dislikes ⋅ 04/10/2023
+            </Typography>
+          </Box>
+          <Box className={styles.mapbox}>
+            <img className={styles.map} src="map.png" alt="Map" />
+            <Typography className={styles.maptitle}>
+              Title
+            </Typography>
+            <Typography className={styles.maptext}>
+              Author
+            </Typography>
+            <Typography className={styles.maptext}>
+              5 Likes ⋅ 5 Dislikes ⋅ 04/10/2023
+            </Typography>
+          </Box>
+          <Box className={styles.mapbox}>
+            <img className={styles.map} src="map.png" alt="Map" />
+            <Typography className={styles.maptitle}>
+              Title
+            </Typography>
+            <Typography className={styles.maptext}>
+              Author
+            </Typography>
+            <Typography className={styles.maptext}>
+              5 Likes ⋅ 5 Dislikes ⋅ 04/10/2023
+            </Typography>
+          </Box>
+          <Box className={styles.mapbox}>
+            <img className={styles.map} src="map.png" alt="Map" />
+            <Typography className={styles.maptitle}>
+              Title
+            </Typography>
+            <Typography className={styles.maptext}>
+              Author
+            </Typography>
+            <Typography className={styles.maptext}>
+              5 Likes ⋅ 5 Dislikes ⋅ 04/10/2023
+            </Typography>
+          </Box>
+          <Box className={styles.mapbox}>
+            <img className={styles.map} src="map.png" alt="Map" />
+            <Typography className={styles.maptitle}>
+              Title
+            </Typography>
+            <Typography className={styles.maptext}>
+              Author
+            </Typography>
+            <Typography className={styles.maptext}>
+              5 Likes ⋅ 5 Dislikes ⋅ 04/10/2023
+            </Typography>
+          </Box>
+          <Box className={styles.mapbox}>
+            <img className={styles.map} src="map.png" alt="Map" />
+            <Typography className={styles.maptitle}>
+              Title
+            </Typography>
+            <Typography className={styles.maptext}>
+              Author
+            </Typography>
+            <Typography className={styles.maptext}>
+              5 Likes ⋅ 5 Dislikes ⋅ 04/10/2023
+            </Typography>
+          </Box>
+          <Box className={styles.mapbox}>
+            <img className={styles.map} src="map.png" alt="Map" />
+            <Typography className={styles.maptitle}>
+              Title
+            </Typography>
+            <Typography className={styles.maptext}>
+              Author
+            </Typography>
+            <Typography className={styles.maptext}>
+              5 Likes ⋅ 5 Dislikes ⋅ 04/10/2023
+            </Typography>
+          </Box>
+        </Box>
+      </Box>
+    </>
+  )
+}
+{/* <main>
 
         <div className={styles.flexcontainer}>
           <div className={styles.importbox}>
@@ -138,7 +334,4 @@ export default function DashboardMaps() {
             </div>
           </div>
         </div>
-      </main>
-    </>
-  )
-}
+      </main> */}

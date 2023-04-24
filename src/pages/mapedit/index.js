@@ -53,6 +53,72 @@ export default function MapEdit() {
     setOpenTagMapModal(false);
   };
 
+  const handleSave = async (event) => {
+    event.preventDefault();
+    // db = request.result;
+    // const transaction = db.transaction('map', 'readwrite');
+    // const fileStore = transaction.objectStore('map');
+
+    // var getRequest = fileStore.get(1);
+
+    // getRequest.onsuccess = async function(event) {
+    //     var file = event.target.result;
+    //     if (file) {
+    //         var json = JSON.parse(await file.text());
+    //         var a = window.document.createElement('a');
+    //         a.href = window.URL.createObjectURL(new File([file], "export.json", {type: file.type}));
+    //         a.download = "export";
+
+    //         // Append anchor to body.
+    //         document.body.appendChild(a);
+    //         a.click();
+
+    //         // Remove anchor from body
+    //         document.body.removeChild(a);
+    //     }
+    // } 
+    let url = "/api/savemap";
+    let title = "test"; //file.name.substring(0, file.name.lastIndexOf("."));
+    let author = "None";
+    let tags = "None";
+    let file_size = 10;//file.size;
+    let likes = 0;
+    let dislikes = 0;
+    let published = false;
+    let publish_date = Date();
+    let description = "None";
+    let map = "test" //await file.arrayBuffer();
+    let comments = "None";
+    let graphics = "None";
+    let thumbnail = null;
+    const res = await fetch(url, {
+      method: "Post",
+      body: JSON.stringify({
+        title,
+        author,
+        tags,
+        file_size,
+        likes,
+        dislikes,
+        published,
+        publish_date,
+        description,
+        map,
+        comments,
+        graphics,
+        thumbnail
+      }),
+      headers: {
+        "content-type": "application/json"
+      },
+    }).catch((e) =>console.log(e)); // Error for fetch request only
+
+    // If status code returns error print the code in the body
+    if(res.status == 400){ 
+      console.log(data.errorMessage);
+    }
+  }
+
   return (
     <>
       <ExportMapModal
@@ -112,7 +178,7 @@ export default function MapEdit() {
             </IconButton>
           </div>
           <div className={styles.actionbuttons}>
-            <Button variant="contained" startIcon={<SaveIcon />} style={{ backgroundColor: "green" }} className={styles.actionbutton}>
+            <Button onClick={handleSave} variant="contained" startIcon={<SaveIcon />} style={{ backgroundColor: "green" }} className={styles.actionbutton}>
               Save
             </Button>
             <Button
