@@ -1,3 +1,93 @@
+/* .createbutton {
+  background-color: silver;
+  border-color: black;
+  border-radius: 15px;
+  color: black;
+}
+
+.createcontainer {
+  border-radius: 15px;
+  background-color: gray;
+  float: left;
+  margin: 2%;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  text-align: center;
+  width: 20%;
+}
+
+.forumauthor {
+  font-size: 75%;
+}
+
+.forumbox {
+  background-color: silver;
+  border-radius: 15px;
+  margin: 2% 2% 0% 2%;
+  padding: 2%;
+}
+
+.forumcontainer {
+  background-color: gray;
+  border-radius: 15px;
+  float: right;
+  margin: 2% 2% 2% 0%;
+  padding-bottom: 2%;
+  width: 73%;
+}
+
+.forumtitle {
+  font-weight: bold;
+  font-size: 150%;
+}
+
+.recentforum {
+  border-radius: 10px;
+  float: left;
+  margin-right: 10%;
+  max-height: 100%;
+  width: 47%;
+}
+
+.recentforumauthor {
+  clear: left;
+  font-size: 75%;
+}
+
+.recentforumcontainer {
+  background-color: gray;
+  border-radius: 15px;
+  float: left;
+  margin-left: 2%;
+  padding: 1%;
+  text-align: center;
+  width: 20%;
+}
+
+.recentforumsubcontainer {
+  background-color: silver;
+  border-radius: 10px;
+  padding: 2%;
+  margin-top: 7%;
+}
+
+.recentforumheading {
+  color: white;
+  margin-bottom: 8%;
+  text-decoration: underline;
+}
+
+.recentforumtext {
+  margin-left: 4%;
+  text-align: left;
+}
+
+.recentforumtitle {
+  float: left;
+  font-size: 125%;
+  font-weight: bold;
+} */
+
 
 .createcontainer {
   width: 15%; 
@@ -11,8 +101,7 @@
   padding: 10px 50px 10px 50px;
   margin: 15px 15px 15px 15px;
   background-color: gray;
-  height:auto
-
+  height: auto
 }
 
 .recentforumcontainer {
