@@ -14,6 +14,7 @@ function ImportMapModal(props) {
     function handleGeoJSON() {
         let db;
         var request = indexedDB.open("map", 1);
+        var request_name;
 
         request.onupgradeneeded = (event) => {
         // store the result of opening the database.
@@ -30,8 +31,26 @@ function ImportMapModal(props) {
             const addRequest = fileStore.put(new Blob([file], { type: file.type }), 1);
             addRequest.onsuccess = event => {
                 console.log('File added to object store success');
-                window.location.replace("/mapedit");
+                request_name = indexedDB.open("map", 1);
+                request_name.onupgradeneeded = (event) => {
+                // store the result of opening the database.
+                    db = request.result;
+                    const fileStore = db.createObjectStore("map");
+                };
+        
+                request_name.onsuccess = (event) => {
+                // store the result of opening the database.
+                    db = request.result;
+                    const transaction = db.transaction('map', 'readwrite');
+                    const fileStore = transaction.objectStore('map');
+                    const addRequest = fileStore.put(file.name, 2);
+                    addRequest.onsuccess = event => {
+                        console.log('File name added to object store success');
+                        window.location.href = "/mapedit";
+                };
+            }
         };
+
         props.handleClose();
     }
 }

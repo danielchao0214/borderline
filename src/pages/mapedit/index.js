@@ -55,68 +55,77 @@ export default function MapEdit() {
 
   const handleSave = async (event) => {
     event.preventDefault();
-    // db = request.result;
-    // const transaction = db.transaction('map', 'readwrite');
-    // const fileStore = transaction.objectStore('map');
 
-    // var getRequest = fileStore.get(1);
+    let db;
+    var request = indexedDB.open("map", 1);
 
-    // getRequest.onsuccess = async function(event) {
-    //     var file = event.target.result;
-    //     if (file) {
-    //         var json = JSON.parse(await file.text());
-    //         var a = window.document.createElement('a');
-    //         a.href = window.URL.createObjectURL(new File([file], "export.json", {type: file.type}));
-    //         a.download = "export";
+    request.onsuccess = async(event) => {
+      db = request.result;
 
-    //         // Append anchor to body.
-    //         document.body.appendChild(a);
-    //         a.click();
+      const transaction = db.transaction('map', 'readwrite');
+      const fileStore = transaction.objectStore('map');
 
-    //         // Remove anchor from body
-    //         document.body.removeChild(a);
-    //     }
-    // } 
-    let url = "/api/savemap";
-    let title = "test"; //file.name.substring(0, file.name.lastIndexOf("."));
-    let author = "None";
-    let tags = "None";
-    let file_size = 10;//file.size;
-    let likes = 0;
-    let dislikes = 0;
-    let published = false;
-    let publish_date = Date();
-    let description = "None";
-    let map = "test" //await file.arrayBuffer();
-    let comments = "None";
-    let graphics = "None";
-    let thumbnail = null;
-    const res = await fetch(url, {
-      method: "Post",
-      body: JSON.stringify({
-        title,
-        author,
-        tags,
-        file_size,
-        likes,
-        dislikes,
-        published,
-        publish_date,
-        description,
-        map,
-        comments,
-        graphics,
-        thumbnail
-      }),
-      headers: {
-        "content-type": "application/json"
-      },
-    }).catch((e) =>console.log(e)); // Error for fetch request only
+      // First get operation
+      const getRequest1 = fileStore.get(1);
+      const firstResultPromise = new Promise(resolve => getRequest1.onsuccess = resolve);
 
-    // If status code returns error print the code in the body
-    if(res.status == 400){ 
-      console.log(data.errorMessage);
+      // Second get operation
+      const getRequest2 = fileStore.get(2);
+      const secondResultPromise = new Promise(resolve => getRequest2.onsuccess = resolve);
+
+      // Wait for both promises to resolve
+      const [response1, response2] = await Promise.all([firstResultPromise, secondResultPromise]);
+
+      var file = response1.target.result;
+      var filename = response2.target.result;
+      if (file) {
+          var json = JSON.parse(await file.text());
+          var name = filename.substring(0, filename.lastIndexOf("."));
+
+          console.log("saving")
+          let url = "/api/savemap";
+          let title = name;
+          let author = "None";
+          let tags = "None";
+          let file_size = file.size;
+          let likes = 0;
+          let dislikes = 0;
+          let published = false;
+          let publish_date = Date();
+          let description = "None";
+          let map = json;
+          let comments = "None";
+          let graphics = "None";
+          let thumbnail = null;
+          const res = await fetch(url, {
+            method: "Post",
+            body: JSON.stringify({
+              title,
+              author,
+              tags,
+              file_size,
+              likes,
+              dislikes,
+              published,
+              publish_date,
+              description,
+              map,
+              comments,
+              graphics,
+              thumbnail
+            }),
+            headers: {
+              "content-type": "application/json"
+            },
+          }).catch((e) =>console.log(e)); // Error for fetch request only
+
+          //If status code returns error print the code in the body
+          if(res.status == 400){ 
+            console.log(data.errorMessage);
+          }
+      } 
     }
+    
   }
 
   return (
