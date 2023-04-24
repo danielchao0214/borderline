@@ -13,6 +13,78 @@ function TagMapModal(props) {
         }
     };
 
+    const handlePublish = async () => {
+        let db;
+        var request = indexedDB.open("map", 1);
+
+        request.onsuccess = async(event) => {
+            db = request.result;
+
+            const transaction = db.transaction('map', 'readwrite');
+            const fileStore = transaction.objectStore('map');
+
+            // First get operation
+            const getRequest1 = fileStore.get(1);
+            const firstResultPromise = new Promise(resolve => getRequest1.onsuccess = resolve);
+
+            // Second get operation
+            const getRequest2 = fileStore.get(2);
+            const secondResultPromise = new Promise(resolve => getRequest2.onsuccess = resolve);
+
+            // Wait for both promises to resolve
+            const [response1, response2] = await Promise.all([firstResultPromise, secondResultPromise]);
+
+            var file = response1.target.result;
+            var filename = response2.target.result;
+            if (file) {
+                var json = JSON.parse(await file.text());
+                var name = filename.substring(0, filename.lastIndexOf("."));
+
+                console.log("saving")
+                let url = "/api/savemap";
+                let title = name;
+                let author = "None";
+                let tags = "None";
+                let file_size = file.size;
+                let likes = 0;
+                let dislikes = 0;
+                let published = true;
+                let publish_date = Date();
+                let description = "None";
+                let map = json;
+                let comments = "None";
+                let graphics = "None";
+                let thumbnail = null;
+                const res = await fetch(url, {
+                    method: "Post",
+                    body: JSON.stringify({
+                    title,
+                    author,
+                    tags,
+                    file_size,
+                    likes,
+                    dislikes,
+                    published,
+                    publish_date,
+                    description,
+                    map,
+                    comments,
+                    graphics,
+                    thumbnail
+                    }),
+                    headers: {
+                    "content-type": "application/json"
+                    },
+                }).catch((e) =>console.log(e)); // Error for fetch request only
+
+                //If status code returns error print the code in the body
+                if(res.status == 400){ 
+                    console.log(data.errorMessage);
+                }
+            } 
+        }
+    }
+
     return (
         <Modal
             open={props.open}
@@ -45,7 +117,7 @@ function TagMapModal(props) {
                 </div>
                 <div className={styles.modalChoices}>
                     <div>
-                        <Button variant="contained" className={styles.publishButton}>Publish</Button>
+                        <Button onClick={handlePublish} variant="contained" className={styles.publishButton}>Publish</Button>
                     </div>
                     <div>
                         <Button variant="contained" className={styles.publishButton} onClick={props.handleClose}>Cancel</Button>

@@ -4,6 +4,11 @@ import styles from '@/styles/Modal.module.css'
 
 function PublishGraphicModal(props) {
 
+    const handlePublish = async () => {
+        
+    }
+
+
     return (
         <Modal
             open={props.open}
@@ -18,7 +23,7 @@ function PublishGraphicModal(props) {
                 <h3 id={styles.modalSubtitle}>Are you sure?</h3>
                 <div className={styles.modalChoices}>
                     <div>
-                        <Button variant="contained" className={styles.publishButton} onClick={props.handleClose}>Yes</Button>
+                        <Button onClick={handlePublish} variant="contained" className={styles.publishButton} >Yes</Button>
                     </div>
                     <div>
                         <Button variant="contained" className={styles.publishButton} onClick={props.handleClose}>Cancel</Button>
