@@ -1,105 +1,61 @@
-  .main {
-    align-items: center;
-  }
-  
-  .importbox {
-    border-radius: 15px;
-    background-color: gray;
-    padding: 15px 15px 15px 15px;
-    margin: 15px 15px 15px 15px;
-    /* padding: 1% 4% 1% 4%;
-    margin: 3% 2% 3% 2%; */
-    float: left;
-    height: 65px;
-  }
+.importbox {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 100px;
+  border-radius: 15px;
+  padding: 10px 50px 10px 50px;
+  margin: 15px 15px 15px 15px;
+  background-color: gray;
+  height:auto
+}
 
-  .recentmapcontainer {
-    width: 250px;
-    border-radius: 15px;
-    background-color: gray;
-    padding: 10px 10px 10px 10px;
-    margin: 15px 15px 15px 15px;
-    clear: left;
-    text-align: center;
-  }
+.mainContainer{
+  display: flex;
+}
 
-  .profilecontainer {
-    float: right;
-    border-radius: 15px;
-    background-color: silver;
-    padding: 25px 25px 25px 25px;
-    margin: 10px 10px 10px 50px;
-    width: 1100px;
-    }
 
-  .mapcontainer {
-    display: inline-block;
-    width: 1100px;
-    border-radius: 15px;
-    background-color: gray;
-    padding: 20px 20px 20px 20px;
-    margin: 10px 10px 10px 10px;
-    text-align: center;
-    }
+.recentmapcontainer {
+  border-radius: 15px;
+  background-color: gray;
+  padding: 10px 10px 10px 10px;
+  margin: 15px 15px 15px 15px;
+  text-align: center;
+}
 
-  .flexcontainer {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: flex-start;
-  }
 
-  .mapsflexcontainer {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 5px 5px 5px 5px;
-    background-color: silver;
-    border-radius: 10px;
-    overflow-y: scroll;
-  }
 
-  .recentmap {
-    height: 80px;
-    width: 120px;
-    float: left;
-    margin-right: 20px;
-    border-radius: 10px;
-  }
+.mapcontainer {
+  display: inline-block;
+  width: 1650px;
+  border-radius: 15px;
+  background-color: gray;
+  padding: 20px 20px 20px 20px;
+  margin: 10px 10px 10px 10px;
+  text-align: center;
+}
 
-  .map {
-    height: 120px;
-    height: 180px;
-    margin-left: 30px;
-    margin-right: 30px;
-    margin-top: 20px;
-    border-radius: 10px;
-  }
-  
-  .profile {
-    height: 80px;
-    width: 80px;
-    float: left;
-    margin-right: 15px;
-    border-radius: 10px;
-  }
+.mapsflexcontainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 5px 5px 5px 5px;
+  background-color: silver;
+  border-radius: 10px;
+  overflow-y: scroll;
+}
 
-  .recentmaptitle {
-    text-decoration: underline;
-    color: white;
-  }
-  
-  .recentmapdiv {
-    background-color: silver;
-    border-radius: 10px;
-    padding: 10px 10px 10px 10px;
-    margin: 10px 10px 10px 10px;
-  }
 
-  .importbutton {
-    background-color: silver;
-    border-color: black;
-    border-radius: 15px;
-    color: black;
-  }
+.recentmaptitle {
+  text-decoration: underline;
+  color: white;
+}
+
+.importbutton {
+  background-color: silver;
+  border-color: black;
+  border-radius: 15px;
+  color: black;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}

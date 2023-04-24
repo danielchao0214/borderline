@@ -1,0 +1,16 @@
+.profilecontainer {
+    border-radius: 15px;
+    background-color: silver;
+    padding: 25px 25px 25px 25px;
+    margin: 10px 10px 10px 10px;
+    width: 1650px;
+  }
+
+  .profile {
+    height: 80px;
+    width: 80px;
+    float: left;
+    margin-right: 15px;
+    border-radius: 10px;
+  }
+  
