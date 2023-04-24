@@ -8,38 +8,74 @@
     src: url('https://fonts.googleapis.com/css2?family=Inter');
 }
 
+.appbar {
+    background-color: #D4D7DC;
+    height: 4rem;
+    color: #608180;
+}
+
+.toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.home {
+    font-family: 'Abel' !important;
+    font-style: normal !important;
+    font-size: 4em !important;
+    color: black !important;
+    letter-spacing: -0.075em !important;
+}
+
+.currentscreen {
+    font-family: 'Abel' !important;
+    font-style: normal !important;
+    font-size: 42px !important;
+    color: #608180 !important;
+}
+
+.searchArea {
+    display: flex;
+    align-items: center;
+}
+
+.searchTextField {
+    background-color: #F7F7F7;
+    width: 30em;
+    margin-right: 0.5em;
+}
+
+.nav {
+    font-family: 'Abel' !important;
+    font-style: normal !important;
+    font-size: 42px !important;
+    color: #608180 !important;
+}
+
+.list {
+    font-family: 'Abel' !important;
+    font-style: normal !important;
+    font-weight: 400 !important;
+    font-size: 20px !important;
+    line-height: 20px !important;
+    color: #000000 !important;
+}
+
+.loginli {
+    margin: 5px!important;
+    text-align: center !important;
+}
+/* 
 #homescreenheading {
     display: inline-flex !important;
     text-align: center !important;
     align-items: center !important;
 }
 
-#outlinedbasic {
-    background-color: rgb(255, 255, 255) !important;
-    text-align: center !important;
-    font-family: 'Inter', 'Abel' !important;
-    font-size: 25px !important;
-    border-radius: 25px !important;
-}
-
 #tagSearch {
     padding: 5px !important;
     border-radius: 25px !important;
-}
-
-#AccountIcon .css-i4bv87-MuiSvgIcon-root {
-    font-size: 2rem !important;
-}
-
-.li {
-    display: flex !important;
-    background-color: #D9D9D9 !important;
-    margin: 10px !important;
-    list-style-type: none !important;
-    border-radius: 25px !important;
-    text-align: center !important;
-    padding: 10px !important;
-
 }
 
 .homescreen-heading {
@@ -50,47 +86,4 @@
     font-weight: 400 !important;
     font-size: 42px !important;
     padding-right: 5% !important;
-}
-
-.p {
-    font-family: 'Abel' !important;
-    font-style: normal !important;
-    display: flex !important;
-    align-items: center !important;
-    font-weight: 400 !important;
-    font-size: 42px !important;
-    padding-right: 5% !important;
-}
-
-.nav {
-    display: flex !important;
-    padding-left: 50px !important;
-    padding-right: 50px !important;
-    align-items: center !important;
-
-    font-family: 'Inter', 'Abel' !important;
-    font-style: normal !important;
-    font-weight: 400 !important;
-    font-size: 32px !important;
-    line-height: 39px !important;
-}
-
-.home{
-    font-family: 'Abel' !important;
-    font-style: normal !important;
-    font-weight: 400 !important;
-    font-size: 64px !important;
-    line-height: 82px !important;
-    padding-right: 5% !important;
-
-    color: #000000 !important;
-}
-
-.list{
-    font-family: 'Abel' !important;
-    font-style: normal !important;
-    font-weight: 400 !important;
-    font-size: 20px !important;
-    line-height: 20px !important;
-    color: #000000 !important;
-}
+} */

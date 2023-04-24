@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useState } from 'react';
 import Popover from '@mui/material/Popover';
 import Box from '@mui/material/Box';
 import { Button, TextField, Tabs, Tab, List, } from '@mui/material'
@@ -18,9 +18,15 @@ import styles from '@/styles/AppBanner.module.css'
 
 export default function AppBanner() {
 
-    const [anchorEl1, setAnchorEl1] = React.useState(null);
-    const [anchorEl2, setAnchorEl2] = React.useState(null);
-    const [anchorEl3, setAnchorEl3] = React.useState(null);
+    const [anchorEl1, setAnchorEl1] = useState(null);
+    const [anchorEl2, setAnchorEl2] = useState(null);
+    const [anchorEl3, setAnchorEl3] = useState(null);
+
+    const [searchText, setSearchText] = useState('');
+
+    const handleSearchInputChange = (event) => {
+        setSearchText(event.target.value);
+    };
 
     const handleClick1 = (event) => {
         setAnchorEl1(event.currentTarget);
@@ -61,154 +67,121 @@ export default function AppBanner() {
 
     return (
         <div className={styles.homescreenheading}>
-            <Box sx={{ flexGrow: 1 }}>
-                <AppBar position="static" style={{backgroundColor: "#AEAEAE", color:"000000"}}>
-                    <Toolbar style={{display:"block"}}>
-                        <Typography
-                            variant="h4"
-                            noWrap
-                            component="div"
-                            sx={{ display: { xs: 'none', sm: 'block', minHeight: 82 } }}
-                            style={{display:"none"}}
+            <AppBar className={styles.appbar}>
+                <Toolbar className={styles.toolbar}>
+                    <Link href="/" target='Home' className={styles.home}>borderline</Link>
+
+                    <p className={styles.currentscreen}>Dashboard</p>
+
+                    <div className={styles.searchArea}>
+                        <TextField
+                            placeholder='Search'
+                            value={searchText}
+                            onChange={handleSearchInputChange}
+                            sx={{
+                                "& .MuiOutlinedInput-root.Mui-focused": { "& > fieldset": { borderColor: "#ADB9C1" } },
+                                "& .MuiOutlinedInput-root:hover": { "& > fieldset": { borderColor: "#ADB9C1" } },
+                            }}
+                            InputProps={{
+                                className: styles.searchTextField,
+                                startAdornment: (
+                                    <InputAdornment position="start">
+                                        <SearchIcon />
+                                    </InputAdornment>
+                                ),
+                            }}
+                        />
+                        <IconButton
+                            aria-label="sort by tag"
+                            aria-controls='primary-search-tag-filter'
+                            aria-haspopup="true"
+                            onClick={handleClick3}
+                            color="inherit"
+                            style={{ marginRight: "0.125em" }}
                         >
+                            <ArrowDownwardSharpIcon />
+                        </IconButton>
+                        <IconButton
+                            aria-label="sort by category"
+                            aria-controls='primary-search-category'
+                            aria-haspopup="true"
+                            onClick={handleClick1}
+                            color="inherit"
+                        >
+                            <SortIcon />
+                        </IconButton>
+                    </div>
+
+                    <Link href="/dashboardmaps" target='Nav' className={styles.nav}>Maps</Link>
+
+                    <Link href="/dashboardforums" target='Nav' className={styles.nav}>Forum</Link>
+
+                    <IconButton
+                        className={styles.AccountIconButton}
+                        aria-label="account of current user"
+                        aria-haspopup="true"
+                        onClick={handleClick2}
+                        color="inherit"
+                    >
+                        <AccountCircle fontSize='large' />
+                    </IconButton>
+
+                    <Popover
+                        open={Boolean(anchorEl1)}
+                        anchorEl={anchorEl1}
+                        onClose={handleClose1}
+                        anchorOrigin={{
+                            vertical: 'bottom',
+                            horizontal: 'left',
+                        }}
+                    >
+                        <Typography sx={{ width: 200 }}>
+                            <ul>
+                                <li target="Categories" className="li">Sort category 1</li>
+                                <li target="Categories" className="li">Sort category 2</li>
+                                <li target="Categories" className="li">Sort category 3</li>
+                                <li target="Categories" className="li">Sort category 4</li>
+                            </ul>
                         </Typography>
+                    </Popover>
 
-                        <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-                            <Link href="/" target='Home' className={styles.home}>borderline</Link>
+                    <Popover
+                        open={Boolean(anchorEl2)}
+                        anchorEl={anchorEl2}
+                        onClose={handleClose2}
+                        anchorOrigin={{
+                            vertical: 'bottom',
+                            horizontal: 'right',
+                        }}
+                    >
+                        <Typography>
+                            <ul>
+                                <li className={styles.loginli}><Link href="/login">Login</Link></li>
+                                <li className={styles.loginli}><Link href="/createaccount">Create Account</Link></li>
+                                <li className={styles.loginli}><Link href="/userprofile">View Account</Link></li>
+                            </ul>
+                        </Typography>
+                    </Popover>
 
-                            <p className={styles.p}>Dashboard</p>
-
-                            <TextField
-                                id={styles.outlinedbasic}
-                                //label="Search" 
-                                variant="outlined"
-                                defaultValue='Type Something To Search'
-                                style={{ padding: "10px", paddingTop: "15px", backgroundColor: "#AEAEAE"}}
-                                InputProps={{
-                                    startAdornment: (
-                                        <InputAdornment position="start">
-                                            <SearchIcon />
-                                        </InputAdornment>
-                                    ),
-                                }}
-
-
-                                sx={{ width: 600, backgroundColor: 'white' }}
-                            //onKeyPress={handleSearch}
-                            />
-                            <Button
-                                size="large"
-                                edge="end"
-                                aria-label="sort by tag"
-                                aria-controls='primary-search-tag-filter'
-                                aria-haspopup="true"
-                                onClick={handleClick3}
-                                color="inherit"
-                                endIcon={<ArrowDownwardSharpIcon />}
-                                sx={{ fontSize: 20, fontWeight: 'bold' }}
-                                style={{marginRight:0}}
-                            >
-                            </Button>
-                            <Button
-                                size="large"
-                                edge="end"
-                                aria-label="sort by catagory"
-                                aria-controls='primary-search-catagory'
-                                aria-haspopup="true"
-                                onClick={handleClick1}
-                                color="inherit"
-                                endIcon={<SortIcon />}
-                                sx={{ fontSize: 20, mr: 10, fontWeight: 'bold' }}
-                                style={{marginRight:0}}
-                            >
-
-                            </Button>
-
-                            <Link href="/dashboardmaps" target='Nav' className={styles.nav}>Maps</Link>
-
-                            <Link href="/dashboardforums" target='Nav' className={styles.nav}>Forum</Link>
-
-
-                            <Box sx={{ display: { xs: 'none', md: 'flex' }, p: 0 }}>
-                                <IconButton
-                                    id={styles.AccountIcon}
-                                    size="large"
-                                    edge="end"
-                                    aria-label="account of current user"
-                                    aria-haspopup="true"
-                                    onClick={handleClick2}
-                                    color="inherit"
-                                >
-                                    <AccountCircle />
-                                </IconButton>
-
-                                <Popover
-                                    open={Boolean(anchorEl1)}
-                                    anchorEl={anchorEl1}
-                                    onClose={handleClose1}
-                                    anchorOrigin={{
-                                        vertical: 'bottom',
-                                        horizontal: 'left',
-                                    }}
-
-                                >
-                                    <Typography sx={{ width: 200 }}>
-                                        <ul>
-                                            <li target="Catagories" className="li">Sort Catagory 1</li>
-                                            <li target="Catagories" className="li">Sort Catagory 2</li>
-                                            <li target="Catagories" className="li">Sort Catagory 3</li>
-                                            <li target="Catagories" className="li">Sort Catagory 4</li>
-                                        </ul>
-                                    </Typography>
-                                </Popover>
-
-                                <Popover
-
-                                    open={Boolean(anchorEl2)}
-                                    anchorEl={anchorEl2}
-                                    onClose={handleClose2}
-                                    anchorOrigin={{
-                                        vertical: 'bottom',
-                                        horizontal: 'left',
-                                    }}
-
-                                >
-                                    <Typography sx={{ width: 150 }}>
-                                        <ul>
-                                            <li className="li"><Link href="/login" target='list' className={styles.list}>Login</Link></li>
-                                            <li className="li"><Link href="/createaccount" target='list' className={styles.list}>Create Account</Link></li>
-                                            <li className="li"><Link href="/userprofile" target='list'>View Account</Link></li>
-
-                                        </ul>
-                                    </Typography>
-                                </Popover>
-
-                                <Popover
-
-                                    open={Boolean(anchorEl3)}
-                                    anchorEl={anchorEl3}
-                                    onClose={handleClose3}
-                                    anchorOrigin={{
-                                        vertical: 'bottom',
-                                        horizontal: 'left',
-                                    }}
-
-                                >
-                                    <Typography sx={{ width: 200 }}>
-                                        <ul>
-                                            <li className="li">{tagTextField}</li>
-                                            <li className="li">Preset Tag 1</li>
-                                            <li className="li">Preset Tag 2</li>
-                                            <li className="li">Preset Tag 3</li>
-                                        </ul>
-                                    </Typography>
-                                </Popover>
-
-                            </Box>
-                        </Box>
-
-                    </Toolbar>
-                </AppBar>
-            </Box>
+                    <Popover
+                        open={Boolean(anchorEl3)}
+                        anchorEl={anchorEl3}
+                        onClose={handleClose3}
+                        anchorOrigin={{
+                            vertical: 'bottom',
+                            horizontal: 'left',
+                        }}
+                    >
+                        <Typography sx={{ width: 200 }}>
+                            <ul>
+                                <li className="li">{tagTextField}</li>
+                                <li className="li">Preset Tag 1</li>
+                                <li className="li">Preset Tag 2</li>
+                                <li className="li">Preset Tag 3</li>
+                            </ul>
+                        </Typography>
+                    </Popover>
+                </Toolbar>
+            </AppBar>
         </div>)
 }
