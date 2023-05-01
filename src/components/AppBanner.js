@@ -2,7 +2,6 @@ import * as React from 'react';
 import Popover from '@mui/material/Popover';
 import Box from '@mui/material/Box';
 import { Button, TextField, Tabs, Tab, List, } from '@mui/material'
-import { Inter } from 'next/font/google';
 import SortIcon from '@mui/icons-material/Sort';
 import ArrowDownwardSharpIcon from '@mui/icons-material/ArrowDownwardSharp';
 import InputAdornment from '@mui/material/InputAdornment';
@@ -14,13 +13,16 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Link from 'next/link';
 import styles from '@/styles/AppBanner.module.css'
-
+import { AppBannerContext } from './contexts/AppBannerContext';
 
 export default function AppBanner() {
 
     const [anchorEl1, setAnchorEl1] = React.useState(null);
     const [anchorEl2, setAnchorEl2] = React.useState(null);
     const [anchorEl3, setAnchorEl3] = React.useState(null);
+
+    const [search, setSearch] = React.useState();
+    const {value, setValue} = React.useContext(AppBannerContext)
 
     const handleClick1 = (event) => {
         setAnchorEl1(event.currentTarget);
@@ -57,7 +59,12 @@ export default function AppBanner() {
         //onKeyPress={handleSearch}
         />
     )
-
+    
+    function handleSearch(event) {
+       //console.log(event.target.value); // Use Context
+       //setSearch(event.target.value);
+        setValue(event.target.value);
+    }
 
     return (
         <div className={styles.homescreenheading}>
@@ -92,9 +99,8 @@ export default function AppBanner() {
                                     ),
                                 }}
 
-
                                 sx={{ width: 600, backgroundColor: 'white' }}
-                            //onKeyPress={handleSearch}
+                            onChange={handleSearch}
                             />
                             <Button
                                 size="large"
