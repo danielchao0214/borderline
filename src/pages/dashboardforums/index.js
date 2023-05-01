@@ -19,12 +19,14 @@ export default function DashboardForums() {
   }, [value]);
 
   async function getForumPost() {
-    const search = { value } // this will be the search in text field
+    const search =  value.Searched  // this will be the search in text field
+    const sortby = value.sortBy
     let url = "/api/getForumPost"
     const res = await fetch(url, {
       method: "POST",
       body: JSON.stringify({
         search,
+        sortby
       }),
       headers: {
         "content-type": "application/json"

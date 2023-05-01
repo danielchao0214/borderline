@@ -18,17 +18,19 @@ export default function DashboardMaps() {
 
   useEffect(() => {
     // inital fire of getForumPost
-    //console.log(value);
+    console.log("Value: " , value);
     getMapPost()
   }, [value]);
 
   async function getMapPost() {
-    const search = { value } // this will be the search in text field
+    const search = value.Searched  // this will be the search in text field
+    const sortby = value.sortBy
     let url = "/api/getMapPost"
     const res = await fetch(url, {
       method: "POST",
       body: JSON.stringify({
         search,
+        sortby
       }),
       headers: {
         "content-type": "application/json"

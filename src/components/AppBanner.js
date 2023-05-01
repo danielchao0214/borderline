@@ -13,6 +13,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Link from 'next/link';
 import styles from '@/styles/AppBanner.module.css'
+import Radio from '@mui/material/Radio';
 import { AppBannerContext } from './contexts/AppBannerContext';
 
 export default function AppBanner() {
@@ -22,6 +23,7 @@ export default function AppBanner() {
     const [anchorEl3, setAnchorEl3] = React.useState(null);
 
     const [search, setSearch] = React.useState();
+    const [sortby, setsortby] = React.useState(1);
     const { value, setValue } = React.useContext(AppBannerContext)
 
     const handleClick1 = (event) => {
@@ -48,6 +50,14 @@ export default function AppBanner() {
         setAnchorEl3(null);
     }
 
+    const handleSortbyAZ = (event) => {
+        setsortby(1)
+    }
+
+    const handleSortbyZA = (event) => {
+        setsortby(-1)
+    }
+
     const tagTextField = (
         <TextField
             id={styles.tagSearch}
@@ -63,8 +73,10 @@ export default function AppBanner() {
     function handleSearch(event) {
         //console.log(event.target.value); // Use Context
         //setSearch(event.target.value);
-        setValue(event.target.value);
+        setValue({ Searched: event.target.value, sortBy: sortby });
     }
+
+
 
     return (
         <div className={styles.homescreenheading}>
@@ -160,10 +172,23 @@ export default function AppBanner() {
                                 >
                                     <Typography sx={{ width: 200 }}>
                                         <ul>
-                                            <li target="Catagories" className="li">Sort Catagory 1</li>
-                                            <li target="Catagories" className="li">Sort Catagory 2</li>
+                                            <li target="Catagories" className="li">
+                                                <Radio
+                                                    checked={sortby === 1}
+                                                    onChange={handleSortbyAZ}
+                                                    value={1}
+                                                    name="radio-button-AZ"
+                                                />
+                                                A-Z</li>
+                                            <li target="Catagories" className="li">
+                                                <Radio
+                                                    checked={sortby === -1}
+                                                    onChange={handleSortbyZA}
+                                                    value={-1}
+                                                    name="radio-button-ZA"
+                                                />
+                                                Z-A</li>
                                             <li target="Catagories" className="li">Sort Catagory 3</li>
-                                            <li target="Catagories" className="li">Sort Catagory 4</li>
                                         </ul>
                                     </Typography>
                                 </Popover>
@@ -216,5 +241,5 @@ export default function AppBanner() {
                     </Toolbar>
                 </AppBar>
             </Box>
-        </div>)
+        </div >)
 }

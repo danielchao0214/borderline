@@ -13,11 +13,22 @@ export default async function handler(req, res) {
     // Rest of the API logic
     const client = await clientPromise;
     const db = client.db("Forum");
-    const { search } = req.body;
+    const { search, sortby } = req.body;
     console.log(req.body);
     switch (req.method) {
         case "POST":
-            const existingUser = await db.collection("Forum").find({ title: {'$regex' : search.value, '$options' : 'i'} }).limit(10);
+
+            if (search == undefined || sortby == undefined) {
+                console.log("ERROR: Search or sortby is undefined")
+                return res
+                    .status(401)
+                    .json({
+                        errorMessage: "ERROR: Search or sortby is undefined"
+                    })
+            }
+
+
+            const existingUser = await db.collection("Forum").find({ title: { '$regex': search, '$options': 'i' } }).limit(10).sort({ title: sortby });
 
             let returnArray = []
 
