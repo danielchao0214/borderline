@@ -17,19 +17,16 @@ export default async function handler(req, res) {
     console.log(req.body);
     switch (req.method) {
         case "POST":
-
-            let searchMB = "/MONGODB/i"
-
             const existingUser = await db.collection("Forum").find({ title: {'$regex' : search.value, '$options' : 'i'} }).limit(10);
 
             let returnArray = []
 
             if (!existingUser) {
-                console.log("ERROR: Wrong Email or Password Provided")
+                console.log("ERROR: Search For Forum has failed")
                 return res
                     .status(401)
                     .json({
-                        errorMessage: "ERROR: Wrong Email or Password Provided"
+                        errorMessage: "ERROR: Search For Forum has failed"
                     })
             }
 
@@ -38,7 +35,7 @@ export default async function handler(req, res) {
             return res
                 .status(200)
                 .json({
-                    message: "SUCCESS: User has been signed into their account",
+                    message: "SUCCESS: Search request was successfull",
                     forumPosts: returnArray
                 })
 
