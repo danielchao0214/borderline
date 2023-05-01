@@ -13,14 +13,14 @@ export default async function handler(req, res) {
     const db = client.db("Users");
     switch (req.method) {
         case "POST":
-            
-            const{firstName, lastName, username, email, password, confirmPassword} = req.body
+
+            const { firstName, lastName, username, email, password, confirmPassword } = req.body
 
             if (!firstName || !lastName || !email || !password || !confirmPassword || !username) {
                 console.log("ERROR: Please enter all required fields.")
                 return res
                     .status(400)
-                    .json({ errorMessage: "ERROR: Please enter all required fields." });  
+                    .json({ errorMessage: "ERROR: Please enter all required fields." });
             }
 
             if (password.length < 8) {
@@ -31,7 +31,7 @@ export default async function handler(req, res) {
                         errorMessage: "ERROR: Password NOT long enough!!! at least 8 characters."
                     });
             }
-            
+
             if (password !== confirmPassword) {
                 return res
                     .status(400)
@@ -40,8 +40,8 @@ export default async function handler(req, res) {
                     })
             }
 
-            const existingUserEmail = await db.collection("Users").findOne({email: email});
-            const existingUsername = await db.collection("Users").findOne({username: username});
+            const existingUserEmail = await db.collection("Users").findOne({ email: email });
+            const existingUsername = await db.collection("Users").findOne({ username: username });
             //console.log("existingUserEmail: " + existingUserEmail);
             //console.log("existingUsername: " + existingUsername);
 
@@ -53,7 +53,7 @@ export default async function handler(req, res) {
                         errorMessage: "ERROR: Email Address already exits"
                     })
             }
-    
+
             if (existingUsername) {
                 console.log("ERROR: Username already exits")
                 return res
@@ -71,17 +71,17 @@ export default async function handler(req, res) {
 
             //New User Object
             const newUser = ({
-                firstName, lastName, username, email,passwordHash
+                firstName, lastName, username, email, passwordHash
             });
 
-           //POST INFO TO DATABASE
-             db.collection("Users").insertOne(newUser, function(err, res){
+            //POST INFO TO DATABASE
+            db.collection("Users").insertOne(newUser, function (err, res) {
                 if (err) throw err;
                 console.log(err);
                 client.close();
             });
 
-            res.json({status: 200, message: "SUCCESS: User account has been created and added to the DB"});
+            res.json({ status: 200, message: "SUCCESS: User account has been created and added to the DB" });
 
             break;
         case "GET":
