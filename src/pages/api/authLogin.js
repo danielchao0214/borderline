@@ -1,7 +1,7 @@
 import { runCors } from "./middleware";
 import clientPromise from "../../../lib/mongo";
 const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
+import { SignJWT } from "jose";
 const cookieParser = require("cookie-parser");
 import { serialize } from "cookie";
 
@@ -51,19 +51,25 @@ export default async function handler(req, res) {
       // LOGIN THE USER
       if (passwordCorrect) {
         // Generate JWT token
-        const token = jwt.sign({ email }, "mysecret", { expiresIn: "1h" });
+        const secret = new TextEncoder().encode("secret");
+        const alg = "HS256";
+        const token = await new SignJWT({ "urn:example:claim": true })
+          .setProtectedHeader({ alg })
+          .setIssuedAt()
+          .setExpirationTime("2h")
+          .sign(secret);
+        console.log(token);
         const cookie = serialize("token", token, {
-            httpOnly: true,
-            path: "/",});
+          httpOnly: true,
+          path: "/",
+        });
         // Set token in cookie and return success response
         res.setHeader("Set-Cookie", cookie);
-        return res
-          .status(200)
-          .json({
-            success: true,
-            message: "User logged in successfully",
-            user: existingUser,
-          });
+        return res.status(200).json({
+          success: true,
+          message: "User logged in successfully",
+          user: existingUser,
+        });
       }
   }
   //login success prompt
