@@ -6,20 +6,20 @@ import styles from '@/styles/Modal.module.css'
 
 function CreatePostModal(props) {
     const [title, setTitle] = useState("");
-    const [username, setUsername] = useState("");
-    const [body, setBody] = useState("");
+    const [postby, setPostby] = useState("");
+    const [postmessage, setPostmessage] = useState("");
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         props.handleClose();
-        setUsername("MongoDB USER")
+        setPostby("MongoDB USER")
         let url = "/api/createpost"
         const res = await fetch(url, {
             method: "Post",
             body: JSON.stringify({
                 title,
-                username,
-                body
+                postby,
+                postmessage
             }),
             headers: {
                 "content-type": "application/json"
@@ -65,8 +65,8 @@ function CreatePostModal(props) {
                         id="body"
                         label="Body..."
                         // className={styles.formTextField}
-                        value={body}
-                        onChange={(event) => setBody(event.target.value)}
+                        value={postmessage}
+                        onChange={(event) => setPostmessage(event.target.value)}
                         margin="normal"
                         variant="outlined"
                     />

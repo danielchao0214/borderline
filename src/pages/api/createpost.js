@@ -18,9 +18,9 @@ export default async function handler(req, res) {
     switch (req.method) {
         case "POST":
 
-            const { title, username, body } = req.body;
+            const { title, postby, postmessage } = req.body;
 
-            if (!title || !body) {
+            if (!title || !postmessage) {
                 console.log("ERROR: Please enter all required fields.")
                 return res
                     .status(400)
@@ -29,7 +29,7 @@ export default async function handler(req, res) {
 
             // New Post Object
             const newPost = ({
-                title, username, body
+                title, postby, postmessage
             });
 
             //POST INFO TO DATABASE
