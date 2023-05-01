@@ -14,8 +14,7 @@ export default function DashboardForums() {
   const { value, setValue } = React.useContext(AppBannerContext)
 
   useEffect(() => {
-    // inital fire of getForumPost
-    console.log(value);
+    //console.log(value);
     getForumPost()
   }, [value]);
 
@@ -41,8 +40,8 @@ export default function DashboardForums() {
     }
     //If route is good then log the results
     if (res.status == 200) {
-      console.log(data.forumPosts)
-      console.log(data.message)
+      //console.log(data.forumPosts)
+      //console.log(data.message)
 
       //Change state !!!!!!!!
       setPost(data.forumPosts)
