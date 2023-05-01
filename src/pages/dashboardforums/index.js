@@ -11,16 +11,16 @@ export default function DashboardForums() {
   // IE  const [postList, setPost] = useState([]);
   const [postList, setPost] = useState([{}]);
   const [recentPostList, setRecentPostList] = useState([{ id: 2, title: "title", user: "user" }]);
-  const {value, setValue} = React.useContext(AppBannerContext)
-  
+  const { value, setValue } = React.useContext(AppBannerContext)
+
   useEffect(() => {
     // inital fire of getForumPost
-    console.log(value)
+    console.log(value);
+    getForumPost()
   }, [value]);
 
-  const getForumPost = async (event) => {
-    const search = {value} // this will be the search in text field
-    event.preventDefault();
+  async function getForumPost() {
+    const search = { value } // this will be the search in text field
     let url = "/api/getForumPost"
     const res = await fetch(url, {
       method: "POST",
@@ -39,7 +39,6 @@ export default function DashboardForums() {
     if (res.status == 401) {
       console.log(data.errorMessage);
     }
-
     //If route is good then log the results
     if (res.status == 200) {
       console.log(data.forumPosts)
@@ -47,9 +46,9 @@ export default function DashboardForums() {
 
       //Change state !!!!!!!!
       setPost(data.forumPosts)
+    };
+  }
 
-    }
-  };
 
   return (
     <>
@@ -57,7 +56,7 @@ export default function DashboardForums() {
         <div className={styles.createcontainer}>
           <div className={styles.createButtonContainter}>
             {
-              <Button className={styles.createbutton} variant="outlined" onClick={getForumPost}>Create Post</Button>
+              <Button className={styles.createbutton} variant="outlined">Create Post</Button>
             }
           </div>
           <div className={styles.recentforumcontainer}>
