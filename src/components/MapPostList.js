@@ -6,7 +6,7 @@ function MapPostList({ mapPostList }) {
         mapPostList.map(map => {
             return (
                 <MapPostCard
-                    key={map.id}
+                    key={map._id}
                     map={map}
                 />
             )

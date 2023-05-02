@@ -13,6 +13,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Link from 'next/link';
 import styles from '@/styles/AppBanner.module.css'
+import Radio from '@mui/material/Radio';
 import { AppBannerContext } from './contexts/AppBannerContext';
 
 export default function AppBanner() {
@@ -22,7 +23,8 @@ export default function AppBanner() {
     const [anchorEl3, setAnchorEl3] = React.useState(null);
 
     const [search, setSearch] = React.useState();
-    const {value, setValue} = React.useContext(AppBannerContext)
+    const [sortby, setsortby] = React.useState(1);
+    const { value, setValue } = React.useContext(AppBannerContext)
 
     const handleClick1 = (event) => {
         setAnchorEl1(event.currentTarget);
@@ -48,6 +50,14 @@ export default function AppBanner() {
         setAnchorEl3(null);
     }
 
+    const handleSortbyAZ = (event) => {
+        setsortby(1)
+    }
+
+    const handleSortbyZA = (event) => {
+        setsortby(-1)
+    }
+
     const tagTextField = (
         <TextField
             id={styles.tagSearch}
@@ -59,29 +69,31 @@ export default function AppBanner() {
         //onKeyPress={handleSearch}
         />
     )
-    
+
     function handleSearch(event) {
-       //console.log(event.target.value); // Use Context
-       //setSearch(event.target.value);
-        setValue(event.target.value);
+        //console.log(event.target.value); // Use Context
+        //setSearch(event.target.value);
+        setValue({ Searched: event.target.value, sortBy: sortby });
     }
+
+
 
     return (
         <div className={styles.homescreenheading}>
             <Box sx={{ flexGrow: 1 }}>
-                <AppBar position="static" style={{backgroundColor: "#AEAEAE", color:"000000"}}>
-                    <Toolbar style={{display:"block"}}>
+                <AppBar position="static" style={{ backgroundColor: "#AEAEAE", color: "000000" }}>
+                    <Toolbar style={{ display: "block" }}>
                         <Typography
                             variant="h4"
                             noWrap
                             component="div"
                             sx={{ display: { xs: 'none', sm: 'block', minHeight: 82 } }}
-                            style={{display:"none"}}
+                            style={{ display: "none" }}
                         >
                         </Typography>
 
                         <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-                            <Link href="/" target='Home' className={styles.home}>borderline</Link>
+                            <Link href="/" className={styles.home}>borderline</Link>
 
                             <p className={styles.p}>Dashboard</p>
 
@@ -90,7 +102,7 @@ export default function AppBanner() {
                                 //label="Search" 
                                 variant="outlined"
                                 defaultValue='Type Something To Search'
-                                style={{ padding: "10px", paddingTop: "15px", backgroundColor: "#AEAEAE"}}
+                                style={{ padding: "10px", paddingTop: "15px", backgroundColor: "#AEAEAE" }}
                                 InputProps={{
                                     startAdornment: (
                                         <InputAdornment position="start">
@@ -100,7 +112,7 @@ export default function AppBanner() {
                                 }}
 
                                 sx={{ width: 600, backgroundColor: 'white' }}
-                            onChange={handleSearch}
+                                onChange={handleSearch}
                             />
                             <Button
                                 size="large"
@@ -112,7 +124,7 @@ export default function AppBanner() {
                                 color="inherit"
                                 endIcon={<ArrowDownwardSharpIcon />}
                                 sx={{ fontSize: 20, fontWeight: 'bold' }}
-                                style={{marginRight:0}}
+                                style={{ marginRight: 0 }}
                             >
                             </Button>
                             <Button
@@ -125,14 +137,14 @@ export default function AppBanner() {
                                 color="inherit"
                                 endIcon={<SortIcon />}
                                 sx={{ fontSize: 20, mr: 10, fontWeight: 'bold' }}
-                                style={{marginRight:0}}
+                                style={{ marginRight: 0 }}
                             >
 
                             </Button>
 
-                            <Link href="/dashboardmaps" target='Nav' className={styles.nav}>Maps</Link>
+                            <Link href="/dashboardmaps" className={styles.nav}>Maps</Link>
 
-                            <Link href="/dashboardforums" target='Nav' className={styles.nav}>Forum</Link>
+                            <Link href="/dashboardforums" className={styles.nav}>Forum</Link>
 
 
                             <Box sx={{ display: { xs: 'none', md: 'flex' }, p: 0 }}>
@@ -160,10 +172,23 @@ export default function AppBanner() {
                                 >
                                     <Typography sx={{ width: 200 }}>
                                         <ul>
-                                            <li target="Catagories" className="li">Sort Catagory 1</li>
-                                            <li target="Catagories" className="li">Sort Catagory 2</li>
+                                            <li target="Catagories" className="li">
+                                                <Radio
+                                                    checked={sortby === 1}
+                                                    onChange={handleSortbyAZ}
+                                                    value={1}
+                                                    name="radio-button-AZ"
+                                                />
+                                                A-Z</li>
+                                            <li target="Catagories" className="li">
+                                                <Radio
+                                                    checked={sortby === -1}
+                                                    onChange={handleSortbyZA}
+                                                    value={-1}
+                                                    name="radio-button-ZA"
+                                                />
+                                                Z-A</li>
                                             <li target="Catagories" className="li">Sort Catagory 3</li>
-                                            <li target="Catagories" className="li">Sort Catagory 4</li>
                                         </ul>
                                     </Typography>
                                 </Popover>
@@ -181,9 +206,9 @@ export default function AppBanner() {
                                 >
                                     <Typography sx={{ width: 150 }}>
                                         <ul>
-                                            <li className="li"><Link href="/login" target='list' className={styles.list}>Login</Link></li>
-                                            <li className="li"><Link href="/createaccount" target='list' className={styles.list}>Create Account</Link></li>
-                                            <li className="li"><Link href="/userprofile" target='list'>View Account</Link></li>
+                                            <li className="li"><Link href="/login" className={styles.list}>Login</Link></li>
+                                            <li className="li"><Link href="/createaccount" className={styles.list}>Create Account</Link></li>
+                                            <li className="li"><Link href="/userprofile" >View Account</Link></li>
 
                                         </ul>
                                     </Typography>
@@ -216,5 +241,5 @@ export default function AppBanner() {
                     </Toolbar>
                 </AppBar>
             </Box>
-        </div>)
+        </div >)
 }
