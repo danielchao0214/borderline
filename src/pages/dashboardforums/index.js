@@ -18,11 +18,11 @@ export default function DashboardForums() {
   useEffect(() => {
     // inital fire of getForumPost
     console.log(value)
+    getForumPost()
   }, [value]);
 
-  const getForumPost = async (event) => {
+  async function getForumPost() {
     const search = { value } // this will be the search in text field
-    event.preventDefault();
     let url = "/api/getForumPost"
     const res = await fetch(url, {
       method: "POST",
@@ -51,7 +51,37 @@ export default function DashboardForums() {
       setPost(data.forumPosts)
 
     }
-  };
+  };async function getForumPost() {
+    const search =  value.Searched  // this will be the search in text field
+    const sortby = value.sortBy
+    let url = "/api/getForumPost"
+    const res = await fetch(url, {
+      method: "POST",
+      body: JSON.stringify({
+        search,
+        sortby
+      }),
+      headers: {
+        "content-type": "application/json"
+      },
+    }).catch((e) => console.log(e));
+
+    // wait for the responce from request and get the body
+    const data = await res.json();
+
+    // If status code returns error print the code in the body
+    if (res.status == 401) {
+      console.log(data.errorMessage);
+    }
+    //If route is good then log the results
+    if (res.status == 200) {
+      //console.log(data.forumPosts)
+      //console.log(data.message)
+
+      //Change state !!!!!!!!
+      setPost(data.forumPosts)
+    };
+  }
 
   const handleCloseCreatePostModal = () => {
     setOpenCreatePostModal(false);
