@@ -12,6 +12,7 @@ export default function DashboardForums() {
   // Data loaded in these useStates is testing data and should be empty at start and use
   // IE  const [postList, setPost] = useState([]);
   const [postList, setPost] = useState([{}]);
+  //THis will need a global context maybe???
   const [recentPostList, setRecentPostList] = useState([{ id: 2, title: "title", user: "user" }]);
   const { value, setValue } = React.useContext(AppBannerContext)
 
@@ -22,38 +23,11 @@ export default function DashboardForums() {
   }, [value]);
 
   async function getForumPost() {
-    const search = { value } // this will be the search in text field
-    let url = "/api/getForumPost"
-    const res = await fetch(url, {
-      method: "POST",
-      body: JSON.stringify({
-        search,
-      }),
-      headers: {
-        "content-type": "application/json"
-      },
-    }).catch((e) => console.log(e));
+    let search = "";
+    let sortby = 1;
 
-    // wait for the responce from request and get the body
-    const data = await res.json();
-
-    // If status code returns error print the code in the body
-    if (res.status == 401) {
-      console.log(data.errorMessage);
-    }
-
-    //If route is good then log the results
-    if (res.status == 200) {
-      console.log(data.forumPosts)
-      console.log(data.message)
-
-      //Change state !!!!!!!!
-      setPost(data.forumPosts)
-
-    }
-  };async function getForumPost() {
-    const search =  value.Searched  // this will be the search in text field
-    const sortby = value.sortBy
+    search = value.Searched  // this will be the search in text field
+    sortby = value.sortBy
     let url = "/api/getForumPost"
     const res = await fetch(url, {
       method: "POST",

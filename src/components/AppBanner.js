@@ -101,7 +101,7 @@ export default function AppBanner() {
                                 id={styles.outlinedbasic}
                                 //label="Search" 
                                 variant="outlined"
-                                defaultValue='Type Something To Search'
+                                placeholder='Type Something To Search'
                                 style={{ padding: "10px", paddingTop: "15px", backgroundColor: "#AEAEAE" }}
                                 InputProps={{
                                     startAdornment: (
