@@ -1,5 +1,7 @@
 import runCors from './cors';
 import clientPromise from '../../../lib/mongo';
+import { ObjectId } from 'mongodb';
+
 
 // Initializing the cors middleware
 // You can read more about the available options here: https://github.com/expressjs/cors#configuration-options
@@ -13,27 +15,15 @@ export default async function handler(req, res) {
     // Rest of the API logic
     const client = await clientPromise;
     const db = client.db("Maps");
-    const { search, sortby } = req.body;
+    const { _id } = req.body;
     console.log(req.body);
     switch (req.method) {
-
         case "POST":
-
-            if (search == undefined || sortby == undefined) {
-                console.log("ERROR: Search or sortby is undefined")
-                return res
-                    .status(401)
-                    .json({
-                        errorMessage: "ERROR: Search or sortby is undefined"
-                    })
-            }
-
-
-            const mapPost = await db.collection("Maps").find({ title: { '$regex': search, '$options': 'i' }, published: true }).limit(10).sort({ title: sortby });
-            const returnUser = await client.db("Users").collection("Users").find({ username: search }).limit(1);
-
+            
+            var o_id = new ObjectId(_id)
+            const mapPost = await db.collection("Maps").find({_id : o_id});
+           
             let returnArray = []
-            let retrunArrayUser = []
 
             if (!mapPost) {
                 console.log("ERROR: Search For Forum has failed")
@@ -46,16 +36,11 @@ export default async function handler(req, res) {
 
             await mapPost.forEach(element => returnArray.push(element));
 
-            if (returnUser !== null) await returnUser.forEach(element => retrunArrayUser.push(element));
-
-            //console.log(retrunArrayUser);
-
             return res
                 .status(200)
                 .json({
                     message: "SUCCESS: Search request was successfull",
-                    mapPosts: returnArray,
-                    user: retrunArrayUser
+                    mapPost: returnArray
                 })
 
             break;

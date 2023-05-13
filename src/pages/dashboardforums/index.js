@@ -21,13 +21,16 @@ export default function DashboardForums() {
     console.log(value)
     getForumPost()
   }, [value]);
+  
 
   async function getForumPost() {
-    let search = "";
-    let sortby = 1;
+    
+    let search = value.Searched  // this will be the search in text field
+    let sortby = value.sortBy
 
-    search = value.Searched  // this will be the search in text field
-    sortby = value.sortBy
+    if(search === undefined) search = "";
+    if(sortby === undefined) sortby = 1;
+
     let url = "/api/getForumPost"
     const res = await fetch(url, {
       method: "POST",

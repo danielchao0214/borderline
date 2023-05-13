@@ -12,7 +12,7 @@ export default function Home() {
   const query = router.query;
   const _id = query._id;
 
-  const [post, setPost] = useState([{ title: "Temp", postedby: "Temp", postmessage: "Temp" }]);
+  const [post, setPost] = useState([{ title: "Temp", postby: "Temp", postmessage: "Temp" }]);
   const [openCreatePostModal, setOpenCreatePostModal] = useState(false);
   const [recentPostList, setRecentPostList] = useState([{ id: 2, title: "title", user: "user" }]);
 
@@ -85,7 +85,7 @@ export default function Home() {
                 <p>{post[0].title}</p>
               </div>
               <div className={styles.subContainerPostedBy}>
-                <p>Posted By: {post[0].postedby}</p>
+                <p>Posted By: {post[0].postby}</p>
                 <br></br>
               </div>
               <div className={styles.subContainerPostMessage}>

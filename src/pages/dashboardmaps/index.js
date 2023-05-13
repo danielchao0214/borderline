@@ -23,8 +23,13 @@ export default function DashboardMaps() {
   }, [value]);
 
   async function getMapPost() {
-    const search = value.Searched  // this will be the search in text field
-    const sortby = value.sortBy
+    let search = value.Searched  // this will be the search in text field
+    let sortby = value.sortBy
+
+    if(search === undefined) search = "";
+    if(sortby === undefined) sortby = 1;
+
+
     let url = "/api/getMapPost"
     const res = await fetch(url, {
       method: "POST",
@@ -52,7 +57,7 @@ export default function DashboardMaps() {
       //Change state !!!!!!!!
       setMapPostList(data.mapPosts)      
       setSearchUserList(data.user)
-      
+    
     };
   }
 
