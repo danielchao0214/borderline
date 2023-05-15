@@ -1,0 +1,22 @@
+.comment {
+    background-color: #9b9b9b;
+    padding: 10px;
+    margin-top: 20px;
+    margin-bottom:20px;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 10px;
+    font-family: 'Inter';
+}
+
+.user{
+    text-align: left;
+    font-size: 20px;
+    font-weight: bold;
+    padding-bottom: 5px;
+}
+
+.body{
+    text-align: left;
+    font-size: 18px;
+}

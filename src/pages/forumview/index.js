@@ -5,6 +5,7 @@ import CreatePostModal from '@/components/CreatePostModal';
 import Button from '@mui/material/Button';
 import RecentPostList from '@/components/RecentPostList';
 import TextField from '@mui/material/TextField';
+import CommentList from '@/components/CommentList';
 
 
 export default function Home() {
@@ -15,6 +16,8 @@ export default function Home() {
   const [post, setPost] = useState([{ title: "Temp", postby: "Temp", postmessage: "Temp" }]);
   const [openCreatePostModal, setOpenCreatePostModal] = useState(false);
   const [recentPostList, setRecentPostList] = useState([{ id: 2, title: "title", user: "user" }]);
+  const [commentList, setCommentList] = useState([{ author: "Temp", body: "Temp", _id: "tempid" }]);
+  const [commentTextField, setcommentTextField] = useState("");
 
   const handleCloseCreatePostModal = () => {
     setOpenCreatePostModal(false);
@@ -53,6 +56,61 @@ export default function Home() {
       //Change state !!!!!!!!
       //console.log(data.forumPost)
       setPost(data.forumPost)
+
+      if (data.forumPost[0].comments !== undefined) {
+        setCommentList(data.forumPost[0].comments)
+      }
+      else {
+        setCommentList([{}]);
+      }
+    };
+  }
+
+  const submitComment = async () => {
+    //Temporary author variable
+    let author = "Test Author Scooter"
+
+    let id = post[0]._id
+
+    if (commentTextField !== "") {
+
+      let url = "/api/addCommentForum"
+      const res = await fetch(url, {
+        method: "POST",
+        body: JSON.stringify({
+          id,
+          commentTextField,
+          author
+        }),
+        headers: {
+          "content-type": "application/json"
+        },
+      }).catch((e) => console.log(e));
+
+      // wait for the responce from request and get the body
+      const data = await res.json();
+
+      // If status code returns error print the code in the body
+      if (res.status == 400) {
+        console.log(data.errorMessage);
+      }
+      //If route is good then log the results
+      if (res.status == 200) {
+        getForumPost()
+        setcommentTextField("");
+      };
+
+
+
+
+
+
+
+
+
+
+
+
     };
   }
 
@@ -66,7 +124,6 @@ export default function Home() {
         <div className={styles.createcontainer}>
           <div className={styles.createButtonContainter}>
             {
-              // <Button className={styles.createbutton} variant="outlined" onClick={getForumPost}>Create Post</Button>
               <Button className={styles.createbutton} variant="outlined" onClick={() => setOpenCreatePostModal(true)}>Create Post</Button>
             }
           </div>
@@ -95,16 +152,22 @@ export default function Home() {
                 <br></br>
               </div>
               <div className={styles.subContainerComment}>
-              <TextField
-                label=""
-                placeholder="Comment Here"
-                multiline
-                variant="standard"
-                size="medium"
-                fullWidth
-              ></TextField>
-              <Button>Comment</Button>
+                <TextField
+                  label=""
+                  placeholder="Comment Here"
+                  multiline
+                  value={commentTextField}
+                  variant="standard"
+                  size="medium"
+                  fullWidth
+                  onChange={(e) => {
+                    setcommentTextField(e.target.value);
+                  }}
+                ></TextField>
+                <Button onClick={submitComment}>Comment</Button>
               </div>
+
+              <CommentList commentList={commentList} />
             </div>
           </div>
         </div>
