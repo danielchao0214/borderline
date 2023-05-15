@@ -27,12 +27,19 @@ export default async function handler(req, res) {
                     })
             }
 
+            let forumPost;
 
-            const existingUser = await db.collection("Forum").find({ title: { '$regex': search, '$options': 'i' } }).limit(10).sort({ title: sortby });
+            if (sortby === 1 || sortby === -1) {
+                forumPost = await db.collection("Forum").find({ title: { '$regex': search, '$options': 'i' } }).limit(10).sort({ title: sortby });
+            }
+
+            else{
+                forumPost = await db.collection("Forum").find({ title: { '$regex': search, '$options': 'i' } }).limit(10).sort({ title: 1 });
+            }
 
             let returnArray = []
 
-            if (!existingUser) {
+            if (!forumPost) {
                 console.log("ERROR: Search For Forum has failed")
                 return res
                     .status(401)
@@ -41,7 +48,7 @@ export default async function handler(req, res) {
                     })
             }
 
-            await existingUser.forEach(element => returnArray.push(element));
+            await forumPost.forEach(element => returnArray.push(element));
 
             return res
                 .status(200)

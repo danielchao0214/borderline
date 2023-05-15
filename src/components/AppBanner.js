@@ -54,9 +54,6 @@ export default function AppBanner() {
         setsortby(1)
     }
 
-    const handleSortbyZA = (event) => {
-        setsortby(-1)
-    }
 
     const tagTextField = (
         <TextField
@@ -183,12 +180,27 @@ export default function AppBanner() {
                                             <li target="Catagories" className="li">
                                                 <Radio
                                                     checked={sortby === -1}
-                                                    onChange={handleSortbyZA}
+                                                    onChange={() => { setsortby(-1) }}
                                                     value={-1}
                                                     name="radio-button-ZA"
                                                 />
                                                 Z-A</li>
-                                            <li target="Catagories" className="li">Sort Catagory 3</li>
+                                            <li target="Catagories" className="li">
+                                                <Radio
+                                                    checked={sortby === 2}
+                                                    onChange={() => { setsortby(2) }}
+                                                    value={2}
+                                                    name="radio-button-MostLike"
+                                                />
+                                                Most Liked</li>
+                                            <li target="Catagories" className="li">
+                                                <Radio
+                                                    checked={sortby === 3}
+                                                    onChange={() => { setsortby(3) }}
+                                                    value={3}
+                                                    name="radio-button-publishDate"
+                                                />
+                                                Publish Date</li>
                                         </ul>
                                     </Typography>
                                 </Popover>

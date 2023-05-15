@@ -28,9 +28,19 @@ export default async function handler(req, res) {
                     })
             }
 
-
-            const mapPost = await db.collection("Maps").find({ title: { '$regex': search, '$options': 'i' }, published: true }).limit(10).sort({ title: sortby });
             const returnUser = await client.db("Users").collection("Users").find({ username: search }).limit(1);
+            let mapPost;
+            if (sortby === 1 || sortby === -1) {
+                mapPost = await db.collection("Maps").find({ title: { '$regex': search, '$options': 'i' }, published: true }).limit(10).sort({ title: sortby });   
+            }
+
+            else if(sortby === 2){
+                mapPost = await db.collection("Maps").find({ title: { '$regex': search, '$options': 'i' }, published: true }).limit(10).sort({ likes: -1 });
+            }
+
+            else if(sortby === 3){
+                mapPost = await db.collection("Maps").find({ title: { '$regex': search, '$options': 'i' }, published: true }).limit(10).sort({ likes: -1 });
+            }
 
             let returnArray = []
             let retrunArrayUser = []
