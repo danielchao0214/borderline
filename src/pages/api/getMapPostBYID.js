@@ -1,5 +1,7 @@
 import runCors from './cors';
 import clientPromise from '../../../lib/mongo';
+import { ObjectId } from 'mongodb';
+
 
 // Initializing the cors middleware
 // You can read more about the available options here: https://github.com/expressjs/cors#configuration-options
@@ -12,27 +14,18 @@ export default async function handler(req, res) {
 
     // Rest of the API logic
     const client = await clientPromise;
-    const db = client.db("Forum");
-    const { search, sortby } = req.body;
+    const db = client.db("Maps");
+    const { _id } = req.body;
     console.log(req.body);
     switch (req.method) {
         case "POST":
-
-            if (search == undefined || sortby == undefined) {
-                console.log("ERROR: Search or sortby is undefined")
-                return res
-                    .status(401)
-                    .json({
-                        errorMessage: "ERROR: Search or sortby is undefined"
-                    })
-            }
-
-
-            const existingUser = await db.collection("Forum").find({ title: { '$regex': search, '$options': 'i' } }).limit(10).sort({ title: sortby });
-
+            
+            var o_id = new ObjectId(_id)
+            const mapPost = await db.collection("Maps").find({_id : o_id});
+           
             let returnArray = []
 
-            if (!existingUser) {
+            if (!mapPost) {
                 console.log("ERROR: Search For Forum has failed")
                 return res
                     .status(401)
@@ -41,13 +34,13 @@ export default async function handler(req, res) {
                     })
             }
 
-            await existingUser.forEach(element => returnArray.push(element));
+            await mapPost.forEach(element => returnArray.push(element));
 
             return res
                 .status(200)
                 .json({
                     message: "SUCCESS: Search request was successfull",
-                    forumPosts: returnArray
+                    mapPost: returnArray
                 })
 
             break;

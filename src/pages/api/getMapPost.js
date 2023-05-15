@@ -12,10 +12,11 @@ export default async function handler(req, res) {
 
     // Rest of the API logic
     const client = await clientPromise;
-    const db = client.db("Forum");
+    const db = client.db("Maps");
     const { search, sortby } = req.body;
     console.log(req.body);
     switch (req.method) {
+
         case "POST":
 
             if (search == undefined || sortby == undefined) {
@@ -28,11 +29,13 @@ export default async function handler(req, res) {
             }
 
 
-            const existingUser = await db.collection("Forum").find({ title: { '$regex': search, '$options': 'i' } }).limit(10).sort({ title: sortby });
+            const mapPost = await db.collection("Maps").find({ title: { '$regex': search, '$options': 'i' }, published: true }).limit(10).sort({ title: sortby });
+            const returnUser = await client.db("Users").collection("Users").find({ username: search }).limit(1);
 
             let returnArray = []
+            let retrunArrayUser = []
 
-            if (!existingUser) {
+            if (!mapPost) {
                 console.log("ERROR: Search For Forum has failed")
                 return res
                     .status(401)
@@ -41,13 +44,18 @@ export default async function handler(req, res) {
                     })
             }
 
-            await existingUser.forEach(element => returnArray.push(element));
+            await mapPost.forEach(element => returnArray.push(element));
+
+            if (returnUser !== null) await returnUser.forEach(element => retrunArrayUser.push(element));
+
+            //console.log(retrunArrayUser);
 
             return res
                 .status(200)
                 .json({
                     message: "SUCCESS: Search request was successfull",
-                    forumPosts: returnArray
+                    mapPosts: returnArray,
+                    user: retrunArrayUser
                 })
 
             break;

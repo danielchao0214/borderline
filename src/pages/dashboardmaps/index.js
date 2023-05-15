@@ -1,29 +1,69 @@
-import { useState } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import styles from '@/pages/dashboardmaps/DashboardMaps.module.css'
 import Button from '@mui/material/Button';
 import ImportMapModal from '@/components/ImportMapModal';
 import MapPostList from '@/components/MapPostList';
 import RecentMapList from '@/components/RecentMapList';
-import SearchUserCard from '@/components/SearchUserCard';
+import { AppBannerContext } from '@/components/contexts/AppBannerContext';
+import SearchedUserList from '@/components/SearchedUserList';
 
 
 export default function DashboardMaps() {
   const [openImportMapModal, setOpenImportMapModal] = useState(false);
-  const [mapPostList, setMapPostList] = useState([{ id: 1, piclink: "map.png", title: "TITLE", author: "AUTHOR", likes: 5, dislikes: 4, date: "4/07/2023" }])
+  const [mapPostList, setMapPostList] = useState([{}])
   const [recentMapList, setRecentMapList] = useState([{ id: 1, piclink: "map.png", title: "title", author: "author" }])
-  //Temp value of usercard doesnt matter just if not null then show
-  let usercard = true;
+  const [searchUserList, setSearchUserList] = useState([{}])
+  
+  const { value, setValue } = useContext(AppBannerContext)
+
+  useEffect(() => {
+    // inital fire of getForumPost
+    console.log("Value: " , value);
+    getMapPost()
+  }, [value]);
+
+  async function getMapPost() {
+    let search = value.Searched  // this will be the search in text field
+    let sortby = value.sortBy
+
+    if(search === undefined) search = "";
+    if(sortby === undefined) sortby = 1;
+
+
+    let url = "/api/getMapPost"
+    const res = await fetch(url, {
+      method: "POST",
+      body: JSON.stringify({
+        search,
+        sortby
+      }),
+      headers: {
+        "content-type": "application/json"
+      },
+    }).catch((e) => console.log(e));
+
+    // wait for the responce from request and get the body
+    const data = await res.json();
+
+    // If status code returns error print the code in the body
+    if (res.status == 401) {
+      console.log(data.errorMessage);
+    }
+    //If route is good then log the results
+    if (res.status == 200) {
+      //console.log(data.mapPosts)
+      //console.log(data.message)
+
+      //Change state !!!!!!!!
+      setMapPostList(data.mapPosts)      
+      setSearchUserList(data.user)
+    
+    };
+  }
 
   const handleCloseImportMapModal = () => {
     setOpenImportMapModal(false);
   };
-
-  //If Search result has value then set usercard
-  //This if statment is temporary and should get a better implementation
-  if (usercard !== null) {
-    usercard = <SearchUserCard User="Username" link="link" ownedmaps={5} />
-  }
-
 
   return (
     <>
@@ -52,7 +92,7 @@ export default function DashboardMaps() {
           </div>
         </div>
         <div>
-          {usercard}
+          <SearchedUserList searchUserList={searchUserList} />
           <div className={styles.mapcontainer}>
             <div className={styles.mapsflexcontainer}>
               <MapPostList mapPostList={mapPostList} />

@@ -10,8 +10,8 @@ export default function App({ Component, pageProps }) {
   return (
     <>
       <AppBannerContext.Provider value={{ value, setValue }}>
-        <AppBanner />
-        <Component {...pageProps} />
+          <AppBanner />
+          <Component {...pageProps} />
       </AppBannerContext.Provider>
     </>
   )
