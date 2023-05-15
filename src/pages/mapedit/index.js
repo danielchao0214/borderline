@@ -27,6 +27,11 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 const inter = Inter({ subsets: ['latin'] })
 
 export default function MapEdit() {
+
+  const geoman = dynamic(() => import('@geoman-io/leaflet-geoman-free'), {
+    ssr: false
+  });
+
   const Map = useMemo(() => dynamic(
     () => import('@/components/map.js'), // replace '@components/map' with your component's location
     {

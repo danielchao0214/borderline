@@ -1,8 +1,15 @@
 import { MapContainer, Marker, Popup, TileLayer, GeoJSON } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import * as React from 'react';
+import dynamic from 'next/dynamic';
+import Geoman from "./geoman";
+
 
 const Map = () => {
+
+  dynamic(() => import('@geoman-io/leaflet-geoman-free'), {
+    ssr: false
+  });
 
   const [mapLoad, setMapLoad] = React.useState(null);
 
@@ -24,7 +31,7 @@ const Map = () => {
         if (file) {
           var json = JSON.parse(await file.text());
           console.log(json);
-          setMapLoad(<GeoJSON data={json}/>);
+          setMapLoad(<GeoJSON data={json} />);
         }
       };
     };
@@ -32,6 +39,7 @@ const Map = () => {
 
   React.useEffect(() => {
     getFile();
+    
   }, []);
 
   return (
@@ -41,6 +49,7 @@ const Map = () => {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       {mapLoad}
+      <Geoman />
     </MapContainer>
   )
 }
