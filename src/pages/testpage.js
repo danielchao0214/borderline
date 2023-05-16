@@ -1,28 +1,17 @@
-import React, { useState } from "react";
-import { useRouter } from 'next/router'
-import { Inter } from 'next/font/google'
-import { TextField, Button } from '@mui/material';
-import styles from '@/pages/resetpasswordemail/ResetPasswordEmail.module.css'
-import { sendResetEmail } from "../../lib/api";
-import { withAuth } from "@/components/withAuth";;
+import { useContext } from 'react';
+import AuthContext from '@/components/contexts/AuthContext';
 
-const inter = Inter({ subsets: ['latin'] })
+function MyComponent() {
+  const { isLoggedIn } = useContext(AuthContext);
 
-const Login = () => {
-  const [email, setEmail] = useState("");
-  const router = useRouter();
-  const [submitEnabled, setSubmitEnabled] = useState(false);
+  // Use the isLoggedIn state in your component logic
+  // For example, conditionally render content based on the login status
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    console.log(`Submitted: ${email}`);
-    setSubmitEnabled(true);
-    await sendResetEmail(email);
-  };
   return (
-    <>
-      asdf
-    </>
-  )
+    <div>
+      {isLoggedIn ? <p>Welcome, User!</p> : <p>Please log in.</p>}
+    </div>
+  );
 }
-export default withAuth(Login);
+
+export default MyComponent;

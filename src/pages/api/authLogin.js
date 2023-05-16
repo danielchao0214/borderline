@@ -16,7 +16,6 @@ export default async function handler(req, res) {
   const client = await clientPromise;
   const db = client.db("Users");
   const { email, password, username } = req.body;
-  console.log(req.body);
   switch (req.method) {
     case "POST":
       if (!email || !password) {

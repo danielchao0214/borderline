@@ -1,9 +1,49 @@
 import { IconButton, Button, Modal } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import styles from '@/styles/Modal.module.css'
+import styles from '@/styles/Modal.module.css';
+import shpwrite from 'shp-write';
 
-function handleShpDbf(props) {
-}
+async function handleShpDbf(props) {
+    console.log("getting file");
+    let db;
+    var request = indexedDB.open("map", 1);
+
+    request.onsuccess = (event) => {
+        // store the result of opening the database.
+        db = request.result;
+        const transaction = db.transaction('map', 'readwrite');
+        const fileStore = transaction.objectStore('map');
+
+        var getRequest = fileStore.get(1);
+
+        getRequest.onsuccess = async function(event) {
+            var file = event.target.result;
+            if (file) {
+                var str = await file.text();
+                console.log(str)
+
+                var json = JSON.parse(str);
+
+                console.log(json);
+                const shpBuffer = shpwrite.download(json);
+
+                console.log(shpBuffer);
+
+                // var a = window.document.createElement('a');
+                // a.href = window.URL.createObjectURL(new File([shpBuffer], "export.zip", {type: "application/zip"}));
+                // a.download = "export.zip";
+
+                // // Append anchor to body.
+                // document.body.appendChild(a);
+                // a.click();
+
+                // // Remove anchor from body
+                // document.body.removeChild(a);
+            }
+        }
+    }
+}  
+
 function handleGeoJSON(props) {
     console.log("getting file");
     let db;
@@ -23,7 +63,7 @@ function handleGeoJSON(props) {
                 var json = JSON.parse(await file.text());
                 var a = window.document.createElement('a');
                 a.href = window.URL.createObjectURL(new File([file], "export.json", {type: file.type}));
-                a.download = "export";
+                a.download = "export.json";
 
                 // Append anchor to body.
                 document.body.appendChild(a);
@@ -32,7 +72,7 @@ function handleGeoJSON(props) {
                 // Remove anchor from body
                 document.body.removeChild(a);
             }
-        } 
+        }
     }
 }
 

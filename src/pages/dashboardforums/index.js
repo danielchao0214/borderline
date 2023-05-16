@@ -1,83 +1,91 @@
+import React, { useState, useEffect, useContext } from 'react'
 import styles from '@/pages/dashboardforums/DashboardForums.module.css'
+import ForumPostList from '@/components/ForumPostList';
+import RecentPostList from '@/components/RecentPostList';
 import Button from '@mui/material/Button';
-import AppBanner from '@/components/AppBanner';
+import { AppBannerContext } from '@/components/contexts/AppBannerContext';
 
 export default function DashboardForums() {
+
+  // Data loaded in these useStates is testing data and should be empty at start and use
+  // IE  const [postList, setPost] = useState([]);
+  const [postList, setPost] = useState([{}]);
+  const [recentPostList, setRecentPostList] = useState([{ id: 2, title: "title", user: "user" }]);
+  const {value, setValue} = React.useContext(AppBannerContext)
+  
+  useEffect(() => {
+    // inital fire of getForumPost
+    console.log(value)
+  }, [value]);
+
+  const getLoggedIn = async (event) => {
+    let url = "/api/loggedin";
+    const res = await fetch(url, {
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+      },
+    }).catch((e) => console.log(e));
+
+    const data = await res.json();
+  }
+
+  const getForumPost = async (event) => {
+    const search = {value} // this will be the search in text field
+    event.preventDefault();
+    let url = "/api/getForumPost"
+    const res = await fetch(url, {
+      method: "POST",
+      body: JSON.stringify({
+        search,
+      }),
+      headers: {
+        "content-type": "application/json"
+      },
+    }).catch((e) => console.log(e));
+
+    // wait for the responce from request and get the body
+    const data = await res.json();
+
+    // If status code returns error print the code in the body
+    if (res.status == 401) {
+      console.log(data.errorMessage);
+    }
+
+    //If route is good then log the results
+    if (res.status == 200) {
+      console.log(data.forumPosts)
+      console.log(data.message)
+
+      //Change state !!!!!!!!
+      setPost(data.forumPosts)
+
+    }
+  };
+
   return (
     <>
-      <AppBanner />
-      {/* <main> */}
-      {/* <div className={styles.flexcontainer}> */}
-      <div className={styles.createcontainer}>
-        {
-          <Button className={styles.createbutton} variant="outlined">Create Post</Button>
-        }
-      </div>
-
-      <div className={styles.forumcontainer}>
-        <div className={styles.forumflexcontainer}>
-          <div className={styles.forumdiv}>
-            <h1>Title</h1>
-            <p>Posted by: User</p>
-            <br />
-            <p>Lorem ipsum dolor sit amet, docendi urbanitas te eum, dolore explicari mei eu. Mandamus democritum necessitatibus an nec. In sit alia libris docendi, cu omittam sapientem definitiones his. Neglegentur voluptatibus interpretaris ei has, eos at exerci audiam.
-
-              Mel an viderer eleifend intellegebat. Ne duo nihil dolorum habemus, iuvaret eleifend prodesset sea ad. Eu quodsi graecis efficiendi per, sea at veri accusam. Quo ferri nobis sadipscing ut, vel suas sint ut.</p>
+      <div className={styles.mainContainer}>
+        <div className={styles.createcontainer}>
+          <div className={styles.createButtonContainter}>
+            {
+              <Button className={styles.createbutton} variant="outlined" onClick={getForumPost}>Create Post</Button>
+            }
           </div>
-          <div className={styles.forumdiv}>
-            <h1>Title</h1>
-            <p>Posted by: User</p>
-            <br />
-            <p>Lorem ipsum dolor sit amet, docendi urbanitas te eum, dolore explicari mei eu. Mandamus democritum necessitatibus an nec. In sit alia libris docendi, cu omittam sapientem definitiones his. Neglegentur voluptatibus interpretaris ei has, eos at exerci audiam.
-
-              Mel an viderer eleifend intellegebat. Ne duo nihil dolorum habemus, iuvaret eleifend prodesset sea ad. Eu quodsi graecis efficiendi per, sea at veri accusam. Quo ferri nobis sadipscing ut, vel suas sint ut.</p>
+          <div className={styles.recentforumcontainer}>
+            <h1 className={styles.recentforumtitle} >Recently Viewed</h1>
+            <div className={styles.flexcontainer}>
+              <RecentPostList recentPostList={recentPostList} />
+            </div>
           </div>
-          <div className={styles.forumdiv}>
-            <h1>Title</h1>
-            <p>Posted by: User</p>
-            <br />
-            <p>Lorem ipsum dolor sit amet, docendi urbanitas te eum, dolore explicari mei eu. Mandamus democritum necessitatibus an nec. In sit alia libris docendi, cu omittam sapientem definitiones his. Neglegentur voluptatibus interpretaris ei has, eos at exerci audiam.
+        </div>
 
-              Mel an viderer eleifend intellegebat. Ne duo nihil dolorum habemus, iuvaret eleifend prodesset sea ad. Eu quodsi graecis efficiendi per, sea at veri accusam. Quo ferri nobis sadipscing ut, vel suas sint ut.</p>
-          </div>
-          <div className={styles.forumdiv}>
-            <h1>Title</h1>
-            <p>Posted by: User</p>
-            <br />
-            <p>Lorem ipsum dolor sit amet, docendi urbanitas te eum, dolore explicari mei eu. Mandamus democritum necessitatibus an nec. In sit alia libris docendi, cu omittam sapientem definitiones his. Neglegentur voluptatibus interpretaris ei has, eos at exerci audiam.
-
-              Mel an viderer eleifend intellegebat. Ne duo nihil dolorum habemus, iuvaret eleifend prodesset sea ad. Eu quodsi graecis efficiendi per, sea at veri accusam. Quo ferri nobis sadipscing ut, vel suas sint ut.</p>
+        <div className={styles.forumcontainer}>
+          <div className={'styles.forumflexcontainer'}>
+            <ForumPostList postList={postList} />
           </div>
         </div>
       </div>
-
-      <div className={styles.recentforumcontainer}>
-        <h1 className={styles.recentforumtitle} >Recently Viewed</h1>
-        <div className={styles.flexcontainer}>
-          <div className={styles.recentforumdiv}>
-            <h2>Title</h2>
-            Posted by: User
-          </div>
-          <div className={styles.recentforumdiv}>
-            <h2>Title</h2>
-            Posted by: User
-          </div>
-          <div className={styles.recentforumdiv}>
-            <h2>Title</h2>
-            Posted by: User
-          </div>
-          <div className={styles.recentforumdiv}>
-            <h2>Title</h2>
-            Posted by: User
-          </div>
-          <div className={styles.recentforumdiv}>
-            <h2>Title</h2>
-            Posted by: User
-          </div>
-        </div>
-      </div>
-      {/* </div> */}
-      {/* </main> */}
     </>
   )
 }

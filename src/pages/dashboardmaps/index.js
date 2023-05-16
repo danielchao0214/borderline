@@ -2,31 +2,36 @@ import { useState } from 'react';
 import styles from '@/pages/dashboardmaps/DashboardMaps.module.css'
 import Button from '@mui/material/Button';
 import ImportMapModal from '@/components/ImportMapModal';
-
-import Box from '@mui/system/Box';
-import AccountCircle from '@mui/icons-material/AccountCircle';
-import Typography from '@mui/material/Typography';
+import MapPostList from '@/components/MapPostList';
+import RecentMapList from '@/components/RecentMapList';
+import SearchUserCard from '@/components/SearchUserCard';
 
 
 export default function DashboardMaps() {
   const [openImportMapModal, setOpenImportMapModal] = useState(false);
+  const [mapPostList, setMapPostList] = useState([{ id: 1, piclink: "map.png", title: "TITLE", author: "AUTHOR", likes: 5, dislikes: 4, date: "4/07/2023" }])
+  const [recentMapList, setRecentMapList] = useState([{ id: 1, piclink: "map.png", title: "title", author: "author" }])
+  //Temp value of usercard doesnt matter just if not null then show
+  let usercard = true;
 
   const handleCloseImportMapModal = () => {
     setOpenImportMapModal(false);
   };
 
+  //If Search result has value then set usercard
+  //This if statment is temporary and should get a better implementation
+  if (usercard !== null) {
+    usercard = <SearchUserCard User="Username" link="link" ownedmaps={5} />
+  }
+
+
   return (
     <>
-    {/* <Box className={styles.importbox}>
-      <Button className={styles.importbutton} variant="outlined">Import File</Button>
-    </Box>
-    <AccountCircle></AccountCircle> */}
       <ImportMapModal
         open={openImportMapModal}
         handleClose={handleCloseImportMapModal}
       />
-      <main>
-
+      <div className={styles.mainContainer}>
         <div className={styles.flexcontainer}>
           <div className={styles.importbox}>
             {
@@ -39,106 +44,22 @@ export default function DashboardMaps() {
               </Button>
             }
           </div>
-
-          <div className={styles.profilecontainer}>
-            <div>
-              <img className={styles.profile} src="profile.jpeg" alt="Profile" />
-            </div>
-            <h1>User</h1><br />
-            Owned Maps: 5
-          </div>
-
           <div className={styles.recentmapcontainer}>
             <h2 className={styles.recentmaptitle} >Recently Viewed</h2>
             <div className={styles.flexcontainer}>
-              <div className={styles.recentmapdiv}>
-                <img className={styles.recentmap} src="map.png" alt="Map" />
-                Title
-                Author
-
-              </div>
-              <div className={styles.recentmapdiv}>
-                <img className={styles.recentmap} src="map.png" alt="Map" />
-                Title
-                Author
-              </div>
-              <div className={styles.recentmapdiv}>
-                <img className={styles.recentmap} src="map.png" alt="Map" />
-                Title
-                Author
-              </div>
-              <div className={styles.recentmapdiv}>
-                <img className={styles.recentmap} src="map.png" alt="Map" />
-                Title
-                Author
-              </div>
-              <div className={styles.recentmapdiv}>
-                <img className={styles.recentmap} src="map.png" alt="Map" />
-                Title
-                Author
-              </div>
-            </div>
-          </div>
-
-          <div className={styles.mapcontainer}>
-            <div className={styles.mapsflexcontainer}>
-              <div>
-                <img className={styles.map} src="map.png" alt="Map" />
-                <h3>Title</h3>
-                Author
-                <p>5 Likes ⋅ 5 Dislikes ⋅ 04/10/2023</p>
-              </div>
-              <div>
-                <img className={styles.map} src="map.png" alt="Map" />
-                <h3>Title</h3>
-                Author
-                <p>5 Likes ⋅ 5 Dislikes ⋅ 04/10/2023</p>
-              </div>
-              <div>
-                <img className={styles.map} src="map.png" alt="Map" />
-                <h3>Title</h3>
-                Author
-                <p>5 Likes ⋅ 5 Dislikes ⋅ 04/10/2023</p>
-              </div>
-              <div>
-                <img className={styles.map} src="map.png" alt="Map" />
-                <h3>Title</h3>
-                Author
-                <p>5 Likes ⋅ 5 Dislikes ⋅ 04/10/2023</p>
-              </div>
-              <div>
-                <img className={styles.map} src="map.png" alt="Map" />
-                <h3>Title</h3>
-                Author
-                <p>5 Likes ⋅ 5 Dislikes ⋅ 04/10/2023</p>
-              </div>
-              <div>
-                <img className={styles.map} src="map.png" alt="Map" />
-                <h3>Title</h3>
-                Author
-                <p>5 Likes ⋅ 5 Dislikes ⋅ 04/10/2023</p>
-              </div><div>
-                <img className={styles.map} src="map.png" alt="Map" />
-                <h3>Title</h3>
-                Author
-                <p>5 Likes ⋅ 5 Dislikes ⋅ 04/10/2023</p>
-              </div>
-              <div>
-                <img className={styles.map} src="map.png" alt="Map" />
-                <h3>Title</h3>
-                Author
-                <p>5 Likes ⋅ 5 Dislikes ⋅ 04/10/2023</p>
-              </div>
-              <div>
-                <img className={styles.map} src="map.png" alt="Map" />
-                <h3>Title</h3>
-                Author
-                <p>5 Likes ⋅ 5 Dislikes ⋅ 04/10/2023</p>
-              </div>
+              <RecentMapList recentMapList={recentMapList} />
             </div>
           </div>
         </div>
-      </main>
+        <div>
+          {usercard}
+          <div className={styles.mapcontainer}>
+            <div className={styles.mapsflexcontainer}>
+              <MapPostList mapPostList={mapPostList} />
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   )
 }
