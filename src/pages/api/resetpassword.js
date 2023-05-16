@@ -8,8 +8,6 @@ export default async function handler(req, res) {
 
   if (req.method === "POST") {
     const { token, newPassword } = req.body;
-    console.log("token: " + token);
-    console.log("newPassword: " + newPassword);
     if (!token || !newPassword) {
       console.log("no token or password");
       return res.status(400).json({ message: "Bad request" });
@@ -21,15 +19,16 @@ export default async function handler(req, res) {
 
       // Check if the token exists and is valid
       const user = await db.collection("Users").findOne({ resetToken: token });
-      
-      if (!user || user.resetTokenExpires < Date.now()) {
-        return res.status(400).json({ message: "Invalid or expired token" });
+      console.log(user);
+      if (!user) {
+        return res.status(400).json({ message: "Invalid token" });
       }
-
+      if (user.resetTokenExpires < Date.now()) {
+        return res.status(400).json({ message: "Expired token" });
+      }
       const saltRounds = 10;
       const salt = await bcrypt.genSalt(saltRounds);
       const passwordHash = await bcrypt.hash(newPassword, salt);
-
       // Update the user's password
       await db.collection("Users").updateOne(
         { resetToken: token },
@@ -41,7 +40,7 @@ export default async function handler(req, res) {
           },
         }
       );
-
+      console.log("4");
       return res.status(200).json({ success: true });
     } catch (error) {
       console.error("Error resetting password:", error);

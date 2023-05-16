@@ -35,7 +35,7 @@ export default async function handler(req, res) {
         .collection("Users")
         .updateOne(
           { email },
-          { $set: { resetToken: token, resetTokenExpiration: expirationTime } }
+          { $set: { resetToken: token, resetTokenExpires: expirationTime } }
         );
 
       await transporter.sendMail({
