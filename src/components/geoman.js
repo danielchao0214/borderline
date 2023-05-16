@@ -5,6 +5,84 @@ import "@geoman-io/leaflet-geoman-free/dist/leaflet-geoman.css";
 
 const Geoman = () => {
 
+    let transactions = [];
+    let max_transactions = 15;
+    for (let i = 0; i < max_transactions; i++) {
+        transactions[i] = null;
+    }
+    let index = 0;
+
+    function addTransaction(json, container) {
+        //console.log(transactions);
+        if (index < max_transactions) {
+            transactions[index] = json;
+            index++;
+            for (let i = index; i < max_transactions; i++) {
+                transactions[i] = null;
+            }
+        }else{
+            transactions.shift();
+            transactions.push(json);
+        }
+        let removemode = false;
+        if (container.pm.globalRemovalModeEnabled()) {
+            removemode = true;
+        }
+        container.pm.getGeomanLayers().map((layer, index) => {
+            layer.remove();
+        });
+        L.geoJSON(transactions[index - 1], { pmIgnore: false }).addTo(container);
+                    container.pm
+                    .getGeomanLayers()
+                    .map((layer, index) => layer.on("pm:edit", (e) => {
+                        console.log(container.pm.getGeomanLayers(true).toGeoJSON());
+                        addTransaction(container.pm.getGeomanLayers(true).toGeoJSON(), container);
+                    }));
+        saveToIndexedDB(transactions[index - 1]);
+        if (removemode) {
+            container.pm.enableGlobalRemovalMode();
+        }
+        //console.log(transactions);
+    }
+
+    function undo(container) {
+        //console.log(transactions);
+        if (index > 1) {
+            index--;
+            container.pm.getGeomanLayers().map((layer, index) => {
+                layer.remove();
+            });
+            L.geoJSON(transactions[index - 1], { pmIgnore: false }).addTo(container);
+                    container.pm
+                    .getGeomanLayers()
+                    .map((layer, index) => layer.on("pm:edit", (e) => {
+                        console.log(container.pm.getGeomanLayers(true).toGeoJSON());
+                        addTransaction(container.pm.getGeomanLayers(true).toGeoJSON(), container);
+                    }));
+            saveToIndexedDB(transactions[index - 1]);
+        }
+        //console.log(transactions);
+    }
+
+    function redo(container) {
+        //console.log(transactions);
+        if (index < max_transactions && transactions[index]) {
+            index++;
+            container.pm.getGeomanLayers().map((layer, index) => {
+                layer.remove();
+            });
+            L.geoJSON(transactions[index - 1], { pmIgnore: false }).addTo(container);
+                    container.pm
+                    .getGeomanLayers()
+                    .map((layer, index) => layer.on("pm:edit", (e) => {
+                        console.log(container.pm.getGeomanLayers(true).toGeoJSON());
+                        addTransaction(container.pm.getGeomanLayers(true).toGeoJSON(), container);
+                    }));
+            saveToIndexedDB(transactions[index - 1]);
+        }
+        //console.log(transactions);
+    }
+
     function saveToIndexedDB(json) {
         const jsonString = JSON.stringify(json);
 
@@ -55,12 +133,7 @@ const Geoman = () => {
                     var json = JSON.parse(await file.text());
                     console.log(json);
                     L.geoJSON(json, { pmIgnore: false }).addTo(container);
-                    container.pm
-                    .getGeomanLayers()
-                    .map((layer, index) => layer.on("pm:edit", (e) => {
-                        console.log(container.pm.getGeomanLayers(true).toGeoJSON());
-                        saveToIndexedDB(container.pm.getGeomanLayers(true).toGeoJSON());
-                    }));
+                    addTransaction(container.pm.getGeomanLayers(true).toGeoJSON(), container);
                 }
             };
         };
@@ -84,7 +157,7 @@ const Geoman = () => {
 
         leafletContainer.on("pm:create", (e) => {
             if (e.layer && e.layer.pm) {
-                saveToIndexedDB(leafletContainer.pm.getGeomanLayers(true).toGeoJSON());
+                addTransaction(leafletContainer.pm.getGeomanLayers(true).toGeoJSON(), leafletContainer);
                 const shape = e;
                 console.log(e);
 
@@ -104,14 +177,14 @@ const Geoman = () => {
                 console.log(shape.layer)
                 shape.layer.on("pm:edit", (e) => {
                     const event = e;
-                    saveToIndexedDB(leafletContainer.pm.getGeomanLayers(true).toGeoJSON());
+                    addTransaction(leafletContainer.pm.getGeomanLayers(true).toGeoJSON(), leafletContainer);
                 });
             }
         });
 
         leafletContainer.on("pm:remove", (e) => {
             console.log("object removed");
-            saveToIndexedDB(leafletContainer.pm.getGeomanLayers(true).toGeoJSON());
+            addTransaction(leafletContainer.pm.getGeomanLayers(true).toGeoJSON(), leafletContainer);
         });
 
           
@@ -144,15 +217,64 @@ const Geoman = () => {
                         }
                         newarr.push(temp);
                     }
-
-                    layer.setLatLngs(newarr);
+                    console.log(newarr);
+                    for (let i = 0; i < newarr.length; i++) {
+                        if (newarr[i].length < 2) {
+                            newarr.splice(i, 1);
+                            i--;
+                        }
+                    }
+                    if (newarr.length == 0) {
+                        layer.remove();
+                    }else{
+                        console.log("adding")
+                        console.log(newarr)
+                        layer.setLatLngs(newarr);
+                    }
                 })
-                saveToIndexedDB(leafletContainer.pm.getGeomanLayers(true).toGeoJSON());
+                addTransaction(leafletContainer.pm.getGeomanLayers(true).toGeoJSON(), leafletContainer);
                 ;
                 //console.log(leafletContainer.pm.getGeomanLayers(false))
             },
             toggle: false
         });
+
+        leafletContainer.pm.Toolbar.createCustomControl({
+            name: 'Undo',
+            block: 'custom',
+            title: 'Undo',
+            onClick: () => {
+                undo(leafletContainer)
+            },
+            toggle: false
+        });
+
+        leafletContainer.pm.Toolbar.createCustomControl({
+            name: 'Redo',
+            block: 'custom',
+            title: 'Redo',
+            onClick: () => {
+                redo(leafletContainer)
+            },
+            toggle: false
+        });
+
+        // leafletContainer.pm.Toolbar.createCustomControl({
+        //     name: 'Split',
+        //     block: 'custom',
+        //     title: 'Split',
+        //     onClick: () => {
+                
+        //     },
+        //     toggle: true
+        // });
+
+        // copy a rectangle and customize its name, block, title and actions
+        // leafletContainer.pm.Toolbar.copyDrawControl('Split', {
+        //     name: 'Split',
+        //     block: 'custom',
+        //     title: 'Display text on hover button'
+        // });
 
         return () => {
             leafletContainer.pm.removeControls();
