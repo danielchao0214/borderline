@@ -72,7 +72,9 @@ export default function Home() {
       setChangeDesc(
         <Button onClick={handleChangeDesc}>Change Description</Button>
       );
+      storeMap();
     }
+    storeMap();
   }, [post]);
   
   const MapComponent = React.useMemo(() => dynamic(
@@ -105,6 +107,7 @@ export default function Home() {
     //If route is good then log the results
     if (res.status == 200) {
       setPost(data.mapPost);
+
 
       if (data.mapPost[0].comments !== "None") {
         setCommentList(data.mapPost[0].comments.reverse());
@@ -149,11 +152,11 @@ export default function Home() {
     }
   };
 
-  const editMap = () => {
-    console.log(post[0].map);
+  const storeMap = () => {
+    console.log(post[0].map)
     const jsonString = JSON.stringify(post[0].map);
-    // Create a Blob from the JSON string
-    const blob = new Blob([jsonString], { type: "application/json" });
+    // Create a Blob from the JSON string    
+    const blob = new Blob([jsonString], { type: 'application/json' });
     // Create a File from the Blob
     const file = new File([blob], "data.json");
     let db;
@@ -167,18 +170,14 @@ export default function Home() {
     request.onsuccess = (event) => {
       // store the result of opening the database.
       db = request.result;
-      const transaction = db.transaction("map", "readwrite");
-      const fileStore = transaction.objectStore("map");
-      const addRequest = fileStore.put(
-        new Blob([file], { type: file.type }),
-        1
-      );
-      addRequest.onsuccess = (event) => {
-        console.log("File added to object store success");
-        window.location.href = "/mapedit";
+      const transaction = db.transaction('map', 'readwrite');
+      const fileStore = transaction.objectStore('map');
+      const addRequest = fileStore.put(new Blob([file], { type: file.type }), 1);
+      addRequest.onsuccess = event => {
+        console.log('File added to object store success');
       };
-    };
-  };
+    }
+  }
 
   const LikePost = async () => {
     //Temporary author variable
