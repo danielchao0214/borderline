@@ -327,9 +327,13 @@ export default function Home() {
             <div name="left buttons" className={styles.left_buttons}>
               <div name="spacer" className={styles.button_spacer}></div>
               <div name="option buttons" className={styles.option_buttons}>
-                <Button className={styles.option_button} onClick={editMap} disabled={!user || user?.username!==post[0].author}>
+              <Link href={{
+                  pathname: '/mapedit',
+                  query: {_id: post[0]._id,
+                          title: post[0].title}
+                }}>
                   Edit Map
-                </Button>
+                </Link>
                 <Link href="mapedit">
                   <button className={styles.option_button}>Fork Map</button>
                 </Link>

@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useRouter } from "next/router";
 import { Inter } from "next/font/google";
 import { TextField, Button } from "@mui/material";
 import styles from "@/pages/resetpasswordemail/ResetPasswordEmail.module.css";
 import { sendResetEmail } from "../../../lib/api";
+import AuthContext from "@/components/contexts/AuthContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -11,6 +12,8 @@ export default function ResetPasswordEmail() {
   const [email, setEmail] = useState("");
   const router = useRouter();
   const [submitEnabled, setSubmitEnabled] = useState(false);
+  const { isLoggedIn } = useContext(AuthContext);
+
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -28,7 +31,6 @@ export default function ResetPasswordEmail() {
     setSubmitEnabled(true);
     await sendResetEmail(email);
   };
-
   return (
     <main className={styles.main}>
       <div className={styles.squircle}>
