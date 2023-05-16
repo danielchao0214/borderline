@@ -66,6 +66,7 @@ export default function Home() {
 
       //Change state !!!!!!!!
       //console.log(data.forumPost)
+
       setPost(data.mapPost)
       
       console.log(data.mapPost[0].comments);
@@ -114,6 +115,40 @@ export default function Home() {
     };
   }
 
+  const editMap = () => {
+    console.log(post[0].map)
+
+    const jsonString = JSON.stringify(post[0].map);
+
+    // Create a Blob from the JSON string    
+    const blob = new Blob([jsonString], { type: 'application/json' });
+
+    // Create a File from the Blob
+    const file = new File([blob], "data.json");
+
+    let db;
+    var request = indexedDB.open("map", 1);
+    var request_name;
+
+    request.onupgradeneeded = (event) => {
+    // store the result of opening the database.
+        db = request.result;
+        db.createObjectStore("map");
+    };
+
+    request.onsuccess = (event) => {
+    // store the result of opening the database.
+        db = request.result;
+        const transaction = db.transaction('map', 'readwrite');
+        const fileStore = transaction.objectStore('map');
+        const addRequest = fileStore.put(new Blob([file], { type: file.type }), 1);
+        addRequest.onsuccess = event => {
+            console.log('File added to object store success');
+            window.location.href = "/mapedit";
+        };
+    }
+  }
+
   return (
     <>
       <main className={styles.main}>
@@ -123,16 +158,16 @@ export default function Home() {
               <div name="spacer" className={styles.button_spacer}>
               </div>
               <div name="option buttons" className={styles.option_buttons}>
-                <Link href="mapedit">
+                <Button onClick={editMap}>
                   <button className={styles.option_button}>
                     Edit Map
                   </button>
-                </Link>
-                <Link href="mapedit">
+                </Button>
+                <Button href="mapedit">
                   <button className={styles.option_button}>
                     Fork Map
                   </button>
-                </Link>
+                </Button>
                 <Link href="mapgraphicedit">
                   <button className={styles.option_button}>
                     Edit Graphic

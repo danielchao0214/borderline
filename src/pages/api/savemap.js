@@ -1,4 +1,4 @@
-import runCors from './middleware';
+import runCors from './cors';
 import clientPromise from '../../../lib/mongo';
 
 // Initializing the cors middleware
