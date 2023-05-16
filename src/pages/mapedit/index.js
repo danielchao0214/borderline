@@ -78,6 +78,8 @@ export default function MapEdit() {
     const handleSave = async (event) => {
         event.preventDefault();
 
+        console.log(_id)
+
         let db;
         var request = indexedDB.open("map", 1);
 
@@ -132,7 +134,7 @@ export default function MapEdit() {
                     if (file) {
                         var json = JSON.parse(await file.text());
 
-                        console.log("saving")
+                        console.log("creating")
                         let url = "/api/createmap";
                         let title = "Untitled";
                         let author = user.username;
