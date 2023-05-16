@@ -327,7 +327,7 @@ export default function Home() {
             <div name="left buttons" className={styles.left_buttons}>
               <div name="spacer" className={styles.button_spacer}></div>
               <div name="option buttons" className={styles.option_buttons}>
-                <Button className={styles.option_button} onClick={editMap}>
+                <Button className={styles.option_button} onClick={editMap} disabled={!user || user?.username!==post[0].author}>
                   Edit Map
                 </Button>
                 <Link href="mapedit">
@@ -336,7 +336,7 @@ export default function Home() {
                 <Link href="mapgraphicedit">
                   <button className={styles.option_button}>Edit Graphic</button>
                 </Link>
-                <button className={styles.option_button}>Publish Map</button>
+                <button className={styles.option_button} disabled={!user || user?.username!==post[0].author}>Publish Map</button>
               </div>
               <div
                 name="like/dislike buttons"
@@ -345,12 +345,14 @@ export default function Home() {
                 <Button
                   className={styles.like_dislike_button}
                   onClick={LikePost}
+                  disabled = {!user}
                 >
                   Like
                 </Button>
                 <Button
                   onClick={DislikePost}
                   className={styles.like_dislike_button}
+                  disabled={!user}
                 >
                   Dislike
                 </Button>
@@ -424,7 +426,7 @@ export default function Home() {
                 >
                   <CommentList commentList={commentList} />
                 </div>
-                <div
+                {isLoggedIn&&<div
                   name="create comment"
                   className={styles.create_comment_container}
                 >
@@ -441,7 +443,7 @@ export default function Home() {
                     }}
                   ></TextField>
                   <Button onClick={submitComment}>Comment</Button>
-                </div>
+                </div>}
               </div>
 
               <div

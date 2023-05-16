@@ -30,7 +30,7 @@ export default function AppBanner() {
   const [tagFilter, settagFilter] = React.useState("");
   const { value, setValue } = React.useContext(AppBannerContext);
 
-  const { isLoggedIn, signOut } = useContext(AuthContext);
+  const { isLoggedIn, setIsLoggedIn, signOut } = useContext(AuthContext);
 
 
   const handleClick1 = (event) => {
@@ -62,6 +62,7 @@ export default function AppBanner() {
   };
 
   function handleSignOut() {
+    setIsLoggedIn(false);
     signOut(); // Call the signOut function from the AuthContext
     router.push("/login");
   }
