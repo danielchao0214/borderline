@@ -13,35 +13,48 @@ export default async function handler(req, res) {
     // Rest of the API logic
     const client = await clientPromise;
     const db = client.db("Maps");
-    const { search, sortby } = req.body;
+    const { search, sortby, tagFilter } = req.body;
     console.log(req.body);
     switch (req.method) {
 
         case "POST":
 
-            if (search == undefined || sortby == undefined) {
-                console.log("ERROR: Search or sortby is undefined")
+            if (search == undefined || sortby == undefined || tagFilter == undefined) {
+                console.log("ERROR: Search or sortby or tagFilter is undefined")
                 return res
                     .status(401)
                     .json({
-                        errorMessage: "ERROR: Search or sortby is undefined"
+                        errorMessage: "ERROR: Search or sortby ot TagFilter is undefined"
                     })
             }
 
             const returnUser = await client.db("Users").collection("Users").find({ username: search }).limit(1);
+
             let mapPost;
             if (sortby === 1 || sortby === -1) {
-                mapPost = await db.collection("Maps").find({ title: { '$regex': search, '$options': 'i' }, published: true }).limit(12).sort({ title: sortby });   
+                if (tagFilter === "") {
+                    mapPost = await db.collection("Maps").find({ title: { '$regex': search, '$options': 'i' }, published: true }).limit(12).sort({ title: sortby });
+                }
+                else {
+                    mapPost = await db.collection("Maps").find({ title: { '$regex': search, '$options': 'i' }, published: true, tags: tagFilter }).limit(12).sort({ title: sortby });
+                }
             }
-
-            else if(sortby === 2){
-                mapPost = await db.collection("Maps").find({ title: { '$regex': search, '$options': 'i' }, published: true }).limit(12).sort({ likes: -1 });
+            else if (sortby === 2) {
+                if (tagFilter === "") {
+                    mapPost = await db.collection("Maps").find({ title: { '$regex': search, '$options': 'i' }, published: true }).limit(12).sort({ likes: -1 });
+                }
+                else {
+                    mapPost = await db.collection("Maps").find({ title: { '$regex': search, '$options': 'i' }, published: true, tags: tagFilter }).limit(12).sort({ likes: -1 });
+                }
             }
-
-            else if(sortby === 3){
-                mapPost = await db.collection("Maps").find({ title: { '$regex': search, '$options': 'i' }, published: true }).limit(12).sort({ publish_date: 1 });
+            else if (sortby === 3) {
+                if (tagFilter === "") {
+                    mapPost = await db.collection("Maps").find({ title: { '$regex': search, '$options': 'i' }, published: true }).limit(12).sort({ publish_date: 1 });
+                }
+                else {
+                    mapPost = await db.collection("Maps").find({ title: { '$regex': search, '$options': 'i' }, published: true, tags: tagFilter }).limit(12).sort({ publish_date: 1 });
+                }
             }
-
             let returnArray = []
             let retrunArrayUser = []
 
