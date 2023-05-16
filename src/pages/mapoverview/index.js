@@ -38,8 +38,7 @@ export default function Home() {
 
   useEffect(() => {
     // inital fire of getForumPost
-    getMapPost();
-    
+    getMapPost()
   }, []);
 
   useEffect(() => {
@@ -49,12 +48,12 @@ export default function Home() {
   }, [isLoggedIn]);
 
   useEffect(() => {
-    console.log(user)
-    if (user && user.username === post[0].author) {
+    console.log(user.username === post[0].author)
+    if (user.username === post[0].author) {
       setChangeName(<Button onClick={handleChangeTitle}>Change Name</Button>);
       setChangeDesc(<Button onClick={handleChangeDesc}>Change Description</Button>)
     }
-    storeMap();
+
   }, [post]);
 
   async function getMapPost() {
@@ -88,7 +87,6 @@ export default function Home() {
       else {
         setCommentList([{}]);
       }
-
     };
   }
 
@@ -128,7 +126,7 @@ export default function Home() {
     };
   }
 
-  const storeMap = () => {
+  const editMap = () => {
     console.log(post[0].map)
     const jsonString = JSON.stringify(post[0].map);
     // Create a Blob from the JSON string    
@@ -151,6 +149,7 @@ export default function Home() {
       const addRequest = fileStore.put(new Blob([file], { type: file.type }), 1);
       addRequest.onsuccess = event => {
         console.log('File added to object store success');
+        window.location.href = "/mapedit";
       };
     }
   }
@@ -309,13 +308,9 @@ export default function Home() {
               <div name="spacer" className={styles.button_spacer}>
               </div>
               <div name="option buttons" className={styles.option_buttons}>
-                <Link href={{
-                  pathname: '/mapedit',
-                  query: {_id: post[0]._id,
-                          title: post[0].title}
-                }}>
+                <Button className={styles.option_button} onClick={editMap}>
                   Edit Map
-                </Link>
+                </Button>
                 <Link href="mapedit">
                   <button className={styles.option_button}>
                     Fork Map
