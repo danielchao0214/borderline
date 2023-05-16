@@ -7,38 +7,34 @@ import Geoman from "./geoman";
 
 const Map = () => {
 
-  dynamic(() => import('@geoman-io/leaflet-geoman-free'), {
-    ssr: false
-  });
-
   const [mapLoad, setMapLoad] = React.useState(null);
 
-  function getFile() {
-    console.log("getting file");
-    let db;
-    var request = indexedDB.open("map", 1);
+  // function getFile() {
+  //   console.log("getting file");
+  //   let db;
+  //   var request = indexedDB.open("map", 1);
 
-    request.onsuccess = (event) => {
-      // store the result of opening the database.
-      db = request.result;
-      const transaction = db.transaction('map', 'readwrite');
-      const fileStore = transaction.objectStore('map');
+  //   request.onsuccess = (event) => {
+  //     // store the result of opening the database.
+  //     db = request.result;
+  //     const transaction = db.transaction('map', 'readwrite');
+  //     const fileStore = transaction.objectStore('map');
 
-      var getRequest = fileStore.get(1);
+  //     var getRequest = fileStore.get(1);
 
-      getRequest.onsuccess = async function(event) {
-        var file = event.target.result;
-        if (file) {
-          var json = JSON.parse(await file.text());
-          console.log(json);
-          setMapLoad(<GeoJSON data={json} />);
-        }
-      };
-    };
-  }
+  //     getRequest.onsuccess = async function(event) {
+  //       var file = event.target.result;
+  //       if (file) {
+  //         var json = JSON.parse(await file.text());
+  //         console.log(json);
+  //         setMapLoad(<GeoJSON data={json} />);
+  //       }
+  //     };
+  //   };
+  // }
 
   React.useEffect(() => {
-    getFile();
+    //getFile();
     
   }, []);
 
