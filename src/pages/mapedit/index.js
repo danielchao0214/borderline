@@ -1,7 +1,9 @@
 import Head from 'next/head';
 import { Inter } from 'next/font/google';
 import dynamic from 'next/dynamic';
-import { useState, useMemo } from 'react';
+import Link from 'next/link';
+import { useRouter } from "next/router";
+import { useState, useMemo, useEffect, useContext } from 'react';
 import ExportMapModal from '@/components/ExportMapModal';
 import PublishMapModal from '@/components/PublishMapModal';
 import TagMapModal from '@/components/TagMapModal';
@@ -22,7 +24,10 @@ import RedoIcon from '@mui/icons-material/Redo';
 import SaveIcon from '@mui/icons-material/Save';
 import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import AuthContext from '@/components/contexts/AuthContext';
 
+
+const inter = Inter({ subsets: ['latin'] })
 
 export default function MapEdit() {
 
