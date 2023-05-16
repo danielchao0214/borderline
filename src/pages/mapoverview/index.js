@@ -5,7 +5,7 @@ import Link from 'next/link';
 import CommentList from '@/components/CommentList';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-
+import AuthContext from '@/components/contexts/AuthContext';
 
 
 export default function Home() {
@@ -14,6 +14,7 @@ export default function Home() {
   const query = router.query;
   const _id = query._id;
 
+  const { isLoggedIn, user } = useContext(AuthContext);
   const [post, setPost] = useState([{ title: "Temp", author: "Temp", tags: "Temp", file_size: 0, likes: 0, dislikes: 0, publish_date: "Temp", description: "Temp", map: {}, tags: "Temp", comments: [{}], graphics: [{}], thumbnail: undefined }]);
   const [commentList, setCommentList] = useState([{ author: "Temp", body: "Temp", _id: "tempid" }]);
   const [commentTextField, setcommentTextField] = useState("");
@@ -37,7 +38,11 @@ export default function Home() {
     getMapPost()
   }, []);
 
-
+  useEffect(() => {
+    // inital fire of getForumPost
+    //console.log(user.username);
+    
+  }, [isLoggedIn]);
 
   async function getMapPost() {
 
@@ -61,14 +66,9 @@ export default function Home() {
     }
     //If route is good then log the results
     if (res.status == 200) {
-      //console.log(data.forumPosts)
-      //console.log(data.message)
-
-      //Change state !!!!!!!!
-      //console.log(data.forumPost)
+     
       setPost(data.mapPost)
       
-      console.log(data.mapPost[0].comments);
       if (data.mapPost[0].comments !== "None") {
         setCommentList(data.mapPost[0].comments.reverse());
       }
@@ -80,7 +80,7 @@ export default function Home() {
 
   const submitComment = async () => {
     //Temporary author variable
-    let author = "Test Author Scooter"
+    let author = user.username
 
     let id = post[0]._id
 
