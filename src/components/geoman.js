@@ -114,6 +114,46 @@ const Geoman = () => {
             saveToIndexedDB(leafletContainer.pm.getGeomanLayers(true).toGeoJSON());
         });
 
+          
+
+        leafletContainer.pm.Toolbar.createCustomControl({
+            name: 'Compress',
+            block: 'custom',
+            title: 'Compress',
+            onClick: () => {
+                console.log("compress");
+                // let arr = leafletContainer.pm.getGeomanLayers()
+                // for(let i = 0; i < arr.length; i++) {
+                //     console.log(arr[i]['feature']['geometry']['coordinates'])
+                // }
+                leafletContainer.pm.getGeomanLayers().map((layer, index) => {
+                    let coords = layer.getLatLngs();
+                    console.log(coords)
+
+                    let newarr = [];
+                    for (let i = 0; i < coords.length; i++) {
+                        let arr = coords[i];
+                        if (coords[i].length == 1 && coords[i][0].length) {
+                            arr = coords[i][0];
+                        }
+                        let temp = [];
+                        for (let j = 0; j < arr.length; j++) {
+                            if (j % 2 == 1) {
+                                temp.push(arr[j]);
+                            }
+                        }
+                        newarr.push(temp);
+                    }
+
+                    layer.setLatLngs(newarr);
+                })
+                saveToIndexedDB(leafletContainer.pm.getGeomanLayers(true).toGeoJSON());
+                ;
+                //console.log(leafletContainer.pm.getGeomanLayers(false))
+            },
+            toggle: false
+        });
+
         return () => {
             leafletContainer.pm.removeControls();
             leafletContainer.pm.setGlobalOptions({ pmIgnore: true });
