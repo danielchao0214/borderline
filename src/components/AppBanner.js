@@ -220,7 +220,7 @@ export default function AppBanner() {
                         />
                         Most Liked
                       </li>
-                      <li target="Catagories" className="li">
+                      {/* <li target="Catagories" className="li">
                         <Radio
                           checked={sortby === 3}
                           onChange={() => {
@@ -230,7 +230,7 @@ export default function AppBanner() {
                           name="radio-button-publishDate"
                         />
                         Publish Date
-                      </li>
+                      </li> */}
                     </ul>
                   </Typography>
                 </Popover>
