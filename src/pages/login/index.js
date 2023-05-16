@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { useRouter } from 'next/router'
-import { Inter } from 'next/font/google'
-import { TextField, Button } from '@mui/material';
-import styles from '@/pages/login/Login.module.css'
+import { useRouter } from "next/router";
+import { Inter } from "next/font/google";
+import { TextField, Button } from "@mui/material";
+import styles from "@/pages/login/Login.module.css";
 import Link from "next/link";
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -14,36 +14,32 @@ export default function Login() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    let url = "/api/authLogin"
-    const res = await fetch( url, {
+    let url = "/api/authLogin";
+    const res = await fetch(url, {
       method: "Post",
       body: JSON.stringify({
         email,
-        password
+        password,
       }),
       headers: {
-        "content-type": "application/json"
+        "content-type": "application/json",
       },
     }).catch((e) => console.log(e));
-    
-    // wait for the responce from request and get the body
-    const data = await res.json(); 
+
+    // wait for the response from request and get the body
+    const data = await res.json();
 
     // If status code returns error print the code in the body
-    if(res.status == 401){ 
+    if (res.status == 401) {
       console.log(data.errorMessage);
     }
 
     //If route is good then log the results and rout the use to login Screen
-    if(res.status == 200){
-      const{firstName, lastName, username} = data.user;
-      console.log(data.message);
-      console.log(firstName);
-      console.log(lastName);
-      console.log(username);
+    if (res.status == 200) {
+      const { firstName, lastName, username } = data.user;
+      document.cookie = `token=${res.token}; path=/;`;
       router.push("/dashboardmaps");
     }
-    
   };
   return (
     <>
@@ -75,9 +71,15 @@ export default function Login() {
               margin="normal"
               variant="outlined"
             />
-            <Link href="/resetpasswordemail" id={styles.forgotpassword}>Forgot password?</Link>
+            <Link href="/resetpasswordemail" id={styles.forgotpassword}>
+              Forgot password?
+            </Link>
             <div style={{ display: "flex", justifyContent: "center" }}>
-              <Button className={styles.submitbutton} type="submit" variant="contained">
+              <Button
+                className={styles.submitbutton}
+                type="submit"
+                variant="contained"
+              >
                 Log in
               </Button>
             </div>
@@ -85,5 +87,5 @@ export default function Login() {
         </div>
       </main>
     </>
-  )
+  );
 }

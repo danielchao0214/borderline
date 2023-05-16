@@ -1,4 +1,4 @@
-import runCors from './cors';
+import runCors from './middleware';
 import { promisify } from "util";
 import { randomBytes } from "crypto";
 import clientPromise from '../../../lib/mongo';
