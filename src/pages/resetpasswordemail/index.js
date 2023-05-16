@@ -12,6 +12,11 @@ export default function ResetPasswordEmail() {
   const router = useRouter();
   const [submitEnabled, setSubmitEnabled] = useState(false);
 
+  useEffect(() => {
+    if (isLoggedIn) {
+      router.push("/dashboardmaps");
+    }
+  }, [isLoggedIn]);
   const handleSubmit = async (event) => {
     event.preventDefault();
 
