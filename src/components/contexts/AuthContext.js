@@ -3,13 +3,14 @@ import { createContext, useState, useEffect } from "react";
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
+  const [isLoading, setIsLoading] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userId, setUserId] = useState(null);
   const [user, setUser] = useState(null);
 
   useEffect(() => {
     checkUserLoggedIn();
-  }, []);
+  }, []); // Run only once on component mount
 
   async function checkUserLoggedIn() {
     try {
@@ -29,6 +30,8 @@ export function AuthProvider({ children }) {
       setIsLoggedIn(false);
       setUserId(null);
       setUser(null); // Reset user data on error
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -39,17 +42,35 @@ export function AuthProvider({ children }) {
       if (response.ok) {
         setUser(data.user);
       } else {
-        console.error('Error fetching user:', data.message);
+        console.error("Error fetching user:", data.message);
         setUser(null); // Reset user data on error
       }
     } catch (error) {
-      console.error('Error fetching user:', error);
+      console.error("Error fetching user:", error);
       setUser(null); // Reset user data on error
     }
   }
 
+  async function signOut() {
+    try {
+      await fetch("/api/signOut");
+      setIsLoggedIn(false);
+      setUserId(null);
+      setUser(null);
+    } catch (error) {
+      console.error("Error signing out:", error);
+    }
+  }
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
+  // Render the children when the authentication status is determined
   return (
-    <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn, userId, user }}>
+    <AuthContext.Provider
+      value={{ isLoggedIn, setIsLoggedIn, userId, user, signOut }}
+    >
       {children}
     </AuthContext.Provider>
   );

@@ -1,12 +1,10 @@
-import { runCors } from "./middleware";
+import { runCors } from "./cors";
 import clientPromise from "../../../lib/mongo";
 import bcrypt from "bcryptjs";
 import { SignJWT } from "jose";
 import { serialize } from "cookie";
 
 const handler = async (req, res) => {
-  await runCors(req, res);
-
   const { method, body } = req;
   console.log("Method", method);
 

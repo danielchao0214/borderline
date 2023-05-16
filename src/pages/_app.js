@@ -1,6 +1,6 @@
-import AppBanner from "@/components/AppBanner.js";
-import { AppBannerContext } from "@/components/contexts/AppBannerContext";
-import { AuthProvider } from "@/components/contexts/AuthContext";
+import AppBanner from "../components/AppBanner";
+import { AppBannerContext } from "../components/contexts/AppBannerContext";
+import { AuthProvider } from "../components/contexts/AuthContext";
 import "@/styles/globals.css";
 import { useState } from "react";
 

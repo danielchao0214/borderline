@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react'
 import styles from '@/pages/userprofile/userprofile.module.css'
+<<<<<<< Updated upstream
 import AuthContext from '@/components/contexts/AuthContext';
 import ForumPostList from '@/components/ForumPostList';
 import MapPostList from '@/components/MapPostList';
@@ -85,6 +86,17 @@ export default function App() {
     };
   }
 
+=======
+import Button from '@mui/material/Button';
+import { useContext, useEffect } from 'react';
+import AuthContext from '@/components/contexts/AuthContext';
+
+export default function App() {
+  const { isLoggedIn, user } = useContext(AuthContext);
+  useEffect(() => {
+    console.log(isLoggedIn);
+  }, []);  
+>>>>>>> Stashed changes
   return (
     <>
       <main>
