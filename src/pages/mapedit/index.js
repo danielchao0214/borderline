@@ -23,7 +23,6 @@ import SaveIcon from '@mui/icons-material/Save';
 import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
-const inter = Inter({ subsets: ['latin'] })
 
 export default function MapEdit() {
 
@@ -99,6 +98,7 @@ export default function MapEdit() {
           let description = "None";
           let map = json;
           let comments = [];
+          let likedDislikedmaps = []
           let graphics = "None";
           let thumbnail = null;
           const res = await fetch(url, {
@@ -115,6 +115,7 @@ export default function MapEdit() {
               description,
               map,
               comments,
+              likedDislikedmaps,
               graphics,
               thumbnail
             }),

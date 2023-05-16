@@ -6,6 +6,7 @@ import Button from '@mui/material/Button';
 import RecentPostList from '@/components/RecentPostList';
 import TextField from '@mui/material/TextField';
 import CommentList from '@/components/CommentList';
+import AuthContext from '@/components/contexts/AuthContext';
 
 
 export default function Home() {
@@ -13,6 +14,7 @@ export default function Home() {
   const query = router.query;
   const _id = query._id;
 
+  const { isLoggedIn, user } = useContext(AuthContext);
   const [post, setPost] = useState([{ title: "Temp", postby: "Temp", postmessage: "Temp" }]);
   const [openCreatePostModal, setOpenCreatePostModal] = useState(false);
   const [recentPostList, setRecentPostList] = useState([{ id: 2, title: "title", user: "user" }]);
@@ -27,6 +29,11 @@ export default function Home() {
     // inital fire of getForumPost
     getForumPost()
   }, []);
+
+  useEffect(() => {
+    // inital fire of getForumPost
+    console.log(user.username);
+  }, [isLoggedIn]);
 
   async function getForumPost() {
 
@@ -68,7 +75,7 @@ export default function Home() {
 
   const submitComment = async () => {
     //Temporary author variable
-    let author = "Test Author Scooter"
+    let author = user.username;
 
     let id = post[0]._id
 

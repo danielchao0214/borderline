@@ -13,14 +13,14 @@ export default async function handler(req, res) {
     // Rest of the API logic
     const client = await clientPromise;
     const db = client.db("Maps");
-    const { search, sortby } = req.body;
+    const { username, published } = req.body;
     console.log(req.body);
     switch (req.method) {
 
         case "POST":
 
-            if (search == undefined || sortby == undefined) {
-                console.log("ERROR: Search or sortby is undefined")
+            if (username == undefined || published == undefined) {
+                console.log("ERROR: username is undefined")
                 return res
                     .status(401)
                     .json({
@@ -28,44 +28,34 @@ export default async function handler(req, res) {
                     })
             }
 
-            const returnUser = await client.db("Users").collection("Users").find({ username: search }).limit(1);
             let mapPost;
-            if (sortby === 1 || sortby === -1) {
-                mapPost = await db.collection("Maps").find({ title: { '$regex': search, '$options': 'i' }, published: true }).limit(12).sort({ title: sortby });   
-            }
+            
+            if(published == true){
+                mapPost = await db.collection("Maps").find({ author: username, published: published });
 
-            else if(sortby === 2){
-                mapPost = await db.collection("Maps").find({ title: { '$regex': search, '$options': 'i' }, published: true }).limit(12).sort({ likes: -1 });
             }
-
-            else if(sortby === 3){
-                mapPost = await db.collection("Maps").find({ title: { '$regex': search, '$options': 'i' }, published: true }).limit(12).sort({ publish_date: 1 });
+            else if(published == false){
+                mapPost = await db.collection("Maps").find({ author: username});
             }
-
+           
             let returnArray = []
-            let retrunArrayUser = []
 
             if (!mapPost) {
-                console.log("ERROR: Search For Forum has failed")
+                console.log("ERROR: Search For user has failed in the DB")
                 return res
                     .status(401)
                     .json({
-                        errorMessage: "ERROR: Search For Forum has failed"
+                        errorMessage: "ERROR: Search For user has failed in the DB"
                     })
             }
 
             await mapPost.forEach(element => returnArray.push(element));
-
-            if (returnUser !== null) await returnUser.forEach(element => retrunArrayUser.push(element));
-
-            //console.log(retrunArrayUser);
 
             return res
                 .status(200)
                 .json({
                     message: "SUCCESS: Search request was successfull",
                     mapPosts: returnArray,
-                    user: retrunArrayUser
                 })
 
             break;
