@@ -19,6 +19,9 @@ export default function Home() {
   const [commentList, setCommentList] = useState([{ author: "Temp", body: "Temp", _id: "tempid" }]);
   const [commentTextField, setcommentTextField] = useState("");
 
+  const [ChangeName, setChangeName] = useState("");
+  const [ChangeDesc, setChangeDesc] = useState("");
+
   const showGraphics = () => {
     document.getElementById("comments").style.display = "none";
     document.getElementById("comments_button").style.backgroundColor = "rgb(104,104,104)";
@@ -43,6 +46,15 @@ export default function Home() {
     //console.log(user.username);
 
   }, [isLoggedIn]);
+
+  useEffect(() => {
+    console.log(user.username === post[0].author)
+    if (user.username === post[0].author) {
+      setChangeName(<Button onClick={handleChangeTitle}>Change Name</Button>);
+      setChangeDesc(<Button onClick={handleChangeDesc}>Change Description</Button>)
+    }
+
+  }, [post]);
 
   async function getMapPost() {
 
@@ -207,6 +219,86 @@ export default function Home() {
     };
 
   }
+
+
+  // onClick converstion to textfield TITLE
+  const handleChangeTitle = async () => {
+
+    setChangeName(<TextField
+      margin="normal"
+      required
+      width='100%'
+      onKeyPress={handleKeyPress}
+      onChange={handleUpdateTitle}
+      defaultValue={post[0].title}
+      autoFocus
+    />)
+
+  }
+
+  // onClick converstion to textfield DESCRIPTION
+  const handleChangeDesc = async () => {
+    setChangeDesc(<TextField
+      margin="normal"
+      required
+      width='100%'
+      onKeyPress={handleKeyPress}
+      onChange={handleUpdateDesc}
+      defaultValue={post[0].description}
+      autoFocus
+    />)
+  }
+
+  // handle key press for both Title and Desc
+  function handleKeyPress(event) {
+    if (event.code === "Enter") {
+      updatePost()
+    }
+  }
+
+  // updates the currrent state Title
+  function handleUpdateTitle(event) {
+    post[0].title = event.target.value;
+
+  }
+
+  //updates the current state description
+  function handleUpdateDesc(event) {
+    post[0].description = event.target.value;
+
+  }
+
+  // This can be called for both update Title and update Description
+  const updatePost = async () => {
+
+    let updatepost = post[0]
+
+    let url = "/api/updateMapPost"
+    const res = await fetch(url, {
+      method: "POST",
+      body: JSON.stringify({
+        updatepost
+      }),
+      headers: {
+        "content-type": "application/json"
+      },
+    }).catch((e) => console.log(e));
+
+    // wait for the responce from request and get the body
+    const data = await res.json();
+
+    // If status code returns error print the code in the body
+    if (res.status == 400) {
+      console.log(data.errorMessage);
+    }
+    //If route is good then log the results
+    if (res.status == 200) {
+      getMapPost()
+    };
+
+  }
+
+
   return (
     <>
       <main className={styles.main}>
@@ -244,13 +336,12 @@ export default function Home() {
             </div>
             <div name="middlesection" className={styles.middle_container}>
               <div name="title" className={styles.title}>
-                <div>
+                <div style={{ width: "100%" }}>
                   <span>
                     {post[0].title}
                   </span>
-                  {/* <span className="material-symbols-outlined">
-                    edit THIS IS TO EDIT MAP NAME WHICH IS LIMITED TO VIEWING OWN MAPS
-                  </span> */}
+                  {/*This is where the change title button is */}
+                  {ChangeName}
                 </div>
                 <span style={{ fontSize: "20px" }}>
                   By:
@@ -272,6 +363,8 @@ export default function Home() {
                   </span>
                 </div>
                 <br />
+                {/*This is where the change title button is */}
+                {ChangeDesc}
                 <div>
                   <span>
                     {post[0].description}
