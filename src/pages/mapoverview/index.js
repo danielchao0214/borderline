@@ -41,7 +41,7 @@ export default function Home() {
   useEffect(() => {
     // inital fire of getForumPost
     //console.log(user.username);
-    
+
   }, [isLoggedIn]);
 
   async function getMapPost() {
@@ -66,9 +66,9 @@ export default function Home() {
     }
     //If route is good then log the results
     if (res.status == 200) {
-     
+
       setPost(data.mapPost)
-      
+
       if (data.mapPost[0].comments !== "None") {
         setCommentList(data.mapPost[0].comments.reverse());
       }
@@ -114,6 +114,99 @@ export default function Home() {
     };
   }
 
+  const editMap = () => {
+    console.log(post[0].map)
+    const jsonString = JSON.stringify(post[0].map);
+    // Create a Blob from the JSON string    
+    const blob = new Blob([jsonString], { type: 'application/json' });
+    // Create a File from the Blob
+    const file = new File([blob], "data.json");
+    let db;
+    var request = indexedDB.open("map", 1);
+    var request_name;
+    request.onupgradeneeded = (event) => {
+      // store the result of opening the database.
+      db = request.result;
+      db.createObjectStore("map");
+    };
+    request.onsuccess = (event) => {
+      // store the result of opening the database.
+      db = request.result;
+      const transaction = db.transaction('map', 'readwrite');
+      const fileStore = transaction.objectStore('map');
+      const addRequest = fileStore.put(new Blob([file], { type: file.type }), 1);
+      addRequest.onsuccess = event => {
+        console.log('File added to object store success');
+        window.location.href = "/mapedit";
+      };
+    }
+  }
+
+  const LikePost = async () => {
+    //Temporary author variable
+    let author = user.username
+    let likedislike = true;
+    let id = post[0]._id
+
+    let url = "/api/addLikeDislikeMap"
+    const res = await fetch(url, {
+      method: "POST",
+      body: JSON.stringify({
+        id,
+        author,
+        likedislike
+      }),
+      headers: {
+        "content-type": "application/json"
+      },
+    }).catch((e) => console.log(e));
+
+    // wait for the responce from request and get the body
+    const data = await res.json();
+
+    // If status code returns error print the code in the body
+    if (res.status == 400) {
+      console.log(data.errorMessage);
+    }
+    //If route is good then log the results
+    if (res.status == 200) {
+      getMapPost()
+    };
+
+  }
+
+  const DislikePost = async () => {
+    //Temporary author variable
+    let author = user.username
+    let likedislike = false;
+    let id = post[0]._id
+
+    let url = "/api/addLikeDislikeMap"
+    const res = await fetch(url, {
+      method: "POST",
+      body: JSON.stringify({
+        id,
+        author,
+        likedislike
+      }),
+      headers: {
+        "content-type": "application/json"
+      },
+    }).catch((e) => console.log(e));
+
+    // wait for the responce from request and get the body
+    const data = await res.json();
+
+    // If status code returns error print the code in the body
+    if (res.status == 400) {
+      console.log(data.errorMessage);
+    }
+    //If route is good then log the results
+    if (res.status == 200) {
+      getMapPost()
+    };
+
+  }
   return (
     <>
       <main className={styles.main}>
@@ -123,11 +216,9 @@ export default function Home() {
               <div name="spacer" className={styles.button_spacer}>
               </div>
               <div name="option buttons" className={styles.option_buttons}>
-                <Link href="mapedit">
-                  <button className={styles.option_button}>
-                    Edit Map
-                  </button>
-                </Link>
+                <Button className={styles.option_button} onClick={editMap}>
+                  Edit Map
+                </Button>
                 <Link href="mapedit">
                   <button className={styles.option_button}>
                     Fork Map
@@ -143,12 +234,12 @@ export default function Home() {
                 </button>
               </div>
               <div name="like/dislike buttons" className={styles.like_dislike_buttons}>
-                <button className={styles.like_dislike_button}>
+                <Button className={styles.like_dislike_button} onClick={LikePost}>
                   Like
-                </button>
-                <button className={styles.like_dislike_button}>
+                </Button>
+                <Button onClick={DislikePost} className={styles.like_dislike_button}>
                   Dislike
-                </button>
+                </Button>
               </div>
             </div>
             <div name="middlesection" className={styles.middle_container}>

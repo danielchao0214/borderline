@@ -12,7 +12,7 @@ export default function App() {
 
   useEffect(() => {
     // inital fire of getForumPost
-    console.log(user.username);
+    //console.log(user);
     getForumPostByUser();
     getMapPostByUser();
   }, [isLoggedIn]);
@@ -105,63 +105,9 @@ export default function App() {
               </h2>
             </div>
             <div className={styles.mapsflexcontainer}>
-              
-            <MapPostList mapPostList={mapPostList} />
-              
-              
-              {/* <div>
-                <img className={styles.map} src="map.png" alt="Map" />
-                <h3>Title</h3>
-                Author
-                <p>5 Likes ⋅ 5 Dislikes ⋅ 04/10/2023</p>
-              </div>
-              <div>
-                <img className={styles.map} src="map.png" alt="Map" />
-                <h3>Title</h3>
-                Author
-                <p>5 Likes ⋅ 5 Dislikes ⋅ 04/10/2023</p>
-              </div>
-              <div>
-                <img className={styles.map} src="map.png" alt="Map" />
-                <h3>Title</h3>
-                Author
-                <p>5 Likes ⋅ 5 Dislikes ⋅ 04/10/2023</p>
-              </div>
-              <div>
-                <img className={styles.map} src="map.png" alt="Map" />
-                <h3>Title</h3>
-                Author
-                <p>5 Likes ⋅ 5 Dislikes ⋅ 04/10/2023</p>
-              </div>
-              <div>
-                <img className={styles.map} src="map.png" alt="Map" />
-                <h3>Title</h3>
-                Author
-                <p>5 Likes ⋅ 5 Dislikes ⋅ 04/10/2023</p>
-              </div>
-              <div>
-                <img className={styles.map} src="map.png" alt="Map" />
-                <h3>Title</h3>
-                Author
-                <p>5 Likes ⋅ 5 Dislikes ⋅ 04/10/2023</p>
-              </div><div>
-                <img className={styles.map} src="map.png" alt="Map" />
-                <h3>Title</h3>
-                Author
-                <p>5 Likes ⋅ 5 Dislikes ⋅ 04/10/2023</p>
-              </div>
-              <div>
-                <img className={styles.map} src="map.png" alt="Map" />
-                <h3>Title</h3>
-                Author
-                <p>5 Likes ⋅ 5 Dislikes ⋅ 04/10/2023</p>
-              </div>
-              <div>
-                <img className={styles.map} src="map.png" alt="Map" />
-                <h3>Title</h3>
-                Author
-                <p>5 Likes ⋅ 5 Dislikes ⋅ 04/10/2023</p>
-              </div> */}
+
+              <MapPostList mapPostList={mapPostList} />
+
             </div>
           </div>
         </div>
