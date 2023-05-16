@@ -71,7 +71,6 @@ export default function DashboardForums() {
         <div className={styles.createcontainer}>
           <div className={styles.createButtonContainter}>
             {
-              // <Button className={styles.createbutton} variant="outlined" onClick={getForumPost}>Create Post</Button>
               <Button className={styles.createbutton} variant="outlined" onClick={() => setOpenCreatePostModal(true)}>Create Post</Button>
             }
           </div>

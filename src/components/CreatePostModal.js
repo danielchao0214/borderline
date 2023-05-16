@@ -6,13 +6,14 @@ import styles from '@/styles/Modal.module.css'
 
 function CreatePostModal(props) {
     const [title, setTitle] = useState("");
-    const [postby, setPostby] = useState("");
+    // const [postby, setPostby] = useState("");
     const [postmessage, setPostmessage] = useState("");
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         props.handleClose();
-        setPostby("MongoDB USER")
+        let postby = "MongoDB USER"
+        // setPostby("MongoDB USER")
         let url = "/api/createpost"
         const res = await fetch(url, {
             method: "Post",

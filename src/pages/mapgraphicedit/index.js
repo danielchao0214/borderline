@@ -22,6 +22,11 @@ import ColorWheel from '@/components/ColorWheel';
 const inter = Inter({ subsets: ['latin'] })
 
 export default function MapGraphicEdit() {
+
+  const leaflet = dynamic(() => import('react-leaflet'), {
+    ssr: false
+  });
+
   const MapGraphic = useMemo(() => dynamic(
     () => import('@/components/MapGraphic.js'), // replace '@components/map' with your component's location
     {
@@ -34,6 +39,34 @@ export default function MapGraphicEdit() {
 
   const handleClosePublishGraphicModal = () => {
     setOpenPublishGraphicModal(false);
+  };
+  
+  // const [isMounted, setIsMounted] = React.useState(false);
+
+  // React.useEffect(() => {
+  //   setIsMounted(true);
+  // }, []);
+
+  // leaflet.Control.textbox = leaflet.Control.extend({
+  //   onAdd: function (map) {
+
+  //     var text = leaflet.DomUtil.create('div');
+  //     text.id = "info_text";
+  //     text.innerHTML = "<strong>text here</strong>"
+  //     return text;
+  //   },
+
+  //   onRemove: function (map) {
+  //     // Nothing to do here
+  //   }
+  // });
+  // leaflet.control.textbox = function (opts) { return new leaflet.Control.textbox(opts); }
+  // leaflet.control.textbox({ position: 'bottomleft' }).addTo(MapGraphic);
+
+  const handleText = () => {
+    console.log("hello")
+    // const text = L.divIcon({html: 'Your HTML text here'});
+
   };
 
   return (
@@ -54,7 +87,7 @@ export default function MapGraphicEdit() {
             <IconButton aria-label='select region' className={styles.toolbarbutton}>
               <NearMeIcon />
             </IconButton>
-            <IconButton aria-label='text box' className={styles.toolbarbutton}>
+            <IconButton aria-label='text box' className={styles.toolbarbutton} onClick={() => handleText}>
               <TextFieldsIcon />
             </IconButton>
             <IconButton aria-label='color fill ' className={styles.toolbarbutton}>
