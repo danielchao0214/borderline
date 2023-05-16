@@ -13,13 +13,13 @@ export default async function handler(req, res) {
     // Rest of the API logic
     const client = await clientPromise;
     const db = client.db("Maps");
-    const { username } = req.body;
+    const { username, published } = req.body;
     console.log(req.body);
     switch (req.method) {
 
         case "POST":
 
-            if (username == undefined) {
+            if (username == undefined || published == undefined) {
                 console.log("ERROR: username is undefined")
                 return res
                     .status(401)
@@ -29,9 +29,15 @@ export default async function handler(req, res) {
             }
 
             let mapPost;
+            
+            if(published == true){
+                mapPost = await db.collection("Maps").find({ author: username, published: published });
 
-            mapPost = await db.collection("Maps").find({ author: username });
-
+            }
+            else if(published == false){
+                mapPost = await db.collection("Maps").find({ author: username});
+            }
+           
             let returnArray = []
 
             if (!mapPost) {

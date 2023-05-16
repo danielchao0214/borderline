@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'
+import { useRouter } from "next/router";
 import styles from '@/pages/userprofile/userprofile.module.css'
 import AuthContext from '@/components/contexts/AuthContext';
 import ForumPostList from '@/components/ForumPostList';
@@ -6,13 +7,17 @@ import MapPostList from '@/components/MapPostList';
 
 export default function App() {
 
+  const router = useRouter();
+  const query = router.query;
+  const usernameQuery = query.username
+
   const { isLoggedIn, user } = useContext(AuthContext);
   const [forumPostList, setforumPostList] = useState([{}]);
   const [mapPostList, setMapPostList] = useState([{}])
 
   useEffect(() => {
     // inital fire of getForumPost
-    console.log(user.username);
+    //console.log(user.username);
     getForumPostByUser();
     getMapPostByUser();
   }, [isLoggedIn]);
@@ -20,7 +25,7 @@ export default function App() {
 
   async function getForumPostByUser() {
 
-    let username = user.username
+    let username = usernameQuery
     let url = "/api/getforumPostByUser"
     const res = await fetch(url, {
       method: "POST",
@@ -53,8 +58,8 @@ export default function App() {
 
   async function getMapPostByUser() {
 
-    let username = user.username;
-    const published = false;
+    let username = usernameQuery
+    const published = true;
     let url = "/api/getmapPostByUser"
     const res = await fetch(url, {
       method: "POST",
@@ -90,7 +95,7 @@ export default function App() {
       <main>
         <div className={styles.flexcontainer}>
           <div className={styles.recentmapcontainer}>
-            <h2 className={styles.recentmaptitle} >Your Forum Posts</h2>
+            <h2 className={styles.recentmaptitle} >{usernameQuery} Forum Posts</h2>
             <div className={styles.flexcontainer}>
 
               <ForumPostList postList={forumPostList}></ForumPostList>
@@ -101,7 +106,7 @@ export default function App() {
           <div className={styles.mapcontainer}>
             <div className={styles.recentmaptitle}>
               <h2>
-                Your Maps
+                {usernameQuery} Maps
               </h2>
             </div>
             <div className={styles.mapsflexcontainer}>
