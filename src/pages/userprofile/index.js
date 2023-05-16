@@ -1,27 +1,26 @@
+import Button from '@mui/material/Button';
 import React, { useState, useEffect, useContext } from 'react'
 import styles from '@/pages/userprofile/userprofile.module.css'
-<<<<<<< Updated upstream
 import AuthContext from '@/components/contexts/AuthContext';
 import ForumPostList from '@/components/ForumPostList';
 import MapPostList from '@/components/MapPostList';
 
 export default function App() {
-
   const { isLoggedIn, user } = useContext(AuthContext);
   const [forumPostList, setforumPostList] = useState([{}]);
   const [mapPostList, setMapPostList] = useState([{}])
 
   useEffect(() => {
     // inital fire of getForumPost
-    //console.log(user);
+    console.log(user);
     getForumPostByUser();
     getMapPostByUser();
-  }, [isLoggedIn]);
+  }, [user]);
 
 
   async function getForumPostByUser() {
-
-    let username = user.username
+    console.log(user);
+    let username = user?.username
     let url = "/api/getforumPostByUser"
     const res = await fetch(url, {
       method: "POST",
@@ -54,7 +53,7 @@ export default function App() {
 
   async function getMapPostByUser() {
 
-    let username = user.username;
+    let username = user?.username;
     const published = false;
     let url = "/api/getmapPostByUser"
     const res = await fetch(url, {
@@ -85,18 +84,6 @@ export default function App() {
 
     };
   }
-
-=======
-import Button from '@mui/material/Button';
-import { useContext, useEffect } from 'react';
-import AuthContext from '@/components/contexts/AuthContext';
-
-export default function App() {
-  const { isLoggedIn, user } = useContext(AuthContext);
-  useEffect(() => {
-    console.log(isLoggedIn);
-  }, []);  
->>>>>>> Stashed changes
   return (
     <>
       <main>
