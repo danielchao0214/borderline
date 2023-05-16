@@ -1,18 +1,20 @@
-import AppBanner from '@/components/AppBanner.js'
-import { AppBannerContext } from '@/components/contexts/AppBannerContext'
-import '@/styles/globals.css'
-import { useState } from 'react'
+import AppBanner from "@/components/AppBanner.js";
+import { AppBannerContext } from "@/components/contexts/AppBannerContext";
+import { AuthProvider } from "@/components/contexts/AuthContext";
+import "@/styles/globals.css";
+import { useState } from "react";
 
 export default function App({ Component, pageProps }) {
-
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState("");
 
   return (
     <>
-      <AppBannerContext.Provider value={{ value, setValue }}>
+      <AuthProvider>
+        <AppBannerContext.Provider value={{ value, setValue }}>
           <AppBanner />
           <Component {...pageProps} />
-      </AppBannerContext.Provider>
+        </AppBannerContext.Provider>
+      </AuthProvider>
     </>
-  )
+  );
 }

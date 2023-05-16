@@ -22,6 +22,18 @@ export default function DashboardForums() {
     getForumPost()
   }, [value]);
   
+  const getLoggedIn = async (event) => {
+    let url = "/api/loggedin";
+    const res = await fetch(url, {
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+      },
+    }).catch((e) => console.log(e));
+
+    const data = await res.json();
+  }
+
 
   async function getForumPost() {
     
