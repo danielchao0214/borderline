@@ -8,7 +8,7 @@ const Geoman = () => {
     function saveToIndexedDB(json) {
         const jsonString = JSON.stringify(json);
 
-        // Create a Blob from the JSON string
+        // Create a Blob from the JSON string    
         const blob = new Blob([jsonString], { type: 'application/json' });
 
         // Create a File from the Blob
