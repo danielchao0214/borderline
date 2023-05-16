@@ -8,7 +8,10 @@ export default async function handler(req, res) {
 
   if (req.method === "POST") {
     const { token, newPassword } = req.body;
+    console.log("token: " + token);
+    console.log("newPassword: " + newPassword);
     if (!token || !newPassword) {
+      console.log("no token or password");
       return res.status(400).json({ message: "Bad request" });
     }
 
