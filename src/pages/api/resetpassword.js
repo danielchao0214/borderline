@@ -12,7 +12,6 @@ const generateToken = promisify(randomBytes);
 export default async function handler(req, res) {
     // Run the middleware
     await runCors(req, res)
-    console.log("adsf");
     // Rest of the API  logic
     if (req.method == "POST") {
         const email = req.body;
