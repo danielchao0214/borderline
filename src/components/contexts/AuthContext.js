@@ -69,7 +69,7 @@ export function AuthProvider({ children }) {
   // Render the children when the authentication status is determined
   return (
     <AuthContext.Provider
-      value={{ isLoggedIn, setIsLoggedIn, userId, user, signOut }}
+      value={{ isLoggedIn, setIsLoggedIn, userId, user, setUser, signOut }}
     >
       {children}
     </AuthContext.Provider>

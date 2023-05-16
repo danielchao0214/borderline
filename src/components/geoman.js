@@ -32,7 +32,9 @@ const Geoman = () => {
             layer.remove();
         });
         L.geoJSON(transactions[index - 1], { pmIgnore: false }).addTo(container);
-                    container.pm
+        //leafletContainer.pm.getGeomanLayers().map((layer, index) => layer.bindPopup(layer));
+                    
+            container.pm
                     .getGeomanLayers()
                     .map((layer, index) => layer.on("pm:edit", (e) => {
                         console.log(container.pm.getGeomanLayers(true).toGeoJSON());

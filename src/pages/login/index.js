@@ -11,7 +11,7 @@ const inter = Inter({ subsets: ["latin"] });
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
+  const { isLoggedIn, setIsLoggedIn, user, setUser } = useContext(AuthContext);
   const [loginError, setLoginError] = useState(false);
   const router = useRouter();
 
@@ -46,7 +46,7 @@ export default function Login() {
 
     //If route is good then log the results and route the user to the dashboard
     if (res.status === 200) {
-      const { firstName, lastName, username } = data.user;
+      setUser(data.user);
       setIsLoggedIn(true);
       document.cookie = `token=${res.token}; path=/;`;
       router.push("/dashboardmaps");
