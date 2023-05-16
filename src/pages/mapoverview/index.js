@@ -311,7 +311,8 @@ export default function Home() {
               <div name="option buttons" className={styles.option_buttons}>
                 <Link href={{
                   pathname: '/mapedit',
-                  query: {_id: post[0]._id}
+                  query: {_id: post[0]._id,
+                          title: post[0].title}
                 }}>
                   Edit Map
                 </Link>

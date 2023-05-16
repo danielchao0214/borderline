@@ -34,6 +34,7 @@ export default function MapEdit() {
   const router = useRouter();
   const query = router.query;
   const _id = query._id;
+  const title = query.title;
 
   const { isLoggedIn, user } = useContext(AuthContext);
 
@@ -74,6 +75,8 @@ export default function MapEdit() {
     event.preventDefault();
 
     console.log(_id);
+
+    console.log(title);
 
     console.log(user);
 
