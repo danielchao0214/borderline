@@ -19,10 +19,13 @@
   padding: 10px 10px 10px 10px;
   margin: 15px 15px 15px 15px;
   text-align: center;
+  font-size: 15px;
+  font-weight: normal;
 }
 
 .mainContainer {
   display: flex;
+  font-family: "Inter";
 }
 
 
@@ -54,16 +57,19 @@
 
 .subContainerTitle {
   text-align: left;
-  font-size: 40px;
+  font-size: 30px;
   font-weight: bold;
+  padding-bottom: 10px;
 }
 
 .subContainerPostedBy{
   text-align: left;
+  font-size: 24px;
 }
 
 .subContainerPostMessage{
   text-align: left;
+  font-size: 20px;
 }
 
 .subContainerComment{

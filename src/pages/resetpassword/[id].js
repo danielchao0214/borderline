@@ -1,25 +1,55 @@
 import React, { useEffect, useState } from "react";
-import { useRouter } from 'next/router'
-import { Inter } from 'next/font/google'
-import { TextField, Button } from '@mui/material';
-import styles from '@/pages/resetpassword/ResetPassword.module.css'
+import { useRouter } from "next/router";
+import { Inter } from "next/font/google";
+import { TextField, Button } from "@mui/material";
+import styles from "@/pages/resetpassword/ResetPassword.module.css";
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
 
-export default function Login() {
+export default function ResetPassword() {
   const [newPassword, setNewPassword] = useState("");
   const [newPasswordRepeat, setNewPasswordRepeat] = useState("");
+  const [resetError, setResetError] = useState("");
   const router = useRouter();
+  const { id } = router.query;
   useEffect(() => {
-    console.log("hi");
-    console.log(router.query);
+    console.log(id);
   }, [router.query]);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    router.push('/'); // this should be changed to whatever
-    // handle submit logic here
+
+    // Check if the passwords match
+    if (newPassword !== newPasswordRepeat) {
+      setResetError("Passwords do not match");
+      return;
+    }
+
+    try {
+      // Send a request to your backend API to update the password
+      const response = await fetch("/api/resetpassword", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          token: id, // Retrieve the token from the URL query parameters
+          newPassword: newPassword,
+        }),
+      });
+
+      if (response.status === 200) {
+        // Password reset successful
+        router.push("/login"); // Redirect to the login page or any other page you want
+      } else {
+        setResetError("Password reset failed. Please try again."); // Set the error message
+      }
+    } catch (error) {
+      console.error("Error resetting password:", error);
+      setResetError("Password reset failed. Please try again."); // Set the error message
+    }
   };
+
   return (
     <>
       <main className={styles.main}>
@@ -31,6 +61,8 @@ export default function Login() {
             <div className={styles.description}>
               <p>Enter your new password below</p>
             </div>
+            {resetError && <p style={{ color: "red" }}>{resetError}</p>}{" "}
+            {/* Error message */}
           </div>
           <form onSubmit={handleSubmit} className={styles.form}>
             <TextField
@@ -40,6 +72,7 @@ export default function Login() {
               onChange={(event) => setNewPassword(event.target.value)}
               margin="normal"
               variant="outlined"
+              type="password"
             />
             <TextField
               label="Confirm Password"
@@ -48,9 +81,14 @@ export default function Login() {
               onChange={(event) => setNewPasswordRepeat(event.target.value)}
               margin="normal"
               variant="outlined"
+              type="password"
             />
             <div style={{ display: "flex", justifyContent: "center" }}>
-              <Button className={styles.submitbutton} type="submit" variant="contained">
+              <Button
+                className={styles.submitbutton}
+                type="submit"
+                variant="contained"
+              >
                 Reset
               </Button>
             </div>
@@ -58,5 +96,5 @@ export default function Login() {
         </div>
       </main>
     </>
-  )
+  );
 }

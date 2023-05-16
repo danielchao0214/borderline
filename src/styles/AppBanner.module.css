@@ -94,3 +94,15 @@
     line-height: 20px !important;
     color: #000000 !important;
 }
+
+.signout {
+    background: none;
+    border: none;
+    font-family: 'Abel' !important;
+    font-style: normal !important;
+    font-weight: 400 !important;
+    font-size: 20px !important;
+    line-height: 20px !important;
+    color: #000000 !important;
+    cursor: pointer;
+  }

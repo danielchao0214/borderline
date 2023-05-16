@@ -8,7 +8,7 @@ function CreatePostModal(props) {
     const [title, setTitle] = useState("");
     const [postby, setPostby] = useState("");
     const [postmessage, setPostmessage] = useState("");
-
+ 
     const handleSubmit = async (event) => {
         event.preventDefault();
         props.handleClose();

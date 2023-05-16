@@ -1,41 +1,50 @@
-import runCors from './middleware';
-import { promisify } from "util";
-import { randomBytes } from "crypto";
-import clientPromise from '../../../lib/mongo';
-import { transporter, mailOptions } from '../../../config/nodemailer';
-
-// Initializing the cors middleware
-// You can read more about the available options here: https://github.com/expressjs/cors#configuration-options
-
-const generateToken = promisify(randomBytes);
+import runCors from "./middleware";
+import clientPromise from "../../../lib/mongo";
+const bcrypt = require("bcryptjs");
 
 export default async function handler(req, res) {
-    // Run the middleware
-    await runCors(req, res)
-    console.log("adsf");
-    // Rest of the API  logic
-    if (req.method == "POST") {
-        const email = req.body;
-        if (!email) { //TODO: verify email address
-            return res.status(400).json({ message: "Bad request" });
-        }
+  // Run the middleware
+  await runCors(req, res);
 
-        const token = (await generateToken(32)).toString("hex");
-        let url = process.env.BASE_URL + '/resetpassword/' + token;
-        console.log(url);
-        try {
-            await transporter.sendMail({
-                from: 'cse416borderline@gmail.com',
-                to: email,
-                subject: "Reset Borderline Password",
-                text: `Reset Link: ${url}`,
-                html: `<h1>Reset Link</h1><p>${url}</p>`
-            });
-            return res.status(200).json({ success: true })
-        } catch (error) {
-            console.log(error);
-            return res.status(400).json({ message: error.message });
-        }
+  if (req.method === "POST") {
+    const { token, newPassword } = req.body;
+    if (!token || !newPassword) {
+      return res.status(400).json({ message: "Bad request" });
     }
-    return res.status(400).json({ message: "Bad request" });
+
+    try {
+      const client = await clientPromise;
+      const db = client.db("Users");
+
+      // Check if the token exists and is valid
+      const user = await db.collection("Users").findOne({ resetToken: token });
+      
+      if (!user || user.resetTokenExpires < Date.now()) {
+        return res.status(400).json({ message: "Invalid or expired token" });
+      }
+
+      const saltRounds = 10;
+      const salt = await bcrypt.genSalt(saltRounds);
+      const passwordHash = await bcrypt.hash(newPassword, salt);
+
+      // Update the user's password
+      await db.collection("Users").updateOne(
+        { resetToken: token },
+        {
+          $set: {
+            passwordHash: passwordHash,
+            resetToken: null,
+            resetTokenExpires: null,
+          },
+        }
+      );
+
+      return res.status(200).json({ success: true });
+    } catch (error) {
+      console.error("Error resetting password:", error);
+      return res.status(500).json({ message: "Internal server error" });
+    }
+  }
+
+  return res.status(400).json({ message: "Bad request" });
 }

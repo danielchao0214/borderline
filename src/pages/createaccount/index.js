@@ -1,23 +1,32 @@
-import React, { useState } from "react";
-import { useRouter } from 'next/router'
-import { Inter } from 'next/font/google'
-import { TextField, Button } from '@mui/material';
-import styles from '@/pages/createaccount/CreateAccount.module.css'
+import React, { useState, useEffect, useContext } from "react";
+import { useRouter } from "next/router";
+import { Inter } from "next/font/google";
+import { TextField, Button } from "@mui/material";
+import styles from "@/pages/createaccount/CreateAccount.module.css";
+import AuthContext from "@/components/contexts/AuthContext";
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
 
-export default function Login() {
+export default function CreateAccount() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [username, setUsername] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [accountCreationError, setAccountCreationError] = useState(false);
+  const { isLoggedIn } = useContext(AuthContext);
   const router = useRouter();
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      router.push("/dashboardmaps");
+    }
+  }, [isLoggedIn]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    let url = "/api/auth"
+    let url = "/api/auth";
     const res = await fetch(url, {
       method: "Post",
       body: JSON.stringify({
@@ -26,28 +35,29 @@ export default function Login() {
         username,
         email,
         password,
-        confirmPassword
+        confirmPassword,
       }),
       headers: {
-        "content-type": "application/json"
+        "content-type": "application/json",
       },
-    }).catch((e) =>console.log(e)); // Error for fetch request only
+    }).catch((e) => console.log(e));
 
-    // wait for the responce from request and get the body
-    const data = await res.json(); 
+    // Wait for the response from the request and get the body
+    const data = await res.json();
 
-    // If status code returns error print the code in the body
-    if(res.status == 400){ 
+    // If status code returns an error, set the account creation error flag
+    if (res.status === 400) {
+      setAccountCreationError(true);
       console.log(data.errorMessage);
     }
 
-    //If route is good then log the results and rout the use to login Screen
-    if(res.status == 200){
+    // If the route is successful, log the results and redirect the user to the login screen
+    if (res.status === 200) {
       console.log(data.message);
       router.push("/login");
     }
-    
   };
+
   return (
     <>
       <main className={styles.main}>
@@ -59,10 +69,15 @@ export default function Login() {
             <div className={styles.description}>
               <p>Enter your information below</p>
             </div>
+            {accountCreationError && (
+              <p className={styles.errorText}>
+                Account creation failed. Please try again.
+              </p>
+            )}
           </div>
           <form onSubmit={handleSubmit} className={styles.form}>
             <TextField
-              id = "firstName"
+              id="firstName"
               label="First Name"
               className={styles.formTextField}
               value={firstName}
@@ -71,7 +86,7 @@ export default function Login() {
               variant="outlined"
             />
             <TextField
-              id = "lastName"
+              id="lastName"
               label="Last Name"
               className={styles.formTextField}
               value={lastName}
@@ -80,7 +95,7 @@ export default function Login() {
               variant="outlined"
             />
             <TextField
-              id = "email"
+              id="email"
               label="Email"
               className={styles.formTextField}
               value={email}
@@ -89,7 +104,7 @@ export default function Login() {
               variant="outlined"
             />
             <TextField
-              id = "username"
+              id="username"
               label="Username"
               className={styles.formTextField}
               value={username}
@@ -98,7 +113,7 @@ export default function Login() {
               variant="outlined"
             />
             <TextField
-              id = "password"
+              id="password"
               label="Password"
               type="password"
               className={styles.formTextField}
@@ -108,7 +123,7 @@ export default function Login() {
               variant="outlined"
             />
             <TextField
-              id = "confirmPassword"
+              id="confirmPassword"
               label="Confirm Password"
               type="password"
               className={styles.formTextField}
@@ -118,7 +133,11 @@ export default function Login() {
               variant="outlined"
             />
             <div style={{ display: "flex", justifyContent: "center" }}>
-              <Button className={styles.submitbutton} type="submit" variant="contained">
+              <Button
+                className={styles.submitbutton}
+                type="submit"
+                variant="contained"
+              >
                 Create Account
               </Button>
             </div>
@@ -126,5 +145,5 @@ export default function Login() {
         </div>
       </main>
     </>
-  )
+  );
 }
