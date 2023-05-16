@@ -26,9 +26,12 @@ export default async function handler(req, res) {
                     })
             }
 
+            console.log(existingMap);
+            console.log(req.body.text)
+
             if (existingMap.author == req.body.author) {
-                db.collection("Maps").updateOne({ _id: o_id }, {$set: { file_size: req.body.file_size }});
-                db.collection("Maps").updateOne({ _id: o_id }, {$set: { map: req.body.map }});
+                db.collection("Maps").updateOne({ _id: o_id }, {$set: { published: true }});
+                db.collection("Maps").updateOne({ _id: o_id }, { $push: { tags: req.body.text} })
                 res.json({status: 200});
             }else{
                 console.log("ERROR: Unauthorized")
