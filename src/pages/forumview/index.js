@@ -58,7 +58,7 @@ export default function Home() {
       setPost(data.forumPost)
 
       if (data.forumPost[0].comments !== undefined) {
-        setCommentList(data.forumPost[0].comments)
+        setCommentList(data.forumPost[0].comments.reverse());
       }
       else {
         setCommentList([{}]);
@@ -99,18 +99,6 @@ export default function Home() {
         getForumPost()
         setcommentTextField("");
       };
-
-
-
-
-
-
-
-
-
-
-
-
     };
   }
 

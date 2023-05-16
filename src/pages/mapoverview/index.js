@@ -2,6 +2,9 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useRouter } from "next/router";
 import styles from '@/styles/Mapoverview.module.css'
 import Link from 'next/link';
+import CommentList from '@/components/CommentList';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 
 
 
@@ -12,7 +15,8 @@ export default function Home() {
   const _id = query._id;
 
   const [post, setPost] = useState([{ title: "Temp", author: "Temp", tags: "Temp", file_size: 0, likes: 0, dislikes: 0, publish_date: "Temp", description: "Temp", map: {}, tags: "Temp", comments: [{}], graphics: [{}], thumbnail: undefined }]);
-
+  const [commentList, setCommentList] = useState([{ author: "Temp", body: "Temp", _id: "tempid" }]);
+  const [commentTextField, setcommentTextField] = useState("");
 
   const showGraphics = () => {
     document.getElementById("comments").style.display = "none";
@@ -63,10 +67,52 @@ export default function Home() {
       //Change state !!!!!!!!
       //console.log(data.forumPost)
       setPost(data.mapPost)
-
+      
+      console.log(data.mapPost[0].comments);
+      if (data.mapPost[0].comments !== "None") {
+        setCommentList(data.mapPost[0].comments.reverse());
+      }
+      else {
+        setCommentList([{}]);
+      }
     };
   }
 
+  const submitComment = async () => {
+    //Temporary author variable
+    let author = "Test Author Scooter"
+
+    let id = post[0]._id
+
+    if (commentTextField !== "") {
+
+      let url = "/api/addCommentMap"
+      const res = await fetch(url, {
+        method: "POST",
+        body: JSON.stringify({
+          id,
+          commentTextField,
+          author
+        }),
+        headers: {
+          "content-type": "application/json"
+        },
+      }).catch((e) => console.log(e));
+
+      // wait for the responce from request and get the body
+      const data = await res.json();
+
+      // If status code returns error print the code in the body
+      if (res.status == 400) {
+        console.log(data.errorMessage);
+      }
+      //If route is good then log the results
+      if (res.status == 200) {
+        getMapPost()
+        setcommentTextField("");
+      };
+    };
+  }
 
   return (
     <>
@@ -155,87 +201,25 @@ export default function Home() {
               </div>
               <div id="comments" name="comment inside container" className={styles.comment_inside_container}>
                 <div name="comment container" className={styles.comments_container}>
-                  <div name="comment" className={styles.comment_card}>
-                    <div>
-                      <span style={{ fontWeight: "bold" }}>
-                        PizzaHater
-                      </span>
-                    </div>
-                    <div>
-                      <span>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-                        dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                      </span>
-                    </div>
-                  </div>
-                  <div name="comment" className={styles.comment_card}>
-                    <div>
-                      <span style={{ fontWeight: "bold" }}>
-                        PizzaHater
-                      </span>
-                    </div>
-                    <div>
-                      <span>
-                        Lorem ipsum dolor sit amet, consectetur
-                      </span>
-                    </div>
-                  </div>
-                  <div name="comment" className={styles.comment_card}>
-                    <div>
-                      <span style={{ fontWeight: "bold" }}>
-                        PizzaHater
-                      </span>
-                    </div>
-                    <div>
-                      <span>
-                        Lorem ipsum dolor sit amet, consectetur
-                      </span>
-                    </div>
-                  </div>
-                  <div name="comment" className={styles.comment_card}>
-                    <div>
-                      <span style={{ fontWeight: "bold" }}>
-                        PizzaHater
-                      </span>
-                    </div>
-                    <div>
-                      <span>
-                        Lorem ipsum dolor sit amet, consectetur
-                      </span>
-                    </div>
-                  </div>
-                  <div name="comment" className={styles.comment_card}>
-                    <div>
-                      <span style={{ fontWeight: "bold" }}>
-                        PizzaHater
-                      </span>
-                    </div>
-                    <div>
-                      <span>
-                        Lorem ipsum dolor sit amet, consectetur
-                      </span>
-                    </div>
-                  </div>
-                  <div name="comment" className={styles.comment_card}>
-                    <div>
-                      <span style={{ fontWeight: "bold" }}>
-                        PizzaHater
-                      </span>
-                    </div>
-                    <div>
-                      <span>
-                        Lorem ipsum dolor sit amet, consectetur
-                      </span>
-                    </div>
-                  </div>
+
+                  <CommentList commentList={commentList} />
+
                 </div>
                 <div name="create comment" className={styles.create_comment_container}>
-                  <textarea placeholder="Comment?" name="create comment textbox" className={styles.comment_textbox}>
-                  </textarea>
-                  <button className={styles.submit_comment}>
-                    Submit
-                  </button>
+                  <TextField
+                    label=""
+                    placeholder="Comment Here"
+                    multiline
+                    value={commentTextField}
+                    variant="standard"
+                    size="medium"
+                    fullWidth
+                    onChange={(e) => {
+                      setcommentTextField(e.target.value);
+                    }}
+                  ></TextField>
+                  <Button onClick={submitComment}>Comment</Button>
+
                 </div>
               </div>
 

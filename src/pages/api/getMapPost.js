@@ -39,7 +39,7 @@ export default async function handler(req, res) {
             }
 
             else if(sortby === 3){
-                mapPost = await db.collection("Maps").find({ title: { '$regex': search, '$options': 'i' }, published: true }).limit(10).sort({ likes: -1 });
+                mapPost = await db.collection("Maps").find({ title: { '$regex': search, '$options': 'i' }, published: true }).limit(10).sort({ publish_date: 1 });
             }
 
             let returnArray = []

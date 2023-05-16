@@ -35,6 +35,12 @@ export default async function handler(req, res) {
             }
 
             await mapPost.forEach(element => returnArray.push(element));
+            
+           
+            let date = new Date(returnArray[0].publish_date)
+
+
+            returnArray[0].publish_date = date.toDateString();
 
             return res
                 .status(200)
