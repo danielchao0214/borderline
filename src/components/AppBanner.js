@@ -27,6 +27,7 @@ export default function AppBanner() {
 
   const [search, setSearch] = React.useState();
   const [sortby, setsortby] = React.useState(1);
+  const [tagFilter, settagFilter] = React.useState("");
   const { value, setValue } = React.useContext(AppBannerContext);
 
   const { isLoggedIn, signOut } = useContext(AuthContext);
@@ -70,16 +71,22 @@ export default function AppBanner() {
       id={styles.tagSearch}
       //label="Search"
       //variant="outlined"
-      defaultValue="Type Something To Search"
+      placeholder="Type A Tag to Filter"
+      defaultValue={tagFilter}
       sx={{ width: 200, backgroundColor: "white", borderRadius: 5 }}
-      //onKeyPress={handleSearch}
+      onKeyPress={handletageFilter}
     />
   );
+
+  function handletageFilter(event) {
+    settagFilter(event.target.value)
+    //setValue({Searched: value.Searched, sortBy: value.sortBy, tagFilter: tagFilter})
+  }
 
   function handleSearch(event) {
     //console.log(event.target.value); // Use Context
     //setSearch(event.target.value);
-    setValue({ Searched: event.target.value, sortBy: sortby });
+    setValue({ Searched: event.target.value, sortBy: sortby, tagFilter: tagFilter });
   }
 
   return (
@@ -213,7 +220,7 @@ export default function AppBanner() {
                         />
                         Most Liked
                       </li>
-                      <li target="Catagories" className="li">
+                      {/* <li target="Catagories" className="li">
                         <Radio
                           checked={sortby === 3}
                           onChange={() => {
@@ -223,7 +230,7 @@ export default function AppBanner() {
                           name="radio-button-publishDate"
                         />
                         Publish Date
-                      </li>
+                      </li> */}
                     </ul>
                   </Typography>
                 </Popover>
@@ -278,9 +285,9 @@ export default function AppBanner() {
                   <Typography sx={{ width: 200 }}>
                     <ul>
                       <li className="li">{tagTextField}</li>
-                      <li className="li">Preset Tag 1</li>
+                      {/* <li className="li">Preset Tag 1</li>
                       <li className="li">Preset Tag 2</li>
-                      <li className="li">Preset Tag 3</li>
+                      <li className="li">Preset Tag 3</li> */}
                     </ul>
                   </Typography>
                 </Popover>

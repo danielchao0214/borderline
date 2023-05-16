@@ -25,17 +25,19 @@ export default function DashboardMaps() {
   async function getMapPost() {
     let search = value.Searched  // this will be the search in text field
     let sortby = value.sortBy
+    let tagFilter = value.tagFilter
 
     if(search === undefined) search = "";
     if(sortby === undefined) sortby = 1;
-
+    if(tagFilter === undefined) tagFilter = "";
 
     let url = "/api/getMapPost"
     const res = await fetch(url, {
       method: "POST",
       body: JSON.stringify({
         search,
-        sortby
+        sortby,
+        tagFilter
       }),
       headers: {
         "content-type": "application/json"
