@@ -142,11 +142,12 @@ export default function MapEdit() {
                         let file_size = file.size;
                         let likes = 0;
                         let dislikes = 0;
+                        let likedDislikedmaps = [];
                         let published = false;
                         let publish_date = Date();
                         let description = "None";
                         let map = json;
-                        let comments = "None";
+                        let comments = [];
                         let graphics = "None";
                         let thumbnail = null;
                         const res = await fetch(url, {
@@ -158,6 +159,7 @@ export default function MapEdit() {
                                 file_size,
                                 likes,
                                 dislikes,
+                                likedDislikedmaps,
                                 published,
                                 publish_date,
                                 description,
